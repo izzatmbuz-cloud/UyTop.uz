@@ -1,0 +1,714 @@
+PAGES	19
+WORDS	5794
+PARAGRAPHS	728
+TABLES	15
+P	1	PAGE=1	STYLE=Название	Texnik topshiriq
+P	2	PAGE=1	STYLE=Заголовок 2	Andijonda uy joy qidirish uchun veb ilova
+P	3	PAGE=1	STYLE=Обычный	1.0-versiya • 2026-yil 29-sentabr • tanlov uchun demo versiya 2026-yil 2-oktabrgacha tayyorlanadi
+P	4	PAGE=1	STYLE=Обычный	Loyihaning ishchi nomi — «Andijonda uy-joy qidirish». Yakuniy nom, logotip va domen alohida tanlanadi; bu ishlar dasturlashni boshlashga to‘sqinlik qilmaydi. Hujjat mahsulot vazifasi, ma’lumotlar, biznes qoidalari, arxitektura, tekshirish tartibi va namoyishga tayyorgarlik rejasini belgilaydi.
+P	5	PAGE=1	STYLE=Заголовок 3	1.1 Maqsad va muammo
+P	6	PAGE=1	STYLE=Обычный	Foydalanuvchi qo‘ng‘iroq qilishdan oldin taklif o‘ziga mosligini tushunadigan yagona qulay uy-joy katalogini yaratish. U talabalar qabul qilinishini, butun kvartira, xona yoki alohida o‘rin ijaraga berilishini, joy bo‘shligini hamda qanday to‘lovlar kerakligini ko‘ra olishi lozim.
+P	7	PAGE=1	STYLE=Обычный	Boshlang‘ich muammo loyiha muallifining kuzatuviga asoslanadi: mahalliy e’lonlar turli Telegram kanallarida tarqalgan; ayrim uy egalari faqat oilalarga ijaraga berishi sababli talabalar rad javobiga duch keladi. Bu kuzatuv bo‘lib, tasdiqlangan bozor statistikasi emas. Himoyada uni keng ko‘lamli tadqiqot natijasi sifatida ko‘rsatish mumkin emas.
+P	8	PAGE=1	STYLE=Заголовок 3	1.2 Mahsulot foydalanuvchiga nima beradi
+P	9	PAGE=1	STYLE=Обычный	«Andijonda yashash shartlari va tushunarli narx bo‘yicha mos uy-joy topish, variantlarni solishtirish va e’lon bergan shaxsga murojaat yuborish».
+P	10	PAGE=1	STYLE=Обычный	Servis taklif topish va aloqa o‘rnatishga yordam beradi. U joylashish, ko‘chmas mulkning huquqiy jihatdan tekshirilganligi, murojaatning qabul qilinishi yoki bitim amalga oshishini kafolatlamaydi. Dolzarblik belgisi e’lon muallifi taklif hali mavjudligini tasdiqlaganini anglatadi.
+P	11	PAGE=1	STYLE=Заголовок 3	1.3 Asosiy namoyish ssenariysi
+P	12	PAGE=1	STYLE=Обычный	Talaba ijara bo‘limini tanlaydi → «Talabalar qabul qilinadi» filtrini yoqadi → budjet va «O‘rin» turini belgilaydi → variantlarni solishtiradi → oylik va dastlabki to‘lovlarni ko‘radi → murojaat yuboradi → uy egasi uni kabinetida qabul qilib, holatini o‘zgartiradi.
+P	13	PAGE=1	STYLE=Заголовок 3	1.4 Hujjatdan foydalanish tartibi
+P	14	PAGE=1	STYLE=Обычный	P0 — tanlov versiyasi uchun majburiy imkoniyatlar. P1 — faqat P0 tayyor va tekshirilganidan keyin qo‘shiladi. P2 — tanlovdan keyingi rivojlantirish. Quyidagi sonli cheklovlar va texnologiyalar 1.0-versiya uchun taklif etilgan sozlamalardir; biznes qoidalarini saqlagan holda ularni ishlab chiqishdan oldin o‘zgartirish mumkin.
+P	15	PAGE=1	STYLE=Обычный	Muallif belgilagan tayyorgarlik muddati — uch kecha va ikki kun. Vaqt yetishmasa, asosiy ssenariyni tekshirish emas, P1 hajmi qisqartiriladi. G‘alabani kafolatlab bo‘lmaydi; texnik topshiriqning vazifasi ishonchli ishlaydigan va foydasi tushunarli mahsulot tayyorlashdir.
+P	17	PAGE=2	STYLE=Заголовок 1	2 Tanlov versiyasining hajmi
+P	18	PAGE=2	STYLE=Заголовок 3	2.1 Majburiy P0 imkoniyatlar
+P	19	PAGE=2	STYLE=Обычный	Bo‘lim
+P	20	PAGE=2	STYLE=Обычный	Amalda ishlashi kerak bo‘lgan imkoniyatlar
+P	22	PAGE=2	STYLE=Обычный	Katalog
+P	23	PAGE=2	STYLE=Обычный	To‘rtta bo‘lim, qidiruv va filtrlar, saralash, sahifalash, alohida e’lon havolalari
+P	25	PAGE=2	STYLE=Обычный	Ijara shartlari
+P	26	PAGE=2	STYLE=Обычный	Uy-joy turi va ijara birligi, talabalarni qabul qilish, bo‘sh o‘rinlar, muddat va joylashish sanasi
+P	28	PAGE=2	STYLE=Обычный	Xarajatlar
+P	29	PAGE=2	STYLE=Обычный	Narx va uning hisob birligi, kommunal to‘lovlar, depozit, vositachilik haqi, ma’lum summalar hisobi
+P	31	PAGE=2	STYLE=Обычный	Solishtirish
+P	32	PAGE=2	STYLE=Обычный	Bir xil valyuta va narx birligidagi ikki yoki uchta ijara taklifini solishtirish
+P	34	PAGE=2	STYLE=Обычный	Dolzarblik
+P	35	PAGE=2	STYLE=Обычный	Tasdiqlangan sana, eskirgan e’lon haqida ogohlantirish, nashrdan olish
+P	37	PAGE=2	STYLE=Обычный	E’lon muallifi
+P	38	PAGE=2	STYLE=Обычный	Tizimga kirish, o‘z e’lonlarini yaratish va tahrirlash, murojaatlarni olish
+P	40	PAGE=2	STYLE=Обычный	Murojaatlar
+P	41	PAGE=2	STYLE=Обычный	Bazaga yozish, yuboruvchi va qabul qiluvchi kabinetlari, holat o‘zgarishlari tarixi
+P	43	PAGE=2	STYLE=Обычный	Yangi qurilishlar
+P	44	PAGE=2	STYLE=Обычный	Loyiha sahifasi, narxi va hisob birligi ko‘rsatilgan takliflar, maslahat olish uchun murojaat
+P	46	PAGE=2	STYLE=Обычный	Moderatsiya
+P	47	PAGE=2	STYLE=Обычный	E’lonni tasdiqlash yoki rad etish, shikoyatlarni ko‘rib chiqish, e’lonni bloklash
+P	49	PAGE=2	STYLE=Обычный	Sifat
+P	50	PAGE=2	STYLE=Обычный	Moslashuvchan interfeys, huquqlar tekshiruvi, server validatsiyasi, demo ma’lumotlar va zaxira ishga tushirish
+P	53	PAGE=2	STYLE=Заголовок 3	2.2 Qo‘shimcha P1 imkoniyatlar
+P	54	PAGE=2	STYLE=Обычный	Qurilmalar o‘rtasida sinxronlanadigan sevimlilar; interfeysning to‘liq ikkinchi tili; tanlangan universitetgacha to‘g‘ri chiziq bo‘yicha masofa; saqlangan qidiruvlar; ko‘rishlar statistikasi; foizdagi vositachilik haqi; quruvchi kompaniyaning bir nechta xodimi uchun alohida hisoblar.
+P	55	PAGE=2	STYLE=Обычный	P1 amalga oshirilmagan bo‘lsa, interfeysda ushbu amallarni va’da qiladigan faol tugmalar bo‘lmasligi kerak. P1 bandlari tanlov versiyasini qabul qilish mezoni hisoblanmaydi.
+P	56	PAGE=2	STYLE=Заголовок 3	2.3 P0 doirasiga kirmaydigan P2 imkoniyatlar
+P	57	PAGE=2	STYLE=Обычный	Telegramdan ommaviy import; e’lon matnini avtomatik ajratish; onlayn to‘lov va oldindan to‘lov; shartnomalar; ipoteka; to‘liq chat; SMS orqali tasdiqlash; push-bildirishnomalar; yo‘nalishlar va yo‘l vaqti; obyektlarni huquqiy tekshirish; algoritmik tavsiyalar; kafolatlangan band qilish; reyestrlar va quruvchilar CRM tizimlari bilan integratsiya.
+P	58	PAGE=2	STYLE=Заголовок 3	2.4 Imkoniyat qachon tugallangan hisoblanadi
+P	59	PAGE=2	STYLE=Обычный	Imkoniyatning ishlaydigan interfeysi, serverdagi ishlovi, zarur ma’lumotlarni saqlashi, kirish huquqlari tekshiruvi va tushunarli xato xabarlari bo‘lishi kerak. Faqat sahifa yangilanguncha ko‘rinadigan murojaat amalga oshirilgan funksiya hisoblanmaydi. O‘quv ma’lumotlaridan foydalanish mumkin, ammo ular aniq belgilanishi lozim.
+P	61	PAGE=3	STYLE=Заголовок 1	3 Tasnif va foydalanuvchi rollari
+P	62	PAGE=3	STYLE=Заголовок 3	3.1 To‘rtta bo‘lim va e’lon holatlari
+P	63	PAGE=3	STYLE=Обычный	Navigatsiya bo‘limi
+P	64	PAGE=3	STYLE=Обычный	Bo‘limga kirish qoidasi
+P	66	PAGE=3	STYLE=Обычный	Kvartira va uy ijarasi
+P	67	PAGE=3	STYLE=Обычный	deal_type=rent, rental_unit=whole
+P	69	PAGE=3	STYLE=Обычный	Xonalar, o‘rinlar va yotoqxonalar
+P	70	PAGE=3	STYLE=Обычный	deal_type=rent, rental_unit=room yoki bed
+P	72	PAGE=3	STYLE=Обычный	Uy-joy sotish
+P	73	PAGE=3	STYLE=Обычный	deal_type=sale, market_type=resale
+P	75	PAGE=3	STYLE=Обычный	Yangi qurilishlar
+P	76	PAGE=3	STYLE=Обычный	Quruvchilar loyihalari va ularga bog‘langan sale/new_build takliflari
+P	79	PAGE=3	STYLE=Обычный	Ko‘chmas mulk turi alohida saqlanadi: kvartira, uy, yotoqxona. Yotoqxona uchun qo‘shimcha tur belgilanadi: xususiy yoki universitetga qarashli. Oddiy kvartiradagi xona yotoqxona deb nomlanmaydi. Universitet yotoqxonasi odatiy tijoriy ijara sifatida taklif qilinmaydi: shartlar va murojaat tartibi muassasadan aniqlanadi. P0 doirasida universitetga rasmiy ariza topshirish amalga oshirilmaydi.
+P	80	PAGE=3	STYLE=Обычный	«Talabalar qabul qilinadi» barcha ijara turlari uchun alohida maydon: ha / yo‘q / ko‘rsatilmagan. Bu qiymat sarlavha, narx, yashovchilar jinsi yoki universitetga yaqinlikdan avtomatik aniqlanmaydi. Tegishli filtr faqat aniq «ha» qiymatiga ega e’lonlarni qaytaradi.
+P	81	PAGE=3	STYLE=Заголовок 3	3.2 Foydalanuvchi rollari
+P	82	PAGE=3	STYLE=Обычный	Rol
+P	83	PAGE=3	STYLE=Обычный	Imkoniyatlar
+P	85	PAGE=3	STYLE=Обычный	Mehmon
+P	86	PAGE=3	STYLE=Обычный	Katalog va tafsilotlarni ko‘rish, filtrlash, solishtirish; murojaat yuborish uchun tizimga kirish
+P	88	PAGE=3	STYLE=Обычный	Ro‘yxatdan o‘tgan foydalanuvchi
+P	89	PAGE=3	STYLE=Обычный	O‘z murojaatlarini yuborish va bekor qilish, tarixini ko‘rish, e’lon joylashtirish
+P	91	PAGE=3	STYLE=Обычный	E’lon muallifi
+P	92	PAGE=3	STYLE=Обычный	Faqat o‘z e’lonlarini va ularga kelgan murojaatlarni boshqarish
+P	94	PAGE=3	STYLE=Обычный	Quruvchi vakili
+P	95	PAGE=3	STYLE=Обычный	E’lon muallifi imkoniyatlari hamda o‘ziga biriktirilgan loyihani boshqarish
+P	97	PAGE=3	STYLE=Обычный	Administrator
+P	98	PAGE=3	STYLE=Обычный	Moderatsiya, ma’lumotnomalar, loyiha vakilini tayinlash, shikoyatlar va bloklash
+P	101	PAGE=3	STYLE=Обычный	Bir foydalanuvchi ham uy-joy qidirishi, ham e’lon joylashtirishi mumkin. «Mulkdor» yoki «vositachi» — muallif bildirgan maqom; u mulk huquqi tekshirilganini anglatmaydi. Quruvchi vakilini administrator tayinlaydi; foydalanuvchi bu rolni o‘ziga bera olmaydi.
+P	102	PAGE=3	STYLE=Заголовок 3	3.3 Holatlarni ajratish
+P	103	PAGE=3	STYLE=Обычный	moderation_status: draft, pending, approved, rejected, blocked. availability_status: available, rented, sold, withdrawn. E’lonning ommaga ko‘rinishi ikkala maydon hamda dolzarblik muddatidan kelib chiqadi. Mavjudlik holatini o‘zgartirish moderator qo‘ygan blokni bekor qilmaydi.
+P	105	PAGE=4	STYLE=Заголовок 1	4 Sahifalar va interfeys
+P	106	PAGE=4	STYLE=Заголовок 3	4.1 Sahifalar xaritasi
+P	107	PAGE=4	STYLE=Обычный	URL
+P	108	PAGE=4	STYLE=Обычный	Mazmun va asosiy amal
+P	110	PAGE=4	STYLE=Обычный	/
+P	111	PAGE=4	STYLE=Обычный	Servis foydasining qisqa izohi, to‘rtta bo‘lim, qidiruvga o‘tish
+P	113	PAGE=4	STYLE=Обычный	/catalog
+P	114	PAGE=4	STYLE=Обычный	Filtrlar, natijalar soni, saralash, e’lon kartochkalari
+P	116	PAGE=4	STYLE=Обычный	/listings/{id}
+P	117	PAGE=4	STYLE=Обычный	Suratlar, shartlar, xarajatlar, manba, murojaat
+P	119	PAGE=4	STYLE=Обычный	/compare
+P	120	PAGE=4	STYLE=Обычный	Ikki yoki uchta ijara taklifini solishtirish
+P	122	PAGE=4	STYLE=Обычный	/projects
+P	123	PAGE=4	STYLE=Обычный	Nashr qilingan yangi qurilish loyihalari ro‘yxati
+P	125	PAGE=4	STYLE=Обычный	/projects/{id}
+P	126	PAGE=4	STYLE=Обычный	Loyiha tavsifi, takliflar, bog‘lanish uchun murojaat
+P	128	PAGE=4	STYLE=Обычный	/login, /register
+P	129	PAGE=4	STYLE=Обычный	Kirish va ro‘yxatdan o‘tish; dastlabki amalga qaytish
+P	131	PAGE=4	STYLE=Обычный	/account/requests
+P	132	PAGE=4	STYLE=Обычный	Foydalanuvchining o‘zi yuborgan murojaatlar
+P	134	PAGE=4	STYLE=Обычный	/account/listings
+P	135	PAGE=4	STYLE=Обычный	O‘z e’lonlari, yaratish, tahrirlash, dolzarblikni tasdiqlash
+P	137	PAGE=4	STYLE=Обычный	/account/inbox
+P	138	PAGE=4	STYLE=Обычный	O‘z e’lonlari va loyihalariga kelgan murojaatlar
+P	140	PAGE=4	STYLE=Обычный	/account/projects/{id}/edit
+P	141	PAGE=4	STYLE=Обычный	Biriktirilgan loyihani tahrirlash
+P	143	PAGE=4	STYLE=Обычный	/admin
+P	144	PAGE=4	STYLE=Обычный	E’lonlar, loyihalar va shikoyatlar moderatsiyasi
+P	147	PAGE=4	STYLE=Заголовок 3	4.2 Umumiy UX qoidalari
+P	148	PAGE=4	STYLE=Обычный	P0 interfeysi o‘zbek tilida, lotin yozuvida tayyorlanadi. Ruscha versiya — P1. Interfeys matnlari alohida lug‘atga chiqariladi; e’lon matni muallif yozgan tilda ko‘rsatiladi, avtomatik tarjima qilinmaydi. Texnik topshiriq tili ilovaning barcha kelajakdagi tillarini cheklamaydi.
+P	149	PAGE=4	STYLE=Обычный	Yuqori navigatsiya: logotip, katalog, yangi qurilishlar, «E’lon joylashtirish», kabinet. Telefonda filtrlar «Ko‘rsatish» va «Tozalash» tugmalari bo‘lgan alohida panelda ochiladi. Faol filtrlar natijalar ustida ko‘rinadi va bittadan olib tashlanadi. Butun kartochkani bosib ochish solishtirish tugmasidan foydalanishga xalaqit bermasligi kerak.
+P	150	PAGE=4	STYLE=Обычный	Har bir formada yuborilmoqda, muvaffaqiyat va xato holatlari bo‘ladi. So‘rov davomida takroriy yuborish interfeysda bloklanadi, ammo dublikatdan himoya serverda ham bo‘lishi shart. Xatolar tegishli maydon yonida ko‘rsatiladi; to‘g‘ri kiritilgan qiymatlar saqlanadi.
+P	151	PAGE=4	STYLE=Заголовок 3	4.3 Bo‘sh natija va xato holatlari
+P	152	PAGE=4	STYLE=Обычный	Natija topilmasa, faol cheklovlar va ularni tozalash amali ko‘rsatiladi. Murojaat bo‘lmasa, ularning bu yerda qanday paydo bo‘lishi tushuntiriladi. E’lon olib tashlangan bo‘lsa, mavjud emasligi va katalogga qaytish havolasi ko‘rsatiladi; murojaat tugmasi bo‘lmaydi. Ruxsat yo‘q — 403; obyekt topilmadi — 404. Server xatosida texnik kod tafsilotlarisiz tushunarli xabar va qayta urinish imkoniyati beriladi.
+P	153	PAGE=4	STYLE=Обычный	360 px kenglikda butun sahifa gorizontal siljimasligi kerak; solishtirish jadvali o‘z konteyneri ichida gorizontal aylantirilishi mumkin. Tugmalar va maydonlar klaviatura orqali boshqariladi, fokus ko‘rinadi, rasmlarda mazmunli alt matni bo‘ladi.
+P	155	PAGE=5	STYLE=Заголовок 1	5 Katalog va qidiruv qoidalari
+P	156	PAGE=5	STYLE=Заголовок 3	5.1 Kartochka tarkibi
+P	157	PAGE=5	STYLE=Обычный	Surat; sarlavha; hudud; «Butun kvartira/uy / Xona / O‘rin» turi; narx, valyuta va hisob birligi; talabalar haqidagi belgi; tegishli hollarda bo‘sh o‘rinlar soni; oxirgi tasdiqlash sanasi. Kartochkadan tafsilotlarga o‘tish va ijara taklifini solishtirishga qo‘shish mumkin. Ko‘rsatilmagan xususiyatlar o‘rniga ijobiy belgilar qo‘yilmaydi.
+P	158	PAGE=5	STYLE=Заголовок 3	5.2 P0 filtrlari
+P	159	PAGE=5	STYLE=Обычный	Guruh
+P	160	PAGE=5	STYLE=Обычный	Maydonlar va qoidalar
+P	162	PAGE=5	STYLE=Обычный	Qidiruv hududi
+P	163	PAGE=5	STYLE=Обычный	Katalog bo‘limi, ma’lumotnomadan hudud, sarlavha va tavsif bo‘yicha matnli qidiruv
+P	165	PAGE=5	STYLE=Обычный	Ijara
+P	166	PAGE=5	STYLE=Обычный	Butun kvartira/uy, xona, o‘rin; talabalar qabul qilinishi
+P	168	PAGE=5	STYLE=Обычный	Narx
+P	169	PAGE=5	STYLE=Обычный	Valyuta, eng kam/eng ko‘p narx; hisob birligi tanlangan ijara turiga mos
+P	171	PAGE=5	STYLE=Обычный	Sig‘im
+P	172	PAGE=5	STYLE=Обычный	Xona/o‘rin uchun eng kam bo‘sh o‘rinlar soni; kvartiradagi xonalar soni emas
+P	174	PAGE=5	STYLE=Обычный	Joylashish
+P	175	PAGE=5	STYLE=Обычный	Tanlangan sanadan kech bo‘lmagan mavjudlik; noma’lum sana filtrdan o‘tmaydi
+P	177	PAGE=5	STYLE=Обычный	Uy-joy
+P	178	PAGE=5	STYLE=Обычный	Kvartira/uy/yotoqxona, xonalar soni, mebel, internet
+P	180	PAGE=5	STYLE=Обычный	Muallif
+P	181	PAGE=5	STYLE=Обычный	Mulkdor / vositachi / vakil; muallif ma’lumotiga asoslanadi
+P	184	PAGE=5	STYLE=Обычный	Katalogdagi budjet e’lonning asosiy narxini anglatadi. Ijara uchun bu barcha xarajatlar emas, oylik ijara haqidir. Maydon izohida bu aniq tushuntiriladi. To‘liq xarajatlar alohida solishtirish ekranida ko‘riladi. Foydalanuvchi narx oralig‘ini kiritishdan oldin valyutani tanlaydi; avtomatik konvertatsiya yo‘q.
+P	185	PAGE=5	STYLE=Заголовок 3	5.3 So‘rov mantiqi
+P	186	PAGE=5	STYLE=Обычный	Turli filtrlar AND orqali, bir maydonning bir nechta qiymati OR orqali birlashtiriladi. Bo‘sh maydon qidiruvni cheklamaydi. Eng kam narx eng ko‘p narxdan katta bo‘lishi mumkin emas. Bo‘lim almashtirilganda mos kelmaydigan filtrlar tozalanadi: masalan, bo‘sh o‘rinlar sotuvga tatbiq etilmaydi. Matnli qidiruv matn bo‘lagini izlaydi; taxminiy qidiruv yoki kirill va lotinni bir xil tushunish va’da qilinmaydi.
+P	187	PAGE=5	STYLE=Обычный	Parametrlar URLda saqlanadi. Sahifani yangilash va havolani yuborish qidiruv holatini saqlaydi. Filtr o‘zgarsa, birinchi sahifaga qaytiladi. Bir sahifada 12 kartochka; standart saralash — oxirgi tasdiqlash, keyin id. Qo‘shimcha: narx o‘sishi/kamayishi, nashr sanasi. Narx bo‘yicha saralash faqat bitta valyuta va narx birligida ruxsat etiladi; aks holda ularni tanlash so‘raladi. Noma’lum narx oxirida ko‘rsatiladi.
+P	188	PAGE=5	STYLE=Заголовок 3	5.4 Geografiya
+P	189	PAGE=5	STYLE=Обычный	P0: Andijon va oldindan belgilangan hududlar/mo‘ljallar ro‘yxati. Universitetlar hamda masofa — P1. P1 amalga oshirilsa, masofa koordinatalardan hisoblanib, «To‘g‘ri chiziq bo‘yicha, taxminan» deb yoziladi; nuqta taxminiy bo‘lsa, bu ham belgilanadi. Tegishli ma’lumotlarsiz piyoda yoki avtobusda yetib borish vaqti chiqarilmaydi.
+P	191	PAGE=6	STYLE=Заголовок 1	6 E’lon va xarajatlar hisobi
+P	192	PAGE=6	STYLE=Заголовок 3	6.1 E’lon sahifasining tarkibi
+P	193	PAGE=6	STYLE=Обычный	Galereya; sarlavha; toifa; hudud va mo‘ljal; tavsif; mavjud bo‘lsa xonalar soni va maydon; yashash shartlari; mebel, internet, isitish, sanuzel; mavjudlik sanasi; eng kam muddat; o‘rinlar soni; muallif turi; xarajatlar bloki; tasdiqlash sanasi; manba; murojaat, solishtirish va shikoyat tugmalari.
+P	194	PAGE=6	STYLE=Обычный	Ijara uchun ijara birligi va talabalar haqidagi javob majburiy, «ko‘rsatilmagan» javobi ham mumkin. Xona bir kishiga yoki guruhga berilishi alohida yoziladi. Xona narxi sig‘imga bo‘linib, avtomatik bir o‘rin narxiga aylantirilmaydi. Umumiy sig‘im va ayni paytdagi bo‘sh o‘rinlar alohida maydonlardir.
+P	195	PAGE=6	STYLE=Заголовок 3	6.2 P0 pul modeli
+P	196	PAGE=6	STYLE=Обычный	Bitta ijara e’lonining barcha to‘lovlari bir xil valyutada: UZS yoki USD. Hisoblar float emas, aniq o‘nli sonlar yoki eng kichik pul birliklaridagi butun sonlarda bajariladi. Asosiy ijara R — tanlangan birlik uchun majburiy oylik narx. Nol ijara narxi taqiqlanadi. Sotuvda obyektning to‘liq narxi ishlatiladi; narx noma’lum bo‘lsa, «So‘rov bo‘yicha» deb ko‘rsatish mumkin.
+P	197	PAGE=6	STYLE=Обычный	Kommunal xarajatlar: included / fixed / unknown. included holatida qo‘shimcha U=0, «Narxga kiritilgan» izohi bilan. fixed holatida muallif U summasini aynan shu ijara birligi va bir oy uchun kiritadi. unknown holatida summa bo‘sh qoladi. Faqat butun kvartiraning xarajati ma’lum bo‘lib, o‘rin ijaraga berilayotgan bo‘lsa, P0 hisobida kommunal xarajat noma’lum deb olinadi; umumiy summa izohda yozilishi mumkin.
+P	198	PAGE=6	STYLE=Обычный	Depozit D va vositachilik haqi C: none / fixed / unknown. «Yo‘q» — tasdiqlangan nol; noma’lum — NULL. P0 faqat belgilangan summalarni qo‘llaydi; foizlar va oylar sonidagi depozit — P1. Depozitni qaytarish shartlari muallif ma’lumotiga ko‘ra alohida ko‘rsatiladi. Qaytariladigan depozit joylashish uchun kerakli pulga kiradi, ammo oylik xarajat deb nomlanmaydi.
+P	199	PAGE=6	STYLE=Заголовок 3	6.3 Formulalar
+P	200	PAGE=6	STYLE=Обычный	Oylik to‘lov M = R + U, faqat U ma’lum bo‘lsa. Joylashishda kerak bo‘ladigan pul E = R + D + C + U₀; U₀ — kommunal to‘lov aynan joylashishda undirilsa, uning summasi. fixed turidagi kommunal to‘lov vaqti muallif tomonidan belgilanadi: joylashishda / keyinroq / aniqlanmagan. R ushbu hisobda birinchi to‘liq oyning ijara haqi; to‘liq bo‘lmagan oy uchun kunlik mutanosib hisob P0ga kirmaydi.
+P	201	PAGE=6	STYLE=Обычный	Zarur qismlardan biri noma’lum bo‘lsa, aniq yakun o‘rniga «Ma’lum xarajatlar: …» va aniqlashtiriladigan to‘lovlar ro‘yxati chiqariladi. Bunday summani «Jami» deb ko‘rsatish taqiqlanadi. Sotuv va yangi qurilishlarga ijara kalkulyatori tatbiq etilmaydi; soliq, kredit yoki bitim xarajatlarini taxminan qo‘shmasdan, e’lon narxi va uning hisob birligi ko‘rsatiladi.
+P	203	PAGE=7	STYLE=Заголовок 1	7 Solishtirish va dolzarblik
+P	204	PAGE=7	STYLE=Заголовок 3	7.1 Hisoblash uchun nazorat misollari
+P	205	PAGE=7	STYLE=Обычный	Kirish qiymatlari UZS
+P	206	PAGE=7	STYLE=Обычный	Kutiladigan natija
+P	208	PAGE=7	STYLE=Обычный	R=800 000; U=100 000 keyinroq; D=800 000; C=0
+P	209	PAGE=7	STYLE=Обычный	Oyiga 900 000; joylashishda 1 600 000
+P	211	PAGE=7	STYLE=Обычный	Xuddi shu qiymatlar; U joylashishda
+P	212	PAGE=7	STYLE=Обычный	Oyiga 900 000; joylashishda 1 700 000
+P	214	PAGE=7	STYLE=Обычный	R=800 000; U narxga kiritilgan; D=0; C=0
+P	215	PAGE=7	STYLE=Обычный	Oyiga ham, joylashishda ham 800 000; kommunal to‘lovlar kiritilgan
+P	217	PAGE=7	STYLE=Обычный	R=800 000; U noma’lum; D=800 000; C noma’lum
+P	218	PAGE=7	STYLE=Обычный	Oy uchun ma’lum ijara 800 000; joylashishda ma’lum xarajatlar 1 600 000; qolgan to‘lovlar aniqlashtiriladi
+P	221	PAGE=7	STYLE=Обычный	Bu sonlar tekshirish uchun sun’iy misollar bo‘lib, Andijondagi uy-joy bozorining narx bahosi emas.
+P	222	PAGE=7	STYLE=Заголовок 3	7.2 P0 solishtirish
+P	223	PAGE=7	STYLE=Обычный	Foydalanuvchi ko‘pi bilan uchta ijara e’lonini qo‘shadi. Solishtirish uchun kamida ikkita kerak. Tanlangan idlar brauzerda mahalliy saqlanadi, ammo ekran ochilganda dolzarb ma’lumot serverdan olinadi. Brauzer xotirasi e’lonlar yoki murojaatlar bazasi o‘rnida ishlatilmaydi.
+P	224	PAGE=7	STYLE=Обычный	Boshqa valyuta yoki narx birligidagi taklifni qo‘shish bloklanadi va «Solishtirish uchun bir xil valyuta va ijara turini tanlang» izohi chiqadi. Narxni avtomatik bo‘lib, o‘rinni butun kvartira bilan solishtirish taqiqlanadi. Jadval qatorlari: ijara haqi, kommunal to‘lov, oylik to‘lov, depozit, vositachilik haqi, joylashish uchun pul, talabalar, bo‘sh o‘rinlar, joylashish sanasi, hudud, qulayliklar, oxirgi tasdiqlash.
+P	225	PAGE=7	STYLE=Обычный	Yetishmayotgan qiymat «Ko‘rsatilmagan» deb yoziladi. Olib tashlangan taklif mavjud emas deb belgilanadi va unga murojaat yuborib bo‘lmaydi. To‘rtinchi kartochkani qo‘shishda avval tanlanganlardan birini olib tashlash taklif qilinadi. Avtomatik «Eng yaxshi variant» yorlig‘i yo‘q.
+P	226	PAGE=7	STYLE=Заголовок 3	7.3 P0 dolzarblik qoidalari
+P	227	PAGE=7	STYLE=Обычный	confirmed_at muallif taklif mavjudligini oxirgi marta tasdiqlagan vaqtni saqlaydi. 7 sutkagacha, shu jumladan aniq 7 sutkada — «Tasdiqlangan: …». 7 sutkadan oshsa — «Anchadan beri yangilanmagan». 14 sutkadan oshsa, e’lon ommaviy katalogdan chiqariladi va yangi murojaatlar yopiladi; muallif kabinetida uni ko‘rishda davom etadi. Muddatlar sozlanadi; P0da barcha e’lonlar uchun bir xil.
+P	228	PAGE=7	STYLE=Обычный	Muallif yoki haqiqiy tasdiqni olib, izoh qoldirgan administrator tasdiqlashi mumkin. Moderatsiya o‘z-o‘zidan mavjudlikni tasdiqlamaydi. «Ijaraga berildi / Sotildi» tugmasi yangi murojaatlarni darhol to‘xtatadi. Qayta faollashtirish tasdiqlash vaqtini yangilaydi, lekin rejected/blocked holatini bekor qilmaydi. Sanalar UTCda saqlanib, Asia/Tashkent vaqtida ko‘rsatiladi. Muddat o‘qish paytida tekshiriladi; to‘g‘ri ishlash uchun doimiy ishga tushgan rejalashtiruvchi shart emas.
+P	230	PAGE=8	STYLE=Заголовок 1	8 E’lon joylashtirish va moderatsiya
+P	231	PAGE=8	STYLE=Заголовок 3	8.1 Joylashtirish formasi
+P	232	PAGE=8	STYLE=Обычный	1-qadam: bo‘lim, uy-joy turi, ijara birligi, hudud. 2-qadam: xususiyatlar, talabalar uchun shartlar, sig‘im, mavjudlik sanasi. 3-qadam: narx, kommunal to‘lov, depozit, vositachilik haqi. 4-qadam: suratlar, tavsif, murojaat uchun aloqa, manba va joylashtirish ruxsati. 5-qadam: oldindan ko‘rish va moderatorga yuborish.
+P	233	PAGE=8	STYLE=Обычный	P0da bosqichli forma o‘rniga shu guruhlar joylashgan bitta sahifa bo‘lishi mumkin. Barcha majburiy maydonlarni to‘ldirmasdan qoralama saqlanadi; moderatsiyaga yuborish uchun esa ular to‘liq bo‘lishi kerak. Mijoz va server bir xil qoidalardan foydalanadi, yakuniy tekshiruv serverda bajariladi.
+P	234	PAGE=8	STYLE=Заголовок 3	8.2 Validatsiya
+P	235	PAGE=8	STYLE=Обычный	Sarlavha 10–120 belgi, tavsif 30–5 000 belgi. Kamida bitta, ko‘pi bilan sakkizta JPEG/PNG/WebP rasm; har biri 5 MBgacha. Maydon ko‘rsatilgan bo‘lsa, noldan katta. Xonalar soni 1–30. Xona/o‘rin ijarasi uchun sig‘im majburiy: 1–30; bo‘sh o‘rinlar 0 dan sig‘imgacha. Bo‘sh o‘rin nol bo‘lsa, «mavjud» holatida nashr qilish taqiqlanadi. Butun obyekt uchun mavjudlik holat orqali belgilanadi, o‘rinlar maydoni majburiy emas.
+P	236	PAGE=8	STYLE=Обычный	Ijara uchun mavjudlik sanasi majburiy; o‘tgan sana hozirning o‘zida mavjudligini anglatadi. Murojaatdagi istalgan ko‘rish sanasi esa o‘tmishda bo‘lishi mumkin emas. Eng kam ijara muddati — 1 dan 60 gacha butun oy yoki «ko‘rsatilmagan». Telefon normallashtirilgach xalqaro formatdagi satr sifatida saqlanadi; chet el raqami faqat mamlakati sababli rad etilmasligi kerak.
+P	237	PAGE=8	STYLE=Заголовок 3	8.3 Moderatsiya holatlari
+P	238	PAGE=8	STYLE=Обычный	draft → pending → approved yoki rejected. Rad etilganda muallif sababni ko‘radi, tuzatadi va qayta yuboradi. Administrator nashr qilingan e’lonni sabab bilan blocked holatiga o‘tkazishi mumkin. Blokdan keyingi tekshiruv uchun administrator amali kerak; muallif qayta yuborish orqali blokni chetlab o‘tolmaydi.
+P	239	PAGE=8	STYLE=Обычный	Tasdiqlangan kartochka mazmuni tahrirlansa, u pending holatiga qaytib, qayta tekshirilguncha yashiriladi. P0da ikki parallel versiyani saqlash o‘rniga shu sodda qoida ishlatiladi. Mavjudlik holati va tasdiqlash vaqtini o‘zgartirish qayta moderatsiyani talab qilmaydi. Tahrirlashdan oldin vaqtincha yashirilishi haqida ogohlantirish ko‘rsatiladi.
+P	240	PAGE=8	STYLE=Заголовок 3	8.4 Shikoyatlar
+P	241	PAGE=8	STYLE=Обычный	Sabablar: allaqachon ijaraga berilgan/sotilgan, noto‘g‘ri narx, noto‘g‘ri shartlar, takroriy e’lon, shubhali mazmun, boshqa. Izoh 1 000 belgigacha; «boshqa» uchun majburiy. P0da faqat tizimga kirgan foydalanuvchi shikoyat qiladi. Shikoyat moderator uchun yozuv yaratadi, lekin avtomatik ayblov yoki bloklashga sabab bo‘lmaydi. Qaror va uning sababi saqlanadi.
+P	243	PAGE=9	STYLE=Заголовок 1	9 Murojaatlar va shaxsiy kabinetlar
+P	244	PAGE=9	STYLE=Заголовок 3	9.1 P0 murojaat yaratish
+P	245	PAGE=9	STYLE=Обычный	Tizimga kirgan foydalanuvchi mavjud va nashr qilingan e’londa «Ko‘rish uchun murojaat» tugmasini bosadi. Maydonlar: ism, telefon, istalgan sana, ixtiyoriy vaqt oralig‘i, xona/o‘rin uchun yashovchilar soni, 1 000 belgigacha xabar. Aloqa ma’lumoti aynan ushbu taklif muallifiga uzatilishi alohida tushuntiriladi. Foydalanuvchi telefoni ommaga ko‘rsatilmaydi.
+P	246	PAGE=9	STYLE=Обычный	Server nashr holati, dolzarblik muddati, mavjudlik, yashovchilar soni va qabul qiluvchini qayta tekshiradi. Taklif allaqachon olib tashlangan bo‘lsa, tushunarli xato qaytariladi. Murojaat bazaga yozilgach, raqami, vaqti va holati ko‘rsatiladi. Muvaffaqiyat matni: «Murojaat yuborildi. Javobni kuting». Bu band qilish yoki ko‘rish vaqti kelishilganini anglatmaydi.
+P	247	PAGE=9	STYLE=Заголовок 3	9.2 Holatlar va huquqlar
+P	248	PAGE=9	STYLE=Обычный	Holat
+P	249	PAGE=9	STYLE=Обычный	Kim va qanday belgilaydi
+P	251	PAGE=9	STYLE=Обычный	new — yangi
+P	252	PAGE=9	STYLE=Обычный	Muvaffaqiyatli yuborishda server
+P	254	PAGE=9	STYLE=Обычный	accepted — kelishilgan
+P	255	PAGE=9	STYLE=Обычный	Qabul qiluvchi taklif etilgan sana/vaqtni tasdiqlaydi
+P	257	PAGE=9	STYLE=Обычный	alternative_proposed — boshqa vaqt taklif qilingan
+P	258	PAGE=9	STYLE=Обычный	Qabul qiluvchi yangi sana/vaqt va izoh kiritadi
+P	260	PAGE=9	STYLE=Обычный	rejected — rad etilgan
+P	261	PAGE=9	STYLE=Обычный	Qabul qiluvchi yangi yoki muhokamadagi murojaatni rad etadi
+P	263	PAGE=9	STYLE=Обычный	cancelled — bekor qilingan
+P	264	PAGE=9	STYLE=Обычный	Yuboruvchi tugallanmagan murojaatni; qabul qiluvchi kelishilgan uchrashuvni sabab bilan bekor qiladi
+P	266	PAGE=9	STYLE=Обычный	completed — yakunlangan
+P	267	PAGE=9	STYLE=Обычный	Qabul qiluvchi ko‘rish yoki maslahat o‘tkazilganini belgilaydi
+P	270	PAGE=9	STYLE=Обычный	new holatidan qabul qiluvchi accepted, alternative_proposed yoki rejected holatiga o‘tkazadi. alternative_proposed holatida yuboruvchi yangi vaqtni qabul qiladi (accepted) yoki bekor qiladi; qabul qiluvchi taklifini o‘zgartirishi yoki rad etishi mumkin. accepted holatidan completed va cancelled mumkin. Yakuniy rejected/cancelled/completed holatlari tahrirlanmaydi; yangi murojaat alohida yaratiladi. Ko‘rish vaqtini kelishish uy-joy mavjudligini avtomatik o‘zgartirmaydi.
+P	271	PAGE=9	STYLE=Заголовок 3	9.3 Takroriy yozuvdan himoya va kabinet
+P	272	PAGE=9	STYLE=Обычный	Bir foydalanuvchining bitta obyektga faqat bitta faol murojaati bo‘ladi; faol holatlar — new, alternative_proposed, accepted. Ikki marta bosish ikkita yozuv yaratmaydi: server noyob yuborish kaliti va atomar tekshiruvdan foydalanadi. Foydalanuvchi o‘z e’loniga murojaat yubora olmaydi.
+P	273	PAGE=9	STYLE=Обычный	«Mening murojaatlarim» bo‘limida obyekt, qabul qiluvchi, sana, holat va tarix ko‘rinadi. «Kiruvchi murojaatlar»da faqat o‘z obyektlariga kelgan yozuvlar ko‘rsatiladi. Har bir o‘zgarishda kim, qachon, oldingi/yangi holat, taklif etilgan vaqt va izoh saqlanadi. P0 bildirishnomasi — sahifa yangilangach kabinetdagi yangi yozuvlar hisoblagichi; SMS, xat va darhol keladigan push va’da qilinmaydi.
+P	275	PAGE=10	STYLE=Заголовок 1	10 Yangi qurilishlar va quruvchilar
+P	276	PAGE=10	STYLE=Заголовок 3	10.1 P0 minimal model
+P	277	PAGE=10	STYLE=Обычный	Loyiha turar joy majmuasi haqidagi umumiy ma’lumot va alohida kvartira takliflarini birlashtiradi. Har bir loyihada bitta mas’ul foydalanuvchi bo‘ladi, uni administrator tayinlaydi. P0da jamoalar, filiallar, murakkab rollar yoki CRMga ega alohida tashkilot modeli yaratilmaydi.
+P	278	PAGE=10	STYLE=Обычный	Loyiha maydonlari: nom, kompaniya, hudud/mo‘ljal, tavsif, suratlar, vakil ma’lumotiga ko‘ra qurilish bosqichi, mavjud bo‘lsa e’lon qilingan topshirish muddati, qulayliklar, aloqa soatlari, yangilangan sana. Hujjatlar va huquqiy tekshiruv borligi sun’iy ko‘rsatilmaydi. Haqiqiy tekshiruv tartibisiz «Tekshirilgan quruvchi» belgisi qo‘yilmaydi.
+P	279	PAGE=10	STYLE=Заголовок 3	10.2 Loyiha ichidagi takliflar
+P	280	PAGE=10	STYLE=Обычный	Taklifda reja yoki rasm, xonalar soni, maydon, mavjud bo‘lsa qavat, valyuta va narx asosi bo‘ladi: aniq to‘liq narx / boshlang‘ich narx / m² uchun narx / so‘rov bo‘yicha. Narx asosi alohida saqlanib, aniq ko‘rsatiladi. m² narxi kvartiraning to‘liq narxi bilan birga saralanmaydi. P0 umumiy narx filtrida faqat aniq to‘liq narxli takliflar qatnashadi; qolganlari narx cheklovisiz ko‘rinadi.
+P	281	PAGE=10	STYLE=Обычный	P0dagi har bir taklif — namoyish varianti; u mavjud kvartiralar zaxirasi bilan avtomatik sinxronlangan emas. Sahifada aniq variant mavjudligi va yakuniy shartlarni vakil tasdiqlashi tushuntiriladi. Sotilgan variant oddiy e’lon kabi muallif tomonidan olib tashlanadi. Bitta variant sotilgani uchun butun loyiha avtomatik yopilmaydi.
+P	282	PAGE=10	STYLE=Заголовок 3	10.3 Maslahat uchun murojaat
+P	283	PAGE=10	STYLE=Обычный	Maydonlar: ism, telefon, qiziqtirgan variant ixtiyoriy, bog‘lanish sanasi/vaqt oralig‘i, izoh. Yozuv faqat loyihaga tayinlangan vakilga yuborilib, uning kabinetida ko‘rinadi. 9-bo‘limdagi holatlar va qoidalar qo‘llanadi; ko‘rish o‘rniga maslahat ko‘rsatiladi. Bir foydalanuvchi bir loyiha bo‘yicha bitta faol maslahat murojaatiga ega bo‘lishi mumkin.
+P	284	PAGE=10	STYLE=Обычный	Mas’ul hisob tayinlanmagan yoki loyiha yashirilgan bo‘lsa, yuborish tugmasi faol bo‘lmaydi. Ishlamaydigan aloqa kanalini ishlayotgandek ko‘rsatish mumkin emas. Namoyishda oldindan yaratilgan test vakili ishlatiladi; haqiqiy kelishuvsiz kompaniya bilan hamkorlik borligi aytilmaydi.
+P	285	PAGE=10	STYLE=Заголовок 3	10.4 Foyda va imkoniyat chegarasi
+P	286	PAGE=10	STYLE=Обычный	Servis ma’lumotni jamlaydi va tartibli murojaatni uzatadi. Bu natijasiz qo‘ng‘iroqlarni kamaytirishi mumkin, ammo javob tezligi vakilga bog‘liq. P0da «Kvartirani sotib olish» tugmasi yo‘q. To‘lov, band qilish, huquqiy rasmiylashtirish va muvaffaqiyatli sotuvdan komissiya olish tanlovdan keyin alohida ishlab chiqiladi.
+P	288	PAGE=11	STYLE=Заголовок 1	11 Ma’lumot manbalari va katalogni to‘ldirish
+P	289	PAGE=11	STYLE=Заголовок 3	11.1 E’lonlar qayerdan olinadi
+P	290	PAGE=11	STYLE=Обычный	Manba
+P	291	PAGE=11	STYLE=Обычный	P0 jarayoni
+P	292	PAGE=11	STYLE=Обычный	Saqlanadigan ma’lumot
+P	294	PAGE=11	STYLE=Обычный	Mulkdor yoki vositachi
+P	295	PAGE=11	STYLE=Обычный	Formani o‘zi to‘ldiradi, moderator to‘liqligini tekshiradi
+P	296	PAGE=11	STYLE=Обычный	Muallif, muallif turi, yuborilgan vaqt
+P	298	PAGE=11	STYLE=Обычный	Telegram hamkori
+P	299	PAGE=11	STYLE=Обычный	Ruxsat bilan e’lon formaga qo‘lda kiritiladi
+P	300	PAGE=11	STYLE=Обычный	Kanal, asl post havolasi, ruxsat, mas’ul bilan aloqa
+P	302	PAGE=11	STYLE=Обычный	Quruvchi
+P	303	PAGE=11	STYLE=Обычный	Administrator loyiha yaratib, vakil tayinlaydi
+P	304	PAGE=11	STYLE=Обычный	Kompaniya, mas’ul shaxs, kelishuv haqidagi ma’lumot
+P	306	PAGE=11	STYLE=Обычный	Demo ma’lumotlar
+P	307	PAGE=11	STYLE=Обычный	Loyiha uchun o‘quv misollari kiritiladi
+P	308	PAGE=11	STYLE=Обычный	is_demo=true, kartochka va sahifada aniq belgi
+P	311	PAGE=11	STYLE=Обычный	Kanal administratorining ruxsati barcha surat va kontaktlarni qayta joylashtirish huquqi mavjudligini o‘z-o‘zidan isbotlamaydi. Haqiqiy to‘ldirishda muayyan materialdan foydalanish imkoniyati va muallif bilan aloqa usuli aniqlanadi. Tashqi manbadagi kontakt avtomatik ro‘yxatdan o‘tgan hisobga aylantirilmaydi.
+P	312	PAGE=11	STYLE=Заголовок 3	11.2 Ko‘chirilgan e’lonlar cheklovi
+P	313	PAGE=11	STYLE=Обычный	P0 ichki murojaatlarni qabul qiladigan katalogda faqat mas’ul foydalanuvchi biriktirilgan va murojaat olishga rozi bo‘lgan takliflar nashr qilinadi. Qabul qiluvchisi yo‘q e’lon qoralama bo‘lib qoladi. Bu manzilsiz murojaat yuborilishini oldini oladi. Telegramdan ommaviy nusxalash va egalar hisobini avtomatik yaratish tanlov versiyasiga kirmaydi.
+P	314	PAGE=11	STYLE=Обычный	Ko‘chirishdan oldin narx va birligi, talabalar, bo‘sh o‘rinlar, depozit va komissiya, mavjudlik sanasi aniqlanadi. Aniqlanmagan qiymatlar «ko‘rsatilmagan» bo‘ladi; kartochkani to‘liq ko‘rsatish uchun taxmin kiritish taqiqlanadi. Takroriy e’lonlar manba, kontakt va mazmun bo‘yicha tekshiriladi. Bitta telefon mos kelishi o‘chirish uchun yetarli emas: vositachida bir nechta obyekt bo‘lishi mumkin.
+P	315	PAGE=11	STYLE=Заголовок 3	11.3 Himoya uchun ma’lumotlar to‘plami
+P	316	PAGE=11	STYLE=Обычный	24 ta sun’iy taklif tayyorlanadi: 6 ta butun uy/kvartira ijarasi, 10 ta xona/o‘rin, 4 ta ikkilamchi bozordagi sotuv, ikki yangi qurilish loyihasida 4 ta taklif. 16 ta ijara ichida: 8 tasi talabalarni qabul qiladi, 4 tasi qabul qilmaydi, 4 tasida shart noma’lum. Bitta olib tashlangan va bitta eskirgan yozuv ham bo‘ladi; shu sababli ommaviy katalogda 24 tadan kam kartochka ko‘rinadi.
+P	317	PAGE=11	STYLE=Обычный	Belgilangan va noma’lum xarajatli misollar, bitta USD taklifi, turli hududlar va joylashish sanalari qo‘shiladi. O‘z suratlari yoki foydalanishga ruxsat etilgan tasvirlar ishlatiladi; test kontaktlari tasodifiy haqiqiy shaxslarga olib bormasligi kerak. O‘quv e’lonlarida «Demo» belgisi bo‘ladi; baza seed buyrug‘i bilan tiklanadi. Ruxsat olingan va manbasi to‘g‘ri yozilgan haqiqiy takliflarni ham qo‘shish mumkin.
+P	319	PAGE=12	STYLE=Заголовок 1	12 Ma’lumotlar modeli
+P	320	PAGE=12	STYLE=Заголовок 3	12.1 Jadvallar va bog‘lanishlar
+P	321	PAGE=12	STYLE=Обычный	Jadval
+P	322	PAGE=12	STYLE=Обычный	Asosiy maydonlar va vazifasi
+P	324	PAGE=12	STYLE=Обычный	users
+P	325	PAGE=12	STYLE=Обычный	id, name, email unique, password_hash, role, maxfiy phone, timestamps
+P	327	PAGE=12	STYLE=Обычный	districts
+P	328	PAGE=12	STYLE=Обычный	id, name_uz, name_ru nullable, active
+P	330	PAGE=12	STYLE=Обычный	projects
+P	331	PAGE=12	STYLE=Обычный	id, manager_user_id, district_id, name, developer_name, description, stage, completion_text, moderation_status, is_demo
+P	333	PAGE=12	STYLE=Обычный	listings
+P	334	PAGE=12	STYLE=Обычный	id, owner_user_id, project_id nullable, district_id, tasnif, mazmun, shartlar, summalar, holatlar, confirmed_at, is_demo
+P	336	PAGE=12	STYLE=Обычный	media
+P	337	PAGE=12	STYLE=Обычный	id, listing_id yoki project_id, storage_path, mime, sort_order; faqat bitta asosiy obyekt
+P	339	PAGE=12	STYLE=Обычный	amenities
+P	340	PAGE=12	STYLE=Обычный	id, code unique, name_uz; qulayliklar ma’lumotnomasi
+P	342	PAGE=12	STYLE=Обычный	listing_amenity
+P	343	PAGE=12	STYLE=Обычный	listing_id + amenity_id, birgalikda noyob kalit
+P	345	PAGE=12	STYLE=Обычный	requests
+P	346	PAGE=12	STYLE=Обычный	id, requester_id, recipient_id, listing_id yoki project_id, murojaat maydonlari, status, idempotency_key
+P	348	PAGE=12	STYLE=Обычный	request_events
+P	349	PAGE=12	STYLE=Обычный	id, request_id, actor_id, from_status, to_status, proposed_at, comment, created_at
+P	351	PAGE=12	STYLE=Обычный	reports
+P	352	PAGE=12	STYLE=Обычный	id, listing_id, reporter_id, reason, comment, status, resolver_id, resolution
+P	354	PAGE=12	STYLE=Обычный	moderation_events
+P	355	PAGE=12	STYLE=Обычный	id, actor_id, listing_id yoki project_id, amal, sabab, created_at
+P	358	PAGE=12	STYLE=Обычный	Murojaatning bitta asosiy nishoni bo‘ladi: listing_id yoki project_id. Loyiha maslahati uchun qo‘shimcha interest_listing_id berilishi mumkin; u shu loyihaga tegishli bo‘lishi va qabul qiluvchini o‘zgartirmasligi kerak. recipient_id yaratilish paytida qabul qiluvchini qayd etadi. P0da faol murojaatlari bor obyekt mas’ulini almashtirish mumkin emas: administrator avval topshirish masalasini tizimdan tashqarida hal qiladi yoki murojaatlarni sabab bilan yopadi. Mijoz kontaktlarini avtomatik boshqa shaxsga o‘tkazish amalga oshirilmaydi.
+P	359	PAGE=12	STYLE=Заголовок 3	12.2 Ma’lumot yaxlitligi
+P	360	PAGE=12	STYLE=Обычный	Tashqi kalitlar ishlatilishi shart; email, qulaylik–e’lon juftligi va yuborish kaliti noyob. enum hamda qiymatlar serverda, imkon bo‘lsa baza cheklovlari bilan ham tekshiriladi. Summalar manfiy emas, bo‘sh o‘rinlar sig‘imdan oshmaydi. project_idli yangi qurilish e’loni shu loyiha vakiliga tegishli bo‘lishi kerak; oddiy ijara loyihaga biriktirilmaydi.
+P	361	PAGE=12	STYLE=Обычный	Kabinetda e’lonni o‘chirish arxivlash shaklida bajariladi; murojaatlar tarixi yo‘qolmaydi. Tarixi bor hisoblar P0 foydalanuvchi interfeysidan bog‘liq yozuvlar bilan birga kaskad tarzda o‘chirilmaydi. Loglarda parollar, tokenlar va kontakt formalarining to‘liq mazmuni saqlanmaydi.
+P	362	PAGE=12	STYLE=Заголовок 3	12.3 Indekslar
+P	363	PAGE=12	STYLE=Обычный	Nashr holatlari va confirmed_at; bo‘lim/hudud/valyuta/narx; owner_user_id; project_id; murojaatlarda recipient_id/status/created_at hamda requester_id/created_at; hodisalarda request_id/created_at bo‘yicha indekslar yaratiladi. P0da to‘liq matnli qidiruv va geografik indekslar shart emas. Baza tuzilmasi qo‘lda emas, migratsiyalar orqali boshqariladi va tekshiriladi.
+P	365	PAGE=13	STYLE=Заголовок 1	13 E’lon maydonlari va qat’iy qoidalar
+P	366	PAGE=13	STYLE=Заголовок 3	13.1 Asosiy maydonlar lug‘ati
+P	367	PAGE=13	STYLE=Обычный	Maydon
+P	368	PAGE=13	STYLE=Обычный	Tur va qoida
+P	370	PAGE=13	STYLE=Обычный	deal_type, market_type
+P	371	PAGE=13	STYLE=Обычный	rent/sale; resale/new_build; ijarada market_type bo‘sh
+P	373	PAGE=13	STYLE=Обычный	property_type, rental_unit
+P	374	PAGE=13	STYLE=Обычный	apartment/house/dormitory; whole/room/bed faqat ijara uchun
+P	376	PAGE=13	STYLE=Обычный	dormitory_type
+P	377	PAGE=13	STYLE=Обычный	private/university; dormitory uchun majburiy
+P	379	PAGE=13	STYLE=Обычный	students_allowed
+P	380	PAGE=13	STYLE=Обычный	yes/no/unknown; sotuv uchun bo‘sh
+P	382	PAGE=13	STYLE=Обычный	title, description
+P	383	PAGE=13	STYLE=Обычный	8-bo‘limdagi uzunlik cheklovlari; HTMLsiz oddiy matn
+P	385	PAGE=13	STYLE=Обычный	currency, price, price_basis
+P	386	PAGE=13	STYLE=Обычный	UZS/USD; qoidaga ko‘ra decimal yoki NULL; monthly_unit/total/from_total/per_m2/on_request
+P	388	PAGE=13	STYLE=Обычный	utilities_mode, utilities_amount
+P	389	PAGE=13	STYLE=Обычный	included/fixed/unknown; summa faqat fixed uchun
+P	391	PAGE=13	STYLE=Обычный	utilities_payment_timing
+P	392	PAGE=13	STYLE=Обычный	move_in/later/unknown; fixed uchun ishlatiladi
+P	394	PAGE=13	STYLE=Обычный	deposit_mode, deposit_amount
+P	395	PAGE=13	STYLE=Обычный	none/fixed/unknown; summa faqat fixed uchun
+P	397	PAGE=13	STYLE=Обычный	commission_mode, commission_amount
+P	398	PAGE=13	STYLE=Обычный	none/fixed/unknown; summa faqat fixed uchun
+P	400	PAGE=13	STYLE=Обычный	capacity, free_places
+P	401	PAGE=13	STYLE=Обычный	Butun sonlar; room/bed uchun majburiy
+P	403	PAGE=13	STYLE=Обычный	available_from, min_months
+P	404	PAGE=13	STYLE=Обычный	Mavjudlik boshlangan sana; eng kam muddat nullable
+P	406	PAGE=13	STYLE=Обычный	area_m2, rooms, floor
+P	407	PAGE=13	STYLE=Обычный	Obyekt xususiyatlari; kiritilsa tekshiriladi
+P	409	PAGE=13	STYLE=Обычный	location_text, lat, lng
+P	410	PAGE=13	STYLE=Обычный	Ommaviy mo‘ljal; koordinatalar nullable; aniqlik darajasi alohida maydon
+P	412	PAGE=13	STYLE=Обычный	author_type, source_type, source_url
+P	413	PAGE=13	STYLE=Обычный	owner/agent/developer; direct/telegram/developer/demo; havola nullable
+P	415	PAGE=13	STYLE=Обычный	moderation_status, availability_status
+P	416	PAGE=13	STYLE=Обычный	3-bo‘limdagi mustaqil holatlar to‘plamlari
+P	418	PAGE=13	STYLE=Обычный	confirmed_at, published_at, archived_at
+P	419	PAGE=13	STYLE=Обычный	UTC vaqt belgilari; NULL alohida ma’noga ega
+P	422	PAGE=13	STYLE=Заголовок 3	13.2 Noma’lum qiymatlarni saqlash
+P	423	PAGE=13	STYLE=Обычный	NULL ma’lumot yo‘qligini, nol esa ma’lum nol summani bildiradi. utilities_mode fixed holatidan unknown holatiga o‘zgarsa, summa tozalanadi. Server mos kelmaydigan maydonlarni, hatto qo‘lda so‘rov orqali yuborilgan bo‘lsa ham, rad etadi yoki hisobga olmaydi. «Ko‘rsatilmagan» matni interfeysda chiqariladi; u sonli maydonga yozilmaydi.
+P	424	PAGE=13	STYLE=Заголовок 3	13.3 Yagona server xarajat modeli
+P	425	PAGE=13	STYLE=Обычный	Hisoblash monthly_known_amount, monthly_complete, move_in_known_amount, move_in_complete va unknown_components qiymatlarini qaytaradi. Mijoz natijani formatlaydi; unda mustaqil ikkinchi formula bo‘lmaydi. API yoki sahifa ma’lumotlarida pul aniq o‘nli satrlar yoki eng kichik pul birligidagi butun sonlar bilan uzatiladi, ikkilik arifmetika xatosiga yo‘l qo‘yilmaydi.
+P	426	PAGE=13	STYLE=Заголовок 3	13.4 Ommaga ko‘rinish
+P	427	PAGE=13	STYLE=Обычный	Kartochka katalogda faqat approved + available + archived_at yo‘q + confirmed_at 14 sutkadan eski emas shartlari bajarilganda ko‘rinadi. Loyiha uchun approved va faol tayinlangan vakil zarur. Yashirilgan e’lonni muallif va administrator ko‘radi; eski havoladan kirgan tashrifchiga xususiy kontaktlarsiz mavjud emasligi haqidagi sahifa beriladi.
+P	429	PAGE=14	STYLE=Заголовок 1	14 Texnik amalga oshirish
+P	430	PAGE=14	STYLE=Заголовок 3	14.1 Taklif etilgan texnologiyalar
+P	431	PAGE=14	STYLE=Обычный	P0: Laravel, Inertia + Vue, Tailwind CSS; muallifga tanish bo‘lsa, administrator qismi uchun Filament. Mahalliy namoyish uchun SQLite va suratlarning mahalliy fayl ombori. Bitta server va bitta sessiyali autentifikatsiya ishlatiladi; alohida mikroservis yoki tokenli API talab qilinmaydi. Paketlarning mos versiyalari ish boshida tanlanib, lock-fayllarda qayd etiladi.
+P	432	PAGE=14	STYLE=Обычный	Dasturchi boshqa texnologiyalarda ishonchliroq ishlasa, ma’lumotlar, cheklovlar va qabul qilish ssenariylarini saqlagan holda boshlashdan oldin stekni almashtirishi mumkin. Tanlov arafasida tayyor asosiy ssenariyni yangi freymvorkka qayta yozish tavsiya etilmaydi. Keyingi ommaviy ishga tushirish uchun doimiy infratuzilma va mos baza tanlanadi; SQLite fayli ommaviy papkada bo‘lmasligi kerak.
+P	433	PAGE=14	STYLE=Заголовок 3	14.2 Kodni ajratish
+P	434	PAGE=14	STYLE=Обычный	Kontroller so‘rovni qabul qiladi; FormRequest validatsiya bajaradi; Policy ruxsatlarni tekshiradi; xarajat servisi summalarni hisoblaydi; murojaat servisi yaratish va holat o‘tishlarini tranzaksiyada bajaradi; katalog so‘rovi ruxsat etilgan filtrlarni qo‘llaydi. Kartochka, pul, holat va forma komponentlari sahifalarda qayta ishlatiladi. UI bazaga bevosita ulanmaydi.
+P	435	PAGE=14	STYLE=Заголовок 3	14.3 Server amallari
+P	436	PAGE=14	STYLE=Обычный	Metod va marshrut
+P	437	PAGE=14	STYLE=Обычный	Amal va ruxsat
+P	439	PAGE=14	STYLE=Обычный	GET /catalog, /listings/{id}
+P	440	PAGE=14	STYLE=Обычный	Faqat ruxsat etilgan ommaviy ma’lumotni o‘qish
+P	442	PAGE=14	STYLE=Обычный	POST /account/listings
+P	443	PAGE=14	STYLE=Обычный	Qoralama yaratish; tizimga kirgan foydalanuvchi
+P	445	PAGE=14	STYLE=Обычный	PATCH /account/listings/{id}
+P	446	PAGE=14	STYLE=Обычный	O‘z e’lonini tahrirlash; moderatsiyani qayta tekshirish
+P	448	PAGE=14	STYLE=Обычный	POST /account/listings/{id}/submit
+P	449	PAGE=14	STYLE=Обычный	Tekshiruvga yuborish
+P	451	PAGE=14	STYLE=Обычный	POST /account/listings/{id}/confirm
+P	452	PAGE=14	STYLE=Обычный	O‘z e’loni mavjudligini tasdiqlash
+P	454	PAGE=14	STYLE=Обычный	PATCH /account/listings/{id}/availability
+P	455	PAGE=14	STYLE=Обычный	Ijaraga berildi/sotildi/olib tashlandi; moslikni tekshirish
+P	457	PAGE=14	STYLE=Обычный	POST /requests
+P	458	PAGE=14	STYLE=Обычный	Murojaat yaratish; tizimga kirgan yuboruvchi
+P	460	PAGE=14	STYLE=Обычный	PATCH /requests/{id}/status
+P	461	PAGE=14	STYLE=Обычный	Tomon huquqini tekshirib, ruxsat etilgan holatga o‘tish
+P	463	PAGE=14	STYLE=Обычный	POST /listings/{id}/reports
+P	464	PAGE=14	STYLE=Обычный	Tizimga kirgan foydalanuvchining shikoyati
+P	467	PAGE=14	STYLE=Обычный	Bu amallar shartnomasi, alohida REST API talabi emas: Inertia sahifa, yo‘naltirish va forma xatolarini qaytarishi mumkin. API variantida 401, 403, 404, ziddiyat uchun 409 va validatsiya uchun 422 ishlatiladi. Muvaffaqiyat faqat bazaga yozilgandan keyin qaytariladi.
+P	468	PAGE=14	STYLE=Заголовок 3	14.4 O‘rnatish va tiklash
+P	469	PAGE=14	STYLE=Обычный	README o‘rnatish, .env sozlamalari, migratsiya, seed, frontendni yig‘ish va ishga tushirishni tushuntiradi. Repozitoriyda sirlarsiz .env.example bo‘ladi. Himoya oldidan resurslar yig‘iladi, rasmlar mahalliy saqlanadi va tashqi CDN, xarita, SMS hamda Telegramsiz ishga tushirish tekshiriladi. Baza va media zaxira nusxasi o‘zaro mos to‘plamni tiklashi kerak.
+P	471	PAGE=15	STYLE=Заголовок 1	15 Xavfsizlik va sifat
+P	472	PAGE=15	STYLE=Заголовок 3	15.1 P0 uchun majburiy choralar
+P	473	PAGE=15	STYLE=Обычный	Parollar freymvorkning standart mexanizmi bilan xeshlanadi. Sessiyali autentifikatsiya, CSRF himoyasi, matnni xavfsiz chiqarish va parametrli so‘rovlar ishlatiladi. Xususiy obyektni har bir o‘qish yoki o‘zgartirishda ruxsat tekshiriladi; tugmani yashirish himoya hisoblanmaydi. Ruxsat etilgan maydonlar aniq belgilanadi: foydalanuvchi role=admin yoki moderation_status=approved yuborib huquq ololmaydi.
+P	474	PAGE=15	STYLE=Обычный	Murojaat yuboruvchining telefonini uning o‘zi, tayinlangan qabul qiluvchi va masalani ko‘rayotgan administrator ko‘radi. Katalog javoblari va ommaviy URLlarda murojaat yuboruvchilarning kontaktlari bo‘lmaydi. Qidiruv uchun aniq kvartira raqami talab qilinmaydi; P0 hudud va mo‘ljaldan foydalanadi. Muallifning ommaviy telefoni ixtiyoriy va faqat uning aniq tanlovi bilan ko‘rsatiladi.
+P	475	PAGE=15	STYLE=Обычный	Rasm yuklashda kengaytma bilan birga haqiqiy fayl turi va hajmi tekshiriladi. Faylga tasodifiy nom beriladi, bajariladigan fayllar taqiqlanadi. Rasmlar koordinatalar ham kiradigan EXIF ma’lumotlarini olib tashlab qayta saqlanadi. Tashqi havolalar http/https bilan cheklanadi; server formadagi ixtiyoriy URLdan fayl yuklamaydi. Maxfiy fayllar va konfiguratsiya web-root orqali ochilmaydi.
+P	476	PAGE=15	STYLE=Обычный	Standart limitlar: kirish — IP va identifikator juftligiga daqiqasiga 5 ta muvaffaqiyatsiz urinish; murojaatlar — foydalanuvchiga soatiga 10 ta; shikoyatlar — soatiga 5 ta. Limit oshsa, keyinroq urinish haqida tushunarli xabar chiqadi. Qiymatlar sozlanadi. Namoyishni qulaylashtirish uchun ruxsat tekshiruvlarini o‘chirish mumkin emas.
+P	477	PAGE=15	STYLE=Заголовок 3	15.2 Tekshiriladigan nofunksional talablar
+P	478	PAGE=15	STYLE=Обычный	24 e’lonli test bazasi va oldindan ishga tushirilgan mahalliy serverda katalogga o‘tish hamda filtrni qo‘llash namoyish noutbukida 2 soniyadan oshmasin; muhit READMEda yoziladi. Bu demo mezoni, katta yuklamadagi tezlik va’dasi emas. Rasmlarning kichik nusxalari bo‘ladi; ekrandan tashqaridagi tasvirlar zarur bo‘lganda yuklanadi.
+P	479	PAGE=15	STYLE=Обычный	360, 768 va 1440 px kengliklar, o‘rnatilgan dolzarb Chromium brauzeri va bitta mobil brauzer tekshiriladi. Matn o‘qilishi, kontrast, maydon yorliqlari, klaviatura boshqaruvi va ko‘rinadigan fokus ta’minlanadi; holatlar faqat rang bilan farqlanmaydi. Alohida auditsiz foydalanish imkoniyati standartlariga muvofiqlik darajasi e’lon qilinmaydi.
+P	480	PAGE=15	STYLE=Заголовок 3	15.3 Haqiqiy ishga tushirish shartlari
+P	481	PAGE=15	STYLE=Обычный	Tanlov bazasida test ma’lumotlari ishlatiladi. Haqiqiy murojaatlar yig‘ilishidan oldin ma’lumotlarni qayta ishlash siyosati, saqlash muddatlari, so‘rov bo‘yicha o‘chirish yoki shaxssizlantirish, zaxira nusxalar va hostingdagi HTTPS tayyorlanadi. Ushbu hujjat huquqiy ekspertiza emas va muayyan qonun talablariga muvofiqlikni tasdiqlamaydi.
+P	483	PAGE=16	STYLE=Заголовок 1	16 Katalog va ma’lumotlarni qabul qilish
+P	484	PAGE=16	STYLE=Обычный	Har bir ssenariy tiklangan test bazasida tekshiriladi. Natija «o‘tdi / o‘tmadi» tarzida, xato tavsifi bilan qayd etiladi. Quyidagi qiymatlar haqiqiy e’lonlar emas, o‘quv misollaridir.
+P	485	PAGE=16	STYLE=Обычный	ID
+P	486	PAGE=16	STYLE=Обычный	Amal
+P	487	PAGE=16	STYLE=Обычный	Kutiladigan natija
+P	489	PAGE=16	STYLE=Обычный	A01
+P	490	PAGE=16	STYLE=Обычный	To‘rtta bo‘limni ochish
+P	491	PAGE=16	STYLE=Обычный	Har birida tegishli obyektlar; xonalar butun uy ijarasiga kirmaydi
+P	493	PAGE=16	STYLE=Обычный	A02
+P	494	PAGE=16	STYLE=Обычный	«Talabalar qabul qilinadi»ni yoqish
+P	495	PAGE=16	STYLE=Обычный	Faqat students_allowed=yes; unknown va no chiqarilmaydi
+P	497	PAGE=16	STYLE=Обычный	A03
+P	498	PAGE=16	STYLE=Обычный	Hudud va o‘rin turini tanlash
+P	499	PAGE=16	STYLE=Обычный	Ikkala shart bir vaqtda bajariladi
+P	501	PAGE=16	STYLE=Обычный	A04
+P	502	PAGE=16	STYLE=Обычный	UZS va budjetni tanlash
+P	503	PAGE=16	STYLE=Обычный	USD va noma’lum narx chiqarilmaydi; chegara qiymatlari hisobga olinadi
+P	505	PAGE=16	STYLE=Обычный	A05
+P	506	PAGE=16	STYLE=Обычный	Eng kam narxni eng ko‘p narxdan oshirish
+P	507	PAGE=16	STYLE=Обычный	Validatsiya xatosi; oldingi to‘g‘ri natijalar yangidek ko‘rsatilmaydi
+P	509	PAGE=16	STYLE=Обычный	A06
+P	510	PAGE=16	STYLE=Обычный	Filtrli URLni yangilash
+P	511	PAGE=16	STYLE=Обычный	Qiymatlar, saralash va sahifa tiklanadi
+P	513	PAGE=16	STYLE=Обычный	A07
+P	514	PAGE=16	STYLE=Обычный	2-sahifada filtrni o‘zgartirish
+P	515	PAGE=16	STYLE=Обычный	1-sahifaga qaytiladi, natijalar soni to‘g‘ri
+P	517	PAGE=16	STYLE=Обычный	A08
+P	518	PAGE=16	STYLE=Обычный	Hech qanday natija topilmasligi
+P	519	PAGE=16	STYLE=Обычный	Tushunarli bo‘sh ekran va filtrlarni tozalash
+P	521	PAGE=16	STYLE=Обычный	A09
+P	522	PAGE=16	STYLE=Обычный	O‘rin narxli e’lonni ochish
+P	523	PAGE=16	STYLE=Обычный	Kartochka, tafsilotlar va solishtirishda narx birligi bir xil
+P	525	PAGE=16	STYLE=Обычный	A10
+P	526	PAGE=16	STYLE=Обычный	7.1-banddagi to‘rtta misolni hisoblash
+P	527	PAGE=16	STYLE=Обычный	Summalar va to‘liqlik belgilari kutilgan natijaga mos
+P	529	PAGE=16	STYLE=Обычный	A11
+P	530	PAGE=16	STYLE=Обычный	UZS o‘rin bilan USD o‘rinni solishtirish
+P	531	PAGE=16	STYLE=Обычный	Mos kelmaydigan taklifni qo‘shish izoh bilan rad etiladi
+P	533	PAGE=16	STYLE=Обычный	A12
+P	534	PAGE=16	STYLE=Обычный	Xona bilan o‘rinni solishtirish
+P	535	PAGE=16	STYLE=Обычный	Narx avtomatik bo‘linmaydi; nomuvofiqlik tushuntiriladi
+P	537	PAGE=16	STYLE=Обычный	A13
+P	538	PAGE=16	STYLE=Обычный	To‘rtinchi variantni qo‘shish
+P	539	PAGE=16	STYLE=Обычный	Tanlov uchtadan oshmaydi; bittasini olib tashlash taklif etiladi
+P	541	PAGE=16	STYLE=Обычный	A14
+P	542	PAGE=16	STYLE=Обычный	confirmed_at 7 sutkadan eski
+P	543	PAGE=16	STYLE=Обычный	Eskirganlik haqida ogohlantirish
+P	545	PAGE=16	STYLE=Обычный	A15
+P	546	PAGE=16	STYLE=Обычный	confirmed_at 14 sutkadan eski
+P	547	PAGE=16	STYLE=Обычный	Katalogda yo‘q; server ham yangi murojaatni qabul qilmaydi
+P	549	PAGE=16	STYLE=Обычный	A16
+P	550	PAGE=16	STYLE=Обычный	«Ijaraga berildi» deb belgilash
+P	551	PAGE=16	STYLE=Обычный	Mavjud takliflardan yo‘qoladi, eski havolada mavjud emasligi chiqadi
+P	553	PAGE=16	STYLE=Обычный	A17
+P	554	PAGE=16	STYLE=Обычный	Muallif blocked e’lonni tasdiqlashi
+P	555	PAGE=16	STYLE=Обычный	Blok ochilmaydi, katalogda ko‘rinmaydi
+P	557	PAGE=16	STYLE=Обычный	A18
+P	558	PAGE=16	STYLE=Обычный	m² narxli yoki so‘rov bo‘yicha sotuv
+P	559	PAGE=16	STYLE=Обычный	Filtr va saralashda to‘liq narx bilan aralashtirilmaydi
+P	562	PAGE=16	STYLE=Заголовок 3	16.1 Mazmunni tekshirish
+P	563	PAGE=16	STYLE=Обычный	Barcha o‘quv yozuvlarida «Demo» belgisi bor. Tasodifiy shaxslarning telefonlari, soxta sharhlar, tekshirilgan mulk huquqi va to‘qima hamkorlik va’dalari yo‘q. Manba va narx birligi saqlashda yo‘qolmaydi. Nol qo‘shimcha to‘lov noma’lum to‘lovdan farqlanadi. Ma’lumotnomalarda bo‘sh hududlar, rasmlarda buzilgan havolalar bo‘lmaydi.
+P	564	PAGE=16	STYLE=Обычный	Birinchi navbatda xarajat hisobi, nashr shartlari va talabalar filtri avtomatlashtirilgan test bilan tekshiriladi. Vizual joylashuv va matn qo‘lda tekshiriladi. Qolgan vaqtni shablonning har bir qatorini takrorlaydigan testlarga sarflamaslik kerak.
+P	566	PAGE=17	STYLE=Заголовок 1	17 Amallar va huquqlarni qabul qilish
+P	567	PAGE=17	STYLE=Обычный	ID
+P	568	PAGE=17	STYLE=Обычный	Amal
+P	569	PAGE=17	STYLE=Обычный	Kutiladigan natija
+P	571	PAGE=17	STYLE=Обычный	B01
+P	572	PAGE=17	STYLE=Обычный	Mehmon murojaat tugmasini bosadi
+P	573	PAGE=17	STYLE=Обычный	Tizimga kirib kerakli obyektga qaytadi; forma izohsiz yo‘qolmaydi
+P	575	PAGE=17	STYLE=Обычный	B02
+P	576	PAGE=17	STYLE=Обычный	Foydalanuvchi murojaat yuboradi
+P	577	PAGE=17	STYLE=Обычный	Bazada yozuv, raqam va holat bor; yangilangach ikkala tomonda ko‘rinadi
+P	579	PAGE=17	STYLE=Обычный	B03
+P	580	PAGE=17	STYLE=Обычный	Ikki marta bosish yoki so‘rovni takrorlash
+P	581	PAGE=17	STYLE=Обычный	Bitta murojaat va bitta boshlang‘ich hodisa to‘plami
+P	583	PAGE=17	STYLE=Обычный	B04
+P	584	PAGE=17	STYLE=Обычный	Obyektga faol murojaatni takrorlash
+P	585	PAGE=17	STYLE=Обычный	Mavjud murojaat ochiladi yoki tushunarli ziddiyat xatosi chiqadi
+P	587	PAGE=17	STYLE=Обычный	B05
+P	588	PAGE=17	STYLE=Обычный	O‘z uyiga murojaat yuborish
+P	589	PAGE=17	STYLE=Обычный	Server amalni rad etadi
+P	591	PAGE=17	STYLE=Обычный	B06
+P	592	PAGE=17	STYLE=Обычный	Boshqa egasi murojaatni id orqali ochadi
+P	593	PAGE=17	STYLE=Обычный	403/404; kontaktlar va mazmun oshkor bo‘lmaydi
+P	595	PAGE=17	STYLE=Обычный	B07
+P	596	PAGE=17	STYLE=Обычный	Yuboruvchi completed holatini belgilaydi
+P	597	PAGE=17	STYLE=Обычный	Server ruxsat etilmagan amalni rad etadi
+P	599	PAGE=17	STYLE=Обычный	B08
+P	600	PAGE=17	STYLE=Обычный	Ega boshqa vaqt taklif qiladi, yuboruvchi qabul qiladi
+P	601	PAGE=17	STYLE=Обычный	Izchil tarix; ikkala tomonda accepted va kelishilgan vaqt
+P	603	PAGE=17	STYLE=Обычный	B09
+P	604	PAGE=17	STYLE=Обычный	Yuboruvchi murojaatni bekor qiladi
+P	605	PAGE=17	STYLE=Обычный	cancelled; keyin yangi murojaat yaratish mumkin
+P	607	PAGE=17	STYLE=Обычный	B10
+P	608	PAGE=17	STYLE=Обычный	Forma ochilgach, yuborishdan oldin e’lon olinadi
+P	609	PAGE=17	STYLE=Обычный	Server rad etadi, yolg‘on muvaffaqiyat ko‘rsatilmaydi
+P	611	PAGE=17	STYLE=Обычный	B11
+P	612	PAGE=17	STYLE=Обычный	O‘tgan sana yoki bo‘sh joydan ko‘p yashovchi
+P	613	PAGE=17	STYLE=Обычный	Tegishli maydonlarda xatolar
+P	615	PAGE=17	STYLE=Обычный	B12
+P	616	PAGE=17	STYLE=Обычный	E’lon yaratib moderatsiyaga yuborish
+P	617	PAGE=17	STYLE=Обычный	Tasdiqlanmaguncha ommaviy katalogda yo‘q
+P	619	PAGE=17	STYLE=Обычный	B13
+P	620	PAGE=17	STYLE=Обычный	approved e’lonni tahrirlash
+P	621	PAGE=17	STYLE=Обычный	pending, qayta tasdiqlanguncha yashiriladi
+P	623	PAGE=17	STYLE=Обычный	B14
+P	624	PAGE=17	STYLE=Обычный	Begona owner_id yoki approved qiymatini qo‘lda yuborish
+P	625	PAGE=17	STYLE=Обычный	Obyektni egallash va moderatsiyani chetlab o‘tish imkonsiz
+P	627	PAGE=17	STYLE=Обычный	B15
+P	628	PAGE=17	STYLE=Обычный	Rasm sifatida bajariladigan fayl yuklash
+P	629	PAGE=17	STYLE=Обычный	Fayl rad etiladi, bajarish uchun ochilmaydi
+P	631	PAGE=17	STYLE=Обычный	B16
+P	632	PAGE=17	STYLE=Обычный	Shikoyat yuborish va administrator ko‘rib chiqishi
+P	633	PAGE=17	STYLE=Обычный	Holat, qaror, sabab saqlanadi; tarix mavjud
+P	635	PAGE=17	STYLE=Обычный	B17
+P	636	PAGE=17	STYLE=Обычный	Loyiha bo‘yicha maslahat murojaati yuborish
+P	637	PAGE=17	STYLE=Обычный	Faqat tayinlangan vakil oladi, murojaat nishoni saqlanadi
+P	639	PAGE=17	STYLE=Обычный	B18
+P	640	PAGE=17	STYLE=Обычный	Loyihada vakil yo‘q
+P	641	PAGE=17	STYLE=Обычный	Yuborish yopiq; server qabul qiluvchisiz yozuv yaratmaydi
+P	643	PAGE=17	STYLE=Обычный	B19
+P	644	PAGE=17	STYLE=Обычный	Ilovani qayta ishga tushirish
+P	645	PAGE=17	STYLE=Обычный	E’lonlar, murojaatlar va holatlari saqlanadi
+P	647	PAGE=17	STYLE=Обычный	B20
+P	648	PAGE=17	STYLE=Обычный	Mahalliy namoyishda internetni o‘chirish
+P	649	PAGE=17	STYLE=Обычный	Asosiy ssenariy va mahalliy rasmlar ishlashda davom etadi
+P	652	PAGE=17	STYLE=Заголовок 3	17.1 Minimal avtomatlashtirilgan testlar
+P	653	PAGE=17	STYLE=Обычный	Formulalar va noma’lum qiymatlar uchun modul testlari; talabalar filtri, murojaatga ruxsat, holat o‘tishlari, takroriy yuborish, nashrni bloklash va mavjudlikning bir vaqtda o‘zgarishi uchun server testlari. Murojaat yaratish va joriy holat tekshiruvi tanlangan bazaga mos parallel amallar himoyasi bilan bitta tranzaksiyada bajariladi. Ziddiyat yuz bersa, yarim yozuv qolmaydi.
+P	654	PAGE=17	STYLE=Обычный	Jiddiy xatolar tuzatilgach, asosiy namoyish yo‘li kamida ikki marta to‘liq, jumladan tizimni boshidan ishga tushirish bilan tekshiriladi. Avtomatlashtirilgan testlar brauzerdagi repetitsiyani almashtirmaydi.
+P	656	PAGE=18	STYLE=Заголовок 1	18 Ishlab chiqish va himoya rejasi
+P	657	PAGE=18	STYLE=Заголовок 3	18.1 2 oktabrgacha bajariladigan ishlar
+P	658	PAGE=18	STYLE=Обычный	Vaqt
+P	659	PAGE=18	STYLE=Обычный	Tayyor bo‘lishi kerak bo‘lgan natija
+P	661	PAGE=18	STYLE=Обычный	29 dan 30 sentabrga o‘tar kecha
+P	662	PAGE=18	STYLE=Обычный	Loyiha asosi, autentifikatsiya, migratsiyalar, seed, katalog va e’lon sahifasi
+P	664	PAGE=18	STYLE=Обычный	30 sentabr kunduzi
+P	665	PAGE=18	STYLE=Обычный	Filtrlar, xarajat hisobi, solishtirish; mos uy-joy qidirish jarayoni
+P	667	PAGE=18	STYLE=Обычный	30 sentabr kechqurun va kechasi
+P	668	PAGE=18	STYLE=Обычный	Joylashtirish, moderatsiya, murojaatni saqlash va ikkala kabinet; to‘liq ishlaydigan yo‘l
+P	670	PAGE=18	STYLE=Обычный	1 oktabr kunduzi
+P	671	PAGE=18	STYLE=Обычный	Minimal yangi qurilishlar bo‘limi, holatlar, shikoyatlar, moslashuvchanlik va muhim tekshiruvlar
+P	673	PAGE=18	STYLE=Обычный	1 oktabr kechqurun
+P	674	PAGE=18	STYLE=Обычный	Yangi imkoniyatlarni to‘xtatish; tuzatish, demo ma’lumotlar, zaxira ishga tushirish, taqdimot
+P	676	PAGE=18	STYLE=Обычный	2 oktabr ertalab
+P	677	PAGE=18	STYLE=Обычный	Qurilmalarni tekshirish va qisqa repetitsiya; katta o‘zgarishlarsiz
+P	680	PAGE=18	STYLE=Обычный	Bu ishlar ketma-ketligi, uyqusiz ishlash talabi emas. 30-sentabr oxirigacha murojaat bazada ishlamasa, barcha P1 va bezak effektlari olib tashlanadi. Joylashtirish formasi bitta sahifa, quruvchi uchun umumiy qabul qiluvchi kabineti, administrator uchun standart jadval ishlatiladi. Huquqlar nazorati, xarajat aniqligi va ma’lumot saqlash qisqartirilmaydi.
+P	681	PAGE=18	STYLE=Заголовок 3	18.2 Uch daqiqalik namoyish ssenariysi
+P	682	PAGE=18	STYLE=Обычный	0:00–0:25 — aniq muammo: mos narx talabalar ham qabul qilinishini anglatmaydi. 0:25–1:05 — talabalar, ijara turi va budjet bo‘yicha filtrlash. 1:05–1:40 — ikkita o‘rinni solishtirish, oylik to‘lov bilan joylashish uchun pul o‘rtasidagi farq. 1:40–2:20 — murojaat yuborish va uy egasida paydo bo‘lishi. 2:20–2:40 — tasdiqlash yoki boshqa vaqt. 2:40–3:00 — qolgan bo‘limlarni qisqa ko‘rsatish va katalog qanday to‘ldirilishini tushuntirish.
+P	683	PAGE=18	STYLE=Обычный	Ikki hisob uchun turli brauzer profillari yoki oddiy va maxfiy oynadan foydalaniladi, shunda sessiyalar bir-birini almashtirmaydi. Mahalliy nusxa, quvvatlangan noutbuk va qisqa zaxira video tayyorlanadi. Video jonli mahsulot o‘rnini bosish uchun emas, texnik uzilishda zaxira sifatida ishlatiladi.
+P	684	PAGE=18	STYLE=Заголовок 3	18.3 Tayyorlik to‘plami
+P	685	PAGE=18	STYLE=Обычный	Manba kodi va lock-fayllar; migratsiyalar va seed; ishga tushirish hamda test rollari ko‘rsatilgan README; .env.example; ishlaydigan mahalliy yig‘ilma va media; muhim tekshiruvlar natijalari; taqdimot va nutq matni; namoyishning zaxira yozuvi. Demo hisoblar parollari ommaviy ishchi tizimga ko‘chirilmaydi. Ommaviy URL uchun alohida xavfsiz sozlamalar va mahalliy zaxira ishga tushirish zarur.
+P	686	PAGE=18	STYLE=Заголовок 3	18.4 Ishlab chiqishni to‘xtatish mezoni
+P	687	PAGE=18	STYLE=Обычный	P0 qabul qilingan, asosiy ssenariy barqaror, taqdimot tayyor. Shundan keyin faqat qayta tekshirishga yetarli vaqt bo‘lsa yangi imkoniyat qo‘shiladi. Tugallanmagan P1 bandlari interfeysdan olinib, kelajakdagi rivojlantirish sifatida aytiladi.
+P	689	PAGE=19	STYLE=Заголовок 1	19 Asoslash va loyiha chegaralari
+P	690	PAGE=19	STYLE=Заголовок 3	19.1 Tanlov mezonlari bilan bog‘liqlik
+P	691	PAGE=19	STYLE=Обычный	Taqdim etilgan rasmdagi mezon
+P	692	PAGE=19	STYLE=Обычный	Ball
+P	693	PAGE=19	STYLE=Обычный	Loyiha nimani namoyish etadi
+P	695	PAGE=19	STYLE=Обычный	Funksionallik
+P	696	PAGE=19	STYLE=Обычный	25
+P	697	PAGE=19	STYLE=Обычный	Qidiruv → solishtirish → saqlangan murojaat → qabul qiluvchi javobi
+P	699	PAGE=19	STYLE=Обычный	Texnik sifat
+P	700	PAGE=19	STYLE=Обычный	20
+P	701	PAGE=19	STYLE=Обычный	Ma’lumotlar tuzilmasi, server huquqlari, validatsiya, tranzaksiyalar, moslashuvchanlik
+P	703	PAGE=19	STYLE=Обычный	Interfeys va dizayn
+P	704	PAGE=19	STYLE=Обычный	15
+P	705	PAGE=19	STYLE=Обычный	Tushunarli narxlar, shartlar, forma holatlari, telefonda qulaylik
+P	707	PAGE=19	STYLE=Обычный	Innovatsionlik
+P	708	PAGE=19	STYLE=Обычный	15
+P	709	PAGE=19	STYLE=Обычный	Talabalar sharti, ijara birligi, xarajat va dolzarblikni bitta ssenariyda birlashtirish
+P	711	PAGE=19	STYLE=Обычный	Amaliy ahamiyat
+P	712	PAGE=19	STYLE=Обычный	15
+P	713	PAGE=19	STYLE=Обычный	Aniq mahalliy muammo va katalogni to‘ldirishning real usuli
+P	715	PAGE=19	STYLE=Обычный	Jonli namoyish
+P	716	PAGE=19	STYLE=Обычный	10
+P	717	PAGE=19	STYLE=Обычный	Barqaror ishga tushirish, ikki foydalanuvchining qisqa takrorlanadigan ssenariysi
+P	720	PAGE=19	STYLE=Обычный	Yangilik mahalliy muammoni hal qilish uchun tanlangan yondashuv sifatida tushuntiriladi. Alohida tadqiqotsiz «Bunday imkoniyat hech qayerda yo‘q» deyilmaydi. Bo‘limlar soni o‘z-o‘zidan mavjud ilovadan ustunlikni isbotlamaydi.
+P	721	PAGE=19	STYLE=Заголовок 3	19.2 Asosiy xavflar
+P	722	PAGE=19	STYLE=Обычный	Bo‘sh baza — qo‘lda kelishilgan to‘ldirish va aniq belgilangan demo misollar. Eskirgan e’lon — ko‘rinadigan sana va muddat bo‘yicha avtomatik chiqarish. Noto‘g‘ri ma’lumot — yolg‘on kafolat o‘rniga noma’lum qiymat va shikoyat. Quruvchi javob bermasligi — murojaat holati bor, ammo javob tezligi va’da qilinmaydi. Vaqt kamligi — P1ni to‘xtatish va umumiy komponentlar. Internet uzilishi — oldindan tekshirilgan mahalliy ishga tushirish.
+P	723	PAGE=19	STYLE=Заголовок 3	19.3 Tanlovdan keyin tekshiriladigan masalalar
+P	724	PAGE=19	STYLE=Обычный	Uy egalarining mavjudlikni muntazam yangilashga tayyorligi; kanal administratorlarining hamkorlikka tayyorligi; talabalar filtriga haqiqiy ehtiyoj; ijara va sotuv uchun mos eskirish muddatlari; quruvchilarning murojaatga javob tezligi. Bu masalalar tasdiqlangan fakt sifatida olinmaydi, suhbatlar va kichik sinov loyihasi orqali tekshiriladi.
+P	725	PAGE=19	STYLE=Заголовок 3	19.4 Hujjatning asoslari
+P	726	PAGE=19	STYLE=Обычный	1. Muallif g‘oyasi, talabalar uy-joy qidirishini kuzatishi va suhbatdagi Telegram kanallari tavsifi. 2. Taqdim etilgan tanlov nizomi rasmlari: Veb-ishlanmalar yo‘nalishi va baholash jadvali. 3. Konsepsiya muhokamasida foydalanilgan Joymee haqidagi ochiq ma’lumotlar: joymee.uz va Google Play, com.joymee.app paketi. Joymeening amaldagi versiyasiga nisbatan aniq ustunliklar alohida tekshirilishi kerak; bu hujjat raqib mahsulotining to‘liq auditi emas.
+P	727	PAGE=19	STYLE=Обычный	Qayta tekshirish havolalari: https://joymee.uz/ ; https://play.google.com/store/apps/details?id=com.joymee.app . Texnik topshiriq tayyorlangan sana: 29.09.2026.
+P	728	PAGE=19	STYLE=Обычный	Himoya uchun ishchi ta’rif: «Biz uy-joy yashash shartlari va xarajatlari bo‘yicha mosligini oldindan tushunishga yordam beradigan, keyin esa murojaatni taklifga mas’ul shaxsga yetkazadigan servis yaratmoqdamiz. Birinchi versiyani Andijonda talabalar uy-joy qidirishi ssenariysida tekshiramiz».
+TABLE	1	ROWS=11	COLS=2
+ROW	1.1	Bo‘lim | Amalda ishlashi kerak bo‘lgan imkoniyatlar
+ROW	1.2	Katalog | To‘rtta bo‘lim, qidiruv va filtrlar, saralash, sahifalash, alohida e’lon havolalari
+ROW	1.3	Ijara shartlari | Uy-joy turi va ijara birligi, talabalarni qabul qilish, bo‘sh o‘rinlar, muddat va joylashish sanasi
+ROW	1.4	Xarajatlar | Narx va uning hisob birligi, kommunal to‘lovlar, depozit, vositachilik haqi, ma’lum summalar hisobi
+ROW	1.5	Solishtirish | Bir xil valyuta va narx birligidagi ikki yoki uchta ijara taklifini solishtirish
+ROW	1.6	Dolzarblik | Tasdiqlangan sana, eskirgan e’lon haqida ogohlantirish, nashrdan olish
+ROW	1.7	E’lon muallifi | Tizimga kirish, o‘z e’lonlarini yaratish va tahrirlash, murojaatlarni olish
+ROW	1.8	Murojaatlar | Bazaga yozish, yuboruvchi va qabul qiluvchi kabinetlari, holat o‘zgarishlari tarixi
+ROW	1.9	Yangi qurilishlar | Loyiha sahifasi, narxi va hisob birligi ko‘rsatilgan takliflar, maslahat olish uchun murojaat
+ROW	1.10	Moderatsiya | E’lonni tasdiqlash yoki rad etish, shikoyatlarni ko‘rib chiqish, e’lonni bloklash
+ROW	1.11	Sifat | Moslashuvchan interfeys, huquqlar tekshiruvi, server validatsiyasi, demo ma’lumotlar va zaxira ishga tushirish
+TABLE	2	ROWS=5	COLS=2
+ROW	2.1	Navigatsiya bo‘limi | Bo‘limga kirish qoidasi
+ROW	2.2	Kvartira va uy ijarasi | deal_type=rent, rental_unit=whole
+ROW	2.3	Xonalar, o‘rinlar va yotoqxonalar | deal_type=rent, rental_unit=room yoki bed
+ROW	2.4	Uy-joy sotish | deal_type=sale, market_type=resale
+ROW	2.5	Yangi qurilishlar | Quruvchilar loyihalari va ularga bog‘langan sale/new_build takliflari
+TABLE	3	ROWS=6	COLS=2
+ROW	3.1	Rol | Imkoniyatlar
+ROW	3.2	Mehmon | Katalog va tafsilotlarni ko‘rish, filtrlash, solishtirish; murojaat yuborish uchun tizimga kirish
+ROW	3.3	Ro‘yxatdan o‘tgan foydalanuvchi | O‘z murojaatlarini yuborish va bekor qilish, tarixini ko‘rish, e’lon joylashtirish
+ROW	3.4	E’lon muallifi | Faqat o‘z e’lonlarini va ularga kelgan murojaatlarni boshqarish
+ROW	3.5	Quruvchi vakili | E’lon muallifi imkoniyatlari hamda o‘ziga biriktirilgan loyihani boshqarish
+ROW	3.6	Administrator | Moderatsiya, ma’lumotnomalar, loyiha vakilini tayinlash, shikoyatlar va bloklash
+TABLE	4	ROWS=13	COLS=2
+ROW	4.1	URL | Mazmun va asosiy amal
+ROW	4.2	/ | Servis foydasining qisqa izohi, to‘rtta bo‘lim, qidiruvga o‘tish
+ROW	4.3	/catalog | Filtrlar, natijalar soni, saralash, e’lon kartochkalari
+ROW	4.4	/listings/{id} | Suratlar, shartlar, xarajatlar, manba, murojaat
+ROW	4.5	/compare | Ikki yoki uchta ijara taklifini solishtirish
+ROW	4.6	/projects | Nashr qilingan yangi qurilish loyihalari ro‘yxati
+ROW	4.7	/projects/{id} | Loyiha tavsifi, takliflar, bog‘lanish uchun murojaat
+ROW	4.8	/login, /register | Kirish va ro‘yxatdan o‘tish; dastlabki amalga qaytish
+ROW	4.9	/account/requests | Foydalanuvchining o‘zi yuborgan murojaatlar
+ROW	4.10	/account/listings | O‘z e’lonlari, yaratish, tahrirlash, dolzarblikni tasdiqlash
+ROW	4.11	/account/inbox | O‘z e’lonlari va loyihalariga kelgan murojaatlar
+ROW	4.12	/account/projects/{id}/edit | Biriktirilgan loyihani tahrirlash
+ROW	4.13	/admin | E’lonlar, loyihalar va shikoyatlar moderatsiyasi
+TABLE	5	ROWS=8	COLS=2
+ROW	5.1	Guruh | Maydonlar va qoidalar
+ROW	5.2	Qidiruv hududi | Katalog bo‘limi, ma’lumotnomadan hudud, sarlavha va tavsif bo‘yicha matnli qidiruv
+ROW	5.3	Ijara | Butun kvartira/uy, xona, o‘rin; talabalar qabul qilinishi
+ROW	5.4	Narx | Valyuta, eng kam/eng ko‘p narx; hisob birligi tanlangan ijara turiga mos
+ROW	5.5	Sig‘im | Xona/o‘rin uchun eng kam bo‘sh o‘rinlar soni; kvartiradagi xonalar soni emas
+ROW	5.6	Joylashish | Tanlangan sanadan kech bo‘lmagan mavjudlik; noma’lum sana filtrdan o‘tmaydi
+ROW	5.7	Uy-joy | Kvartira/uy/yotoqxona, xonalar soni, mebel, internet
+ROW	5.8	Muallif | Mulkdor / vositachi / vakil; muallif ma’lumotiga asoslanadi
+TABLE	6	ROWS=5	COLS=2
+ROW	6.1	Kirish qiymatlari UZS | Kutiladigan natija
+ROW	6.2	R=800 000; U=100 000 keyinroq; D=800 000; C=0 | Oyiga 900 000; joylashishda 1 600 000
+ROW	6.3	Xuddi shu qiymatlar; U joylashishda | Oyiga 900 000; joylashishda 1 700 000
+ROW	6.4	R=800 000; U narxga kiritilgan; D=0; C=0 | Oyiga ham, joylashishda ham 800 000; kommunal to‘lovlar kiritilgan
+ROW	6.5	R=800 000; U noma’lum; D=800 000; C noma’lum | Oy uchun ma’lum ijara 800 000; joylashishda ma’lum xarajatlar 1 600 000; qolgan to‘lovlar aniqlashtiriladi
+TABLE	7	ROWS=7	COLS=2
+ROW	7.1	Holat | Kim va qanday belgilaydi
+ROW	7.2	new — yangi | Muvaffaqiyatli yuborishda server
+ROW	7.3	accepted — kelishilgan | Qabul qiluvchi taklif etilgan sana/vaqtni tasdiqlaydi
+ROW	7.4	alternative_proposed — boshqa vaqt taklif qilingan | Qabul qiluvchi yangi sana/vaqt va izoh kiritadi
+ROW	7.5	rejected — rad etilgan | Qabul qiluvchi yangi yoki muhokamadagi murojaatni rad etadi
+ROW	7.6	cancelled — bekor qilingan | Yuboruvchi tugallanmagan murojaatni; qabul qiluvchi kelishilgan uchrashuvni sabab bilan bekor qiladi
+ROW	7.7	completed — yakunlangan | Qabul qiluvchi ko‘rish yoki maslahat o‘tkazilganini belgilaydi
+TABLE	8	ROWS=5	COLS=3
+ROW	8.1	Manba | P0 jarayoni | Saqlanadigan ma’lumot
+ROW	8.2	Mulkdor yoki vositachi | Formani o‘zi to‘ldiradi, moderator to‘liqligini tekshiradi | Muallif, muallif turi, yuborilgan vaqt
+ROW	8.3	Telegram hamkori | Ruxsat bilan e’lon formaga qo‘lda kiritiladi | Kanal, asl post havolasi, ruxsat, mas’ul bilan aloqa
+ROW	8.4	Quruvchi | Administrator loyiha yaratib, vakil tayinlaydi | Kompaniya, mas’ul shaxs, kelishuv haqidagi ma’lumot
+ROW	8.5	Demo ma’lumotlar | Loyiha uchun o‘quv misollari kiritiladi | is_demo=true, kartochka va sahifada aniq belgi
+TABLE	9	ROWS=12	COLS=2
+ROW	9.1	Jadval | Asosiy maydonlar va vazifasi
+ROW	9.2	users | id, name, email unique, password_hash, role, maxfiy phone, timestamps
+ROW	9.3	districts | id, name_uz, name_ru nullable, active
+ROW	9.4	projects | id, manager_user_id, district_id, name, developer_name, description, stage, completion_text, moderation_status, is_demo
+ROW	9.5	listings | id, owner_user_id, project_id nullable, district_id, tasnif, mazmun, shartlar, summalar, holatlar, confirmed_at, is_demo
+ROW	9.6	media | id, listing_id yoki project_id, storage_path, mime, sort_order; faqat bitta asosiy obyekt
+ROW	9.7	amenities | id, code unique, name_uz; qulayliklar ma’lumotnomasi
+ROW	9.8	listing_amenity | listing_id + amenity_id, birgalikda noyob kalit
+ROW	9.9	requests | id, requester_id, recipient_id, listing_id yoki project_id, murojaat maydonlari, status, idempotency_key
+ROW	9.10	request_events | id, request_id, actor_id, from_status, to_status, proposed_at, comment, created_at
+ROW	9.11	reports | id, listing_id, reporter_id, reason, comment, status, resolver_id, resolution
+ROW	9.12	moderation_events | id, actor_id, listing_id yoki project_id, amal, sabab, created_at
+TABLE	10	ROWS=18	COLS=2
+ROW	10.1	Maydon | Tur va qoida
+ROW	10.2	deal_type, market_type | rent/sale; resale/new_build; ijarada market_type bo‘sh
+ROW	10.3	property_type, rental_unit | apartment/house/dormitory; whole/room/bed faqat ijara uchun
+ROW	10.4	dormitory_type | private/university; dormitory uchun majburiy
+ROW	10.5	students_allowed | yes/no/unknown; sotuv uchun bo‘sh
+ROW	10.6	title, description | 8-bo‘limdagi uzunlik cheklovlari; HTMLsiz oddiy matn
+ROW	10.7	currency, price, price_basis | UZS/USD; qoidaga ko‘ra decimal yoki NULL; monthly_unit/total/from_total/per_m2/on_request
+ROW	10.8	utilities_mode, utilities_amount | included/fixed/unknown; summa faqat fixed uchun
+ROW	10.9	utilities_payment_timing | move_in/later/unknown; fixed uchun ishlatiladi
+ROW	10.10	deposit_mode, deposit_amount | none/fixed/unknown; summa faqat fixed uchun
+ROW	10.11	commission_mode, commission_amount | none/fixed/unknown; summa faqat fixed uchun
+ROW	10.12	capacity, free_places | Butun sonlar; room/bed uchun majburiy
+ROW	10.13	available_from, min_months | Mavjudlik boshlangan sana; eng kam muddat nullable
+ROW	10.14	area_m2, rooms, floor | Obyekt xususiyatlari; kiritilsa tekshiriladi
+ROW	10.15	location_text, lat, lng | Ommaviy mo‘ljal; koordinatalar nullable; aniqlik darajasi alohida maydon
+ROW	10.16	author_type, source_type, source_url | owner/agent/developer; direct/telegram/developer/demo; havola nullable
+ROW	10.17	moderation_status, availability_status | 3-bo‘limdagi mustaqil holatlar to‘plamlari
+ROW	10.18	confirmed_at, published_at, archived_at | UTC vaqt belgilari; NULL alohida ma’noga ega
+TABLE	11	ROWS=10	COLS=2
+ROW	11.1	Metod va marshrut | Amal va ruxsat
+ROW	11.2	GET /catalog, /listings/{id} | Faqat ruxsat etilgan ommaviy ma’lumotni o‘qish
+ROW	11.3	POST /account/listings | Qoralama yaratish; tizimga kirgan foydalanuvchi
+ROW	11.4	PATCH /account/listings/{id} | O‘z e’lonini tahrirlash; moderatsiyani qayta tekshirish
+ROW	11.5	POST /account/listings/{id}/submit | Tekshiruvga yuborish
+ROW	11.6	POST /account/listings/{id}/confirm | O‘z e’loni mavjudligini tasdiqlash
+ROW	11.7	PATCH /account/listings/{id}/availability | Ijaraga berildi/sotildi/olib tashlandi; moslikni tekshirish
+ROW	11.8	POST /requests | Murojaat yaratish; tizimga kirgan yuboruvchi
+ROW	11.9	PATCH /requests/{id}/status | Tomon huquqini tekshirib, ruxsat etilgan holatga o‘tish
+ROW	11.10	POST /listings/{id}/reports | Tizimga kirgan foydalanuvchining shikoyati
+TABLE	12	ROWS=19	COLS=3
+ROW	12.1	ID | Amal | Kutiladigan natija
+ROW	12.2	A01 | To‘rtta bo‘limni ochish | Har birida tegishli obyektlar; xonalar butun uy ijarasiga kirmaydi
+ROW	12.3	A02 | «Talabalar qabul qilinadi»ni yoqish | Faqat students_allowed=yes; unknown va no chiqarilmaydi
+ROW	12.4	A03 | Hudud va o‘rin turini tanlash | Ikkala shart bir vaqtda bajariladi
+ROW	12.5	A04 | UZS va budjetni tanlash | USD va noma’lum narx chiqarilmaydi; chegara qiymatlari hisobga olinadi
+ROW	12.6	A05 | Eng kam narxni eng ko‘p narxdan oshirish | Validatsiya xatosi; oldingi to‘g‘ri natijalar yangidek ko‘rsatilmaydi
+ROW	12.7	A06 | Filtrli URLni yangilash | Qiymatlar, saralash va sahifa tiklanadi
+ROW	12.8	A07 | 2-sahifada filtrni o‘zgartirish | 1-sahifaga qaytiladi, natijalar soni to‘g‘ri
+ROW	12.9	A08 | Hech qanday natija topilmasligi | Tushunarli bo‘sh ekran va filtrlarni tozalash
+ROW	12.10	A09 | O‘rin narxli e’lonni ochish | Kartochka, tafsilotlar va solishtirishda narx birligi bir xil
+ROW	12.11	A10 | 7.1-banddagi to‘rtta misolni hisoblash | Summalar va to‘liqlik belgilari kutilgan natijaga mos
+ROW	12.12	A11 | UZS o‘rin bilan USD o‘rinni solishtirish | Mos kelmaydigan taklifni qo‘shish izoh bilan rad etiladi
+ROW	12.13	A12 | Xona bilan o‘rinni solishtirish | Narx avtomatik bo‘linmaydi; nomuvofiqlik tushuntiriladi
+ROW	12.14	A13 | To‘rtinchi variantni qo‘shish | Tanlov uchtadan oshmaydi; bittasini olib tashlash taklif etiladi
+ROW	12.15	A14 | confirmed_at 7 sutkadan eski | Eskirganlik haqida ogohlantirish
+ROW	12.16	A15 | confirmed_at 14 sutkadan eski | Katalogda yo‘q; server ham yangi murojaatni qabul qilmaydi
+ROW	12.17	A16 | «Ijaraga berildi» deb belgilash | Mavjud takliflardan yo‘qoladi, eski havolada mavjud emasligi chiqadi
+ROW	12.18	A17 | Muallif blocked e’lonni tasdiqlashi | Blok ochilmaydi, katalogda ko‘rinmaydi
+ROW	12.19	A18 | m² narxli yoki so‘rov bo‘yicha sotuv | Filtr va saralashda to‘liq narx bilan aralashtirilmaydi
+TABLE	13	ROWS=21	COLS=3
+ROW	13.1	ID | Amal | Kutiladigan natija
+ROW	13.2	B01 | Mehmon murojaat tugmasini bosadi | Tizimga kirib kerakli obyektga qaytadi; forma izohsiz yo‘qolmaydi
+ROW	13.3	B02 | Foydalanuvchi murojaat yuboradi | Bazada yozuv, raqam va holat bor; yangilangach ikkala tomonda ko‘rinadi
+ROW	13.4	B03 | Ikki marta bosish yoki so‘rovni takrorlash | Bitta murojaat va bitta boshlang‘ich hodisa to‘plami
+ROW	13.5	B04 | Obyektga faol murojaatni takrorlash | Mavjud murojaat ochiladi yoki tushunarli ziddiyat xatosi chiqadi
+ROW	13.6	B05 | O‘z uyiga murojaat yuborish | Server amalni rad etadi
+ROW	13.7	B06 | Boshqa egasi murojaatni id orqali ochadi | 403/404; kontaktlar va mazmun oshkor bo‘lmaydi
+ROW	13.8	B07 | Yuboruvchi completed holatini belgilaydi | Server ruxsat etilmagan amalni rad etadi
+ROW	13.9	B08 | Ega boshqa vaqt taklif qiladi, yuboruvchi qabul qiladi | Izchil tarix; ikkala tomonda accepted va kelishilgan vaqt
+ROW	13.10	B09 | Yuboruvchi murojaatni bekor qiladi | cancelled; keyin yangi murojaat yaratish mumkin
+ROW	13.11	B10 | Forma ochilgach, yuborishdan oldin e’lon olinadi | Server rad etadi, yolg‘on muvaffaqiyat ko‘rsatilmaydi
+ROW	13.12	B11 | O‘tgan sana yoki bo‘sh joydan ko‘p yashovchi | Tegishli maydonlarda xatolar
+ROW	13.13	B12 | E’lon yaratib moderatsiyaga yuborish | Tasdiqlanmaguncha ommaviy katalogda yo‘q
+ROW	13.14	B13 | approved e’lonni tahrirlash | pending, qayta tasdiqlanguncha yashiriladi
+ROW	13.15	B14 | Begona owner_id yoki approved qiymatini qo‘lda yuborish | Obyektni egallash va moderatsiyani chetlab o‘tish imkonsiz
+ROW	13.16	B15 | Rasm sifatida bajariladigan fayl yuklash | Fayl rad etiladi, bajarish uchun ochilmaydi
+ROW	13.17	B16 | Shikoyat yuborish va administrator ko‘rib chiqishi | Holat, qaror, sabab saqlanadi; tarix mavjud
+ROW	13.18	B17 | Loyiha bo‘yicha maslahat murojaati yuborish | Faqat tayinlangan vakil oladi, murojaat nishoni saqlanadi
+ROW	13.19	B18 | Loyihada vakil yo‘q | Yuborish yopiq; server qabul qiluvchisiz yozuv yaratmaydi
+ROW	13.20	B19 | Ilovani qayta ishga tushirish | E’lonlar, murojaatlar va holatlari saqlanadi
+ROW	13.21	B20 | Mahalliy namoyishda internetni o‘chirish | Asosiy ssenariy va mahalliy rasmlar ishlashda davom etadi
+TABLE	14	ROWS=7	COLS=2
+ROW	14.1	Vaqt | Tayyor bo‘lishi kerak bo‘lgan natija
+ROW	14.2	29 dan 30 sentabrga o‘tar kecha | Loyiha asosi, autentifikatsiya, migratsiyalar, seed, katalog va e’lon sahifasi
+ROW	14.3	30 sentabr kunduzi | Filtrlar, xarajat hisobi, solishtirish; mos uy-joy qidirish jarayoni
+ROW	14.4	30 sentabr kechqurun va kechasi | Joylashtirish, moderatsiya, murojaatni saqlash va ikkala kabinet; to‘liq ishlaydigan yo‘l
+ROW	14.5	1 oktabr kunduzi | Minimal yangi qurilishlar bo‘limi, holatlar, shikoyatlar, moslashuvchanlik va muhim tekshiruvlar
+ROW	14.6	1 oktabr kechqurun | Yangi imkoniyatlarni to‘xtatish; tuzatish, demo ma’lumotlar, zaxira ishga tushirish, taqdimot
+ROW	14.7	2 oktabr ertalab | Qurilmalarni tekshirish va qisqa repetitsiya; katta o‘zgarishlarsiz
+TABLE	15	ROWS=7	COLS=3
+ROW	15.1	Taqdim etilgan rasmdagi mezon | Ball | Loyiha nimani namoyish etadi
+ROW	15.2	Funksionallik | 25 | Qidiruv → solishtirish → saqlangan murojaat → qabul qiluvchi javobi
+ROW	15.3	Texnik sifat | 20 | Ma’lumotlar tuzilmasi, server huquqlari, validatsiya, tranzaksiyalar, moslashuvchanlik
+ROW	15.4	Interfeys va dizayn | 15 | Tushunarli narxlar, shartlar, forma holatlari, telefonda qulaylik
+ROW	15.5	Innovatsionlik | 15 | Talabalar sharti, ijara birligi, xarajat va dolzarblikni bitta ssenariyda birlashtirish
+ROW	15.6	Amaliy ahamiyat | 15 | Aniq mahalliy muammo va katalogni to‘ldirishning real usuli
+ROW	15.7	Jonli namoyish | 10 | Barqaror ishga tushirish, ikki foydalanuvchining qisqa takrorlanadigan ssenariysi

@@ -8,7 +8,7 @@
     </header>
     <main class="relative z-10 mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8">
       <div class="hidden lg:block"><p class="text-xs font-black uppercase tracking-[0.22em] text-[#e85d3f]">UyTop hisobingiz</p><h1 class="mt-5 max-w-lg text-6xl font-black leading-[.98] tracking-[-0.065em]">Uy topish jarayoni <span class="font-serif font-normal italic text-[#e85d3f]">osonroq.</span></h1><p class="mt-6 max-w-md text-lg leading-8 text-slate-600 dark:text-slate-300">E’lonlarni saqlang, variantlarni solishtiring va uy egasiga murojaat yuboring.</p><div class="mt-9 flex gap-6 text-sm font-bold text-slate-500 dark:text-slate-400"><span>✓ Aniq xarajatlar</span><span>✓ Tekshirilgan shartlar</span></div></div>
-      <div class="mx-auto w-full max-w-lg"><slot /></div>
+      <div class="mx-auto w-full max-w-md"><slot /></div>
     </main>
   </div>
 </template>

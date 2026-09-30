@@ -7,17 +7,17 @@
       <p class="mt-3 max-w-2xl text-slate-600">Andijondagi yangi loyihalar va ular bo‘yicha mavjud takliflar.</p>
       <div v-if="!projects.length" class="mt-8 rounded-[28px] border border-dashed border-slate-300 bg-white p-12 text-center text-slate-500">Hozircha tasdiqlangan loyiha yo‘q.</div>
       <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <article v-for="project in projects" :key="project.id" class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-          <div class="h-40 bg-gradient-to-br from-blue-950 via-blue-800 to-cyan-600 p-6 text-white"><span v-if="project.is_demo" class="rounded-full bg-white/15 px-3 py-1 text-xs font-bold">Demo loyiha</span><h2 class="mt-7 text-2xl font-black">{{ project.name }}</h2></div>
-          <div class="p-6"><p class="text-sm font-semibold text-blue-600">{{ project.developer_name || 'Quruvchi ko‘rsatilmagan' }}</p><p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">{{ project.description }}</p><dl class="mt-5 grid grid-cols-2 gap-3 text-sm"><div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs text-slate-400">Hudud</dt><dd class="mt-1 font-semibold">{{ project.district?.name_uz }}</dd></div><div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs text-slate-400">Topshirish</dt><dd class="mt-1 font-semibold">{{ project.completion_text || 'Aniqlanmoqda' }}</dd></div></dl></div>
-        </article>
+        <Link v-for="project in projects" :key="project.id" :href="`/projects/${project.id}`" class="surface group overflow-hidden rounded-[28px] transition hover:-translate-y-1">
+          <div class="relative h-44 overflow-hidden bg-gradient-to-br from-[#222a25] via-[#365148] to-[#e85d3f] p-6 text-white"><img v-if="project.media?.length" :src="`/storage/${project.media[0].storage_path}`" :alt="project.name" class="absolute inset-0 h-full w-full object-cover opacity-60 transition duration-500 group-hover:scale-105" /><div class="relative"><span v-if="project.is_demo" class="rounded-full bg-white/15 px-3 py-1 text-xs font-bold backdrop-blur">Demo loyiha</span><h2 class="mt-8 text-2xl font-black">{{ project.name }}</h2></div></div>
+          <div class="p-6"><p class="text-sm font-semibold text-[#e85d3f]">{{ project.developer_name || 'Quruvchi ko‘rsatilmagan' }}</p><p class="mt-3 line-clamp-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{{ project.description }}</p><dl class="mt-5 grid grid-cols-2 gap-3 text-sm"><div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs text-slate-400">Hudud</dt><dd class="mt-1 font-semibold">{{ project.district?.name_uz }}</dd></div><div class="rounded-xl bg-slate-50 p-3"><dt class="text-xs text-slate-400">Takliflar</dt><dd class="mt-1 font-semibold">{{ project.listings_count }} ta</dd></div></dl></div>
+        </Link>
       </div>
     </section>
   </AppLayout>
 </template>
 
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import AppLayout from '../Layouts/AppLayout.vue';
 defineProps({ projects: { type: Array, default: () => [] } });
 </script>

@@ -7,9 +7,10 @@ use App\Http\Controllers\ComparisonController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectConsultationController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestController;
-use App\Models\Project;
 use App\Models\Request as RequestModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,11 +23,8 @@ Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
 Route::get('/listings/{listing}', [CatalogController::class, 'show'])->name('listings.show');
 Route::get('/compare', ComparisonController::class)->name('compare');
 
-Route::get('/projects', function () {
-    return Inertia::render('Projects', [
-        'projects' => Project::with('district')->where('moderation_status', 'approved')->get(),
-    ]);
-})->name('projects');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account/listings', [ListingController::class, 'index'])->name('account.listings');
@@ -41,9 +39,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/listings/{listing}/request', [RequestController::class, 'create'])->name('requests.create');
     Route::post('/listings/{listing}/requests', [RequestController::class, 'store'])->name('requests.store');
     Route::patch('/requests/{request}/status', [RequestController::class, 'updateStatus'])->name('requests.status');
+    Route::post('/projects/{project}/requests', [ProjectConsultationController::class, 'store'])->middleware('throttle:10,60')->name('projects.requests.store');
     Route::get('/account/requests', function () {
         return Inertia::render('Account/Requests', [
-            'requests' => RequestModel::with(['listing.district', 'recipient', 'events.actor'])
+            'requests' => RequestModel::with(['listing.district', 'project.district', 'recipient', 'events.actor'])
                 ->where('requester_id', Auth::id())
                 ->orderByDesc('created_at')
                 ->get(),
@@ -51,10 +50,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('account.requests');
     Route::get('/account/inbox', function () {
         return Inertia::render('Account/Inbox', [
-            'requests' => RequestModel::with(['listing.district', 'requester', 'events.actor'])
-                ->where('recipient_id', Auth::id())
-                ->latest()
-                ->get(),
+            'requests' => tap(
+                RequestModel::with(['listing.district', 'project.district', 'requester', 'events.actor'])
+                    ->where('recipient_id', Auth::id())
+                    ->latest()
+                    ->get(),
+                function ($requests) {
+                    $requests->each(function (RequestModel $item) {
+                        if ($item->listing === null && $item->project !== null) {
+                            $item->project->setAttribute('title', $item->project->name);
+                            $item->setRelation('listing', $item->project);
+                        }
+                    });
+                },
+            ),
         ]);
     })->name('account.inbox');
 

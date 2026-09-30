@@ -1,100 +1,14 @@
-<script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
-</script>
-
 <template>
-    <GuestLayout>
-        <Head title="Log in" />
-
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="current-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
-                </label>
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Log in
-                </PrimaryButton>
-            </div>
-        </form>
-    </GuestLayout>
+  <GuestLayout><Head title="Kirish" /><section class="surface rounded-[32px] p-6 sm:p-9">
+    <p class="text-xs font-black uppercase tracking-[0.18em] text-[#e85d3f]">Xush kelibsiz</p><h2 class="mt-3 text-4xl font-black tracking-[-0.055em]">Hisobga kirish</h2><p class="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">E’lonlar va murojaatlaringizni boshqarish uchun ma’lumotlarni kiriting.</p>
+    <div v-if="status" class="mt-5 rounded-2xl bg-emerald-100 px-4 py-3 text-sm font-semibold text-emerald-900 dark:bg-emerald-950 dark:text-emerald-200">{{ status }}</div>
+    <form class="mt-7 space-y-5" @submit.prevent="submit"><label class="block"><span class="field-label">Email</span><input v-model="form.email" type="email" class="field" autocomplete="username" autofocus required placeholder="name@example.com" /><span class="error">{{ form.errors.email }}</span></label><label class="block"><span class="field-label">Parol</span><input v-model="form.password" type="password" class="field" autocomplete="current-password" required placeholder="••••••••" /><span class="error">{{ form.errors.password }}</span></label><div class="flex items-center justify-between gap-4"><label class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-300"><input v-model="form.remember" type="checkbox" class="rounded border-black/20 text-[#e85d3f] focus:ring-[#e85d3f]" /> Eslab qolish</label><Link v-if="canResetPassword" href="/forgot-password" class="text-sm font-bold text-[#e85d3f]">Parolni unutdingizmi?</Link></div><button type="submit" class="w-full rounded-2xl bg-[#e85d3f] px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-900/15 transition hover:-translate-y-0.5 disabled:opacity-50" :disabled="form.processing">{{ form.processing ? 'Kirilmoqda…' : 'Kirish' }}</button></form>
+    <p class="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">Hisobingiz yo‘qmi? <Link href="/register" class="font-black text-slate-950 underline decoration-[#e85d3f] decoration-2 underline-offset-4 dark:text-white">Ro‘yxatdan o‘tish</Link></p>
+  </section></GuestLayout>
 </template>
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/vue3'; import GuestLayout from '../../Layouts/GuestLayout.vue';
+defineProps({ canResetPassword: Boolean, status: String }); const form = useForm({ email: '', password: '', remember: false });
+function submit() { form.post('/login', { onFinish: () => form.reset('password') }); }
+</script>
+<style scoped>.field-label { @apply mb-1.5 block text-xs font-black uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400; }.field { @apply w-full rounded-2xl border-black/10 bg-white/75 px-4 py-3.5 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#e85d3f] focus:ring-4 focus:ring-[#e85d3f]/10 dark:border-white/10 dark:bg-white/5 dark:text-white; }.error { @apply mt-1.5 block text-xs font-semibold text-red-600; }</style>

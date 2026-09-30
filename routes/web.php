@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\ModerationController;
+use App\Http\Controllers\Admin\ReportModerationController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ComparisonController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RequestController;
 use App\Models\Project;
 use App\Models\Request as RequestModel;
@@ -57,6 +59,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/moderation', [ModerationController::class, 'index'])->name('admin.moderation');
     Route::patch('/admin/moderation/{listing}', [ModerationController::class, 'update'])->name('admin.moderation.update');
+    Route::post('/listings/{listing}/reports', [ReportController::class, 'store'])->middleware('throttle:5,60')->name('reports.store');
+    Route::patch('/admin/reports/{report}', [ReportModerationController::class, 'update'])->name('admin.reports.update');
 });
 
 Route::get('/dashboard', function () {

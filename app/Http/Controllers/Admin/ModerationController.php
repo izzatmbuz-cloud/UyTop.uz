@@ -6,6 +6,7 @@ use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\Listing;
 use App\Models\ModerationEvent;
+use App\Models\Report;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -25,6 +26,10 @@ class ModerationController extends Controller
                 ->where('moderation_status', 'pending')
                 ->oldest()
                 ->paginate(20),
+            'reports' => Report::with(['listing:id,title,moderation_status', 'reporter:id,name,email'])
+                ->where('status', 'new')
+                ->oldest()
+                ->get(),
         ]);
     }
 

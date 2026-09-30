@@ -14,7 +14,9 @@
           <h2 class="mt-4 line-clamp-2 text-lg font-black text-slate-950 dark:text-white">{{ listing.title }}</h2>
           <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">{{ listing.district?.name_uz }} · {{ listing.deal_type === 'rent' ? 'Ijara' : 'Sotuv' }}</p>
           <p class="mt-4 text-xl font-black">{{ price(listing) }}</p>
-          <div class="mt-5 flex gap-2"><Link :href="`/account/listings/${listing.id}/edit`" class="flex-1 rounded-xl bg-slate-950 px-3 py-2.5 text-center text-sm font-bold text-white dark:bg-white dark:text-slate-950">Tahrirlash</Link><button v-if="!listing.archived_at" class="rounded-xl border border-black/10 px-3 py-2.5 text-sm font-bold text-slate-600 dark:border-white/10 dark:text-slate-300" @click="archive(listing.id)">Arxiv</button></div>
+          <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">{{ freshness(listing.confirmed_at) }}</p>
+          <div v-if="listing.moderation_status === 'rejected' && listing.moderation_events?.[0]?.reason" class="mt-3 rounded-xl bg-red-50 p-3 text-xs font-semibold text-red-800 dark:bg-red-950 dark:text-red-200">Sabab: {{ listing.moderation_events[0].reason }}</div>
+          <div class="mt-5 grid grid-cols-2 gap-2"><Link :href="`/account/listings/${listing.id}/edit`" class="rounded-xl bg-slate-950 px-3 py-2.5 text-center text-sm font-bold text-white dark:bg-white dark:text-slate-950">Tahrirlash</Link><button v-if="listing.moderation_status === 'approved' && !listing.archived_at" class="rounded-xl bg-[#bedc79] px-3 py-2.5 text-sm font-bold text-[#24310d]" @click="confirmListing(listing.id)">Dolzarb</button><button v-if="listing.availability_status === 'available' && !listing.archived_at" class="rounded-xl border border-black/10 px-3 py-2.5 text-sm font-bold text-slate-600 dark:border-white/10 dark:text-slate-300" @click="markUnavailable(listing)">{{ listing.deal_type === 'sale' ? 'Sotildi' : 'Ijaraga berildi' }}</button><button v-if="listing.availability_status !== 'available' && !listing.archived_at" class="rounded-xl border border-black/10 px-3 py-2.5 text-sm font-bold text-slate-600 dark:border-white/10 dark:text-slate-300" @click="setAvailability(listing.id, 'available')">Qayta faollashtirish</button><button v-if="!listing.archived_at" class="rounded-xl border border-black/10 px-3 py-2.5 text-sm font-bold text-slate-600 dark:border-white/10 dark:text-slate-300" @click="archive(listing.id)">Arxiv</button></div>
         </article>
       </div>
     </section>
@@ -29,4 +31,8 @@ const statusLabel = (value) => ({ draft: 'Qoralama', pending: 'Moderatsiyada', a
 const statusClass = (value) => ({ draft: 'bg-slate-100 text-slate-600', pending: 'bg-amber-100 text-amber-800', approved: 'bg-emerald-100 text-emerald-800', rejected: 'bg-red-100 text-red-700', blocked: 'bg-red-100 text-red-700' }[value]);
 const price = (item) => item.price == null ? 'So‘rov bo‘yicha' : `${new Intl.NumberFormat('uz-UZ').format(item.price)} ${item.currency}`;
 function archive(id) { if (window.confirm('E’lonni arxivlaysizmi?')) router.patch(`/account/listings/${id}/archive`, {}, { preserveScroll: true }); }
+function confirmListing(id) { router.post(`/account/listings/${id}/confirm`, {}, { preserveScroll: true }); }
+function setAvailability(id, status) { router.patch(`/account/listings/${id}/availability`, { status }, { preserveScroll: true }); }
+function markUnavailable(item) { setAvailability(item.id, item.deal_type === 'sale' ? 'sold' : 'rented'); }
+function freshness(value) { if (!value) return 'Hali dolzarbligi tasdiqlanmagan'; const days = Math.floor((Date.now() - new Date(value).getTime()) / 86400000); return days > 7 ? 'Anchadan beri yangilanmagan' : `Tasdiqlangan: ${new Intl.DateTimeFormat('uz-UZ').format(new Date(value))}`; }
 </script>

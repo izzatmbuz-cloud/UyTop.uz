@@ -108,6 +108,11 @@ class Listing extends Model
         return $this->hasMany(Report::class);
     }
 
+    public function moderationEvents()
+    {
+        return $this->hasMany(ModerationEvent::class);
+    }
+
     public function isPubliclyVisible(): bool
     {
         return $this->moderation_status === ModerationStatus::APPROVED

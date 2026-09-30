@@ -73,6 +73,33 @@ class ListingManagementTest extends TestCase
         $this->actingAs($user)->get(route('admin.moderation'))->assertForbidden();
     }
 
+    public function test_owner_can_mark_listing_as_rented_and_reactivate_it(): void
+    {
+        $owner = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
+        $listing = $this->listingFor($owner);
+
+        $this->actingAs($owner)->patch(route('account.listings.availability', $listing), ['status' => 'rented'])
+            ->assertRedirect();
+        $this->assertDatabaseHas('listings', ['id' => $listing->id, 'availability_status' => 'rented']);
+
+        $this->actingAs($owner)->patch(route('account.listings.availability', $listing), ['status' => 'available'])
+            ->assertRedirect();
+        $this->assertDatabaseHas('listings', ['id' => $listing->id, 'availability_status' => 'available']);
+        $this->assertNotNull($listing->fresh()->confirmed_at);
+    }
+
+    public function test_owner_cannot_reactivate_a_blocked_listing(): void
+    {
+        $owner = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
+        $listing = $this->listingFor($owner);
+        $listing->update(['moderation_status' => 'blocked', 'availability_status' => 'withdrawn']);
+
+        $this->actingAs($owner)->patch(route('account.listings.availability', $listing), ['status' => 'available'])
+            ->assertConflict();
+
+        $this->assertSame('withdrawn', $listing->fresh()->availability_status->value);
+    }
+
     private function listingFor(User $owner): Listing
     {
         $district = District::firstOrCreate(['name_uz' => 'Andijon shahri'], ['active' => true]);

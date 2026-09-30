@@ -8,10 +8,12 @@ use App\Models\Amenity;
 use App\Models\District;
 use App\Models\Listing;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,7 +22,7 @@ class ListingController extends Controller
     public function index(): Response
     {
         $listings = auth()->user()->listings()
-            ->with(['district', 'media'])
+            ->with(['district', 'media', 'moderationEvents' => fn ($query) => $query->latest('created_at')->limit(1)])
             ->latest()
             ->get();
 
@@ -94,6 +96,40 @@ class ListingController extends Controller
         $this->forgetPublicCache();
 
         return back()->with('success', 'E’lon arxivlandi.');
+    }
+
+    public function confirm(Listing $listing): RedirectResponse
+    {
+        Gate::authorize('update', $listing);
+        abort_if($listing->moderation_status === ModerationStatus::BLOCKED, 409, 'Bloklangan e’lonni administrator tekshirishi kerak.');
+        abort_if($listing->archived_at !== null, 409, 'Arxivlangan e’lonni tasdiqlab bo‘lmaydi.');
+
+        $listing->update([
+            'confirmed_at' => now(),
+            'availability_status' => 'available',
+        ]);
+        $this->forgetPublicCache();
+
+        return back()->with('success', 'E’lon dolzarbligi tasdiqlandi.');
+    }
+
+    public function updateAvailability(Request $request, Listing $listing): RedirectResponse
+    {
+        Gate::authorize('update', $listing);
+        $terminalStatus = $listing->deal_type->value === 'sale' ? 'sold' : 'rented';
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(['available', $terminalStatus, 'withdrawn'])],
+        ]);
+
+        abort_if($validated['status'] === 'available' && $listing->moderation_status === ModerationStatus::BLOCKED, 409, 'Bloklangan e’lonni qayta faollashtirib bo‘lmaydi.');
+
+        $listing->update([
+            'availability_status' => $validated['status'],
+            'confirmed_at' => $validated['status'] === 'available' ? now() : $listing->confirmed_at,
+        ]);
+        $this->forgetPublicCache();
+
+        return back()->with('success', 'Mavjudlik holati yangilandi.');
     }
 
     private function formData(): array

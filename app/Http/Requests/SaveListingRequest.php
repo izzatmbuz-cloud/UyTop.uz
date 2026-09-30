@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class SaveListingRequest extends FormRequest
 {
@@ -43,6 +44,25 @@ class SaveListingRequest extends FormRequest
             'amenity_ids' => ['array'],
             'amenity_ids.*' => ['integer', 'distinct', 'exists:amenities,id'],
             'submit_for_moderation' => ['boolean'],
+            'images' => ['array', 'max:8'],
+            'images.*' => ['file', 'image', 'mimes:jpeg,jpg,png,webp', 'max:5120'],
         ];
+    }
+
+    public function after(): array
+    {
+        return [function (Validator $validator) {
+            $listing = $this->route('listing');
+            $existingCount = $listing?->media()->count() ?? 0;
+            $newCount = count($this->file('images', []));
+
+            if ($existingCount + $newCount > 8) {
+                $validator->errors()->add('images', 'Ko‘pi bilan 8 ta rasm yuklash mumkin.');
+            }
+
+            if ($this->boolean('submit_for_moderation') && $existingCount + $newCount < 1) {
+                $validator->errors()->add('images', 'Moderatsiyaga yuborish uchun kamida bitta rasm kerak.');
+            }
+        }];
     }
 }

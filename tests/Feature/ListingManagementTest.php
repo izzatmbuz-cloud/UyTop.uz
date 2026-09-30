@@ -6,6 +6,8 @@ use App\Models\District;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ListingManagementTest extends TestCase
@@ -14,6 +16,7 @@ class ListingManagementTest extends TestCase
 
     public function test_user_can_create_a_listing_and_submit_it_for_moderation(): void
     {
+        Storage::fake('public');
         $user = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
         $district = District::create(['name_uz' => 'Andijon shahri', 'active' => true]);
 
@@ -34,6 +37,7 @@ class ListingManagementTest extends TestCase
             'capacity' => 3,
             'free_places' => 2,
             'amenity_ids' => [],
+            'images' => [UploadedFile::fake()->image('home.jpg', 1200, 800)],
             'submit_for_moderation' => true,
         ]);
 
@@ -43,6 +47,41 @@ class ListingManagementTest extends TestCase
             'moderation_status' => 'pending',
             'title' => 'Universitet yaqinida qulay joy',
         ]);
+        $media = Listing::first()->media()->first();
+        $this->assertNotNull($media);
+        $this->assertSame('image/webp', $media->mime);
+        Storage::disk('public')->assertExists($media->storage_path);
+    }
+
+    public function test_draft_can_be_saved_without_an_image_but_submission_cannot(): void
+    {
+        $user = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
+        $district = District::create(['name_uz' => 'Asaka', 'active' => true]);
+        $data = [
+            'deal_type' => 'sale', 'property_type' => 'house', 'district_id' => $district->id,
+            'title' => 'Rasmsiz hovli uy qoralamasi', 'description' => 'Sinov uchun yetarlicha uzun qoralama tavsifi.',
+            'currency' => 'USD', 'price' => 50000, 'price_basis' => 'total',
+            'amenity_ids' => [],
+        ];
+
+        $this->actingAs($user)->post(route('account.listings.store'), [...$data, 'submit_for_moderation' => false])
+            ->assertRedirect(route('account.listings'));
+        $this->actingAs($user)->post(route('account.listings.store'), [...$data, 'title' => 'Ikkinchi rasmsiz e’lon', 'submit_for_moderation' => true])
+            ->assertSessionHasErrors('images');
+    }
+
+    public function test_executable_file_cannot_be_uploaded_as_an_image(): void
+    {
+        $user = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
+        $district = District::create(['name_uz' => 'Marhamat', 'active' => true]);
+
+        $this->actingAs($user)->post(route('account.listings.store'), [
+            'deal_type' => 'sale', 'property_type' => 'house', 'district_id' => $district->id,
+            'title' => 'Xavfsizlik uchun sinov e’loni', 'description' => 'Fayl tekshiruvini sinash uchun yetarli tavsif.',
+            'currency' => 'USD', 'price' => 50000, 'price_basis' => 'total',
+            'images' => [UploadedFile::fake()->create('virus.php', 20, 'application/x-php')],
+            'submit_for_moderation' => true,
+        ])->assertSessionHasErrors('images.0');
     }
 
     public function test_user_cannot_edit_someone_elses_listing(): void

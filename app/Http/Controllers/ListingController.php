@@ -7,12 +7,15 @@ use App\Http\Requests\SaveListingRequest;
 use App\Models\Amenity;
 use App\Models\District;
 use App\Models\Listing;
+use App\Models\Media;
+use App\Services\ListingImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -36,11 +39,11 @@ class ListingController extends Controller
         return Inertia::render('Account/ListingForm', $this->formData());
     }
 
-    public function store(SaveListingRequest $request): RedirectResponse
+    public function store(SaveListingRequest $request, ListingImageService $images): RedirectResponse
     {
         Gate::authorize('create', Listing::class);
 
-        $listing = DB::transaction(function () use ($request) {
+        $listing = DB::transaction(function () use ($request, $images) {
             $data = $this->listingData($request);
             $data['owner_user_id'] = $request->user()->id;
             $data['moderation_status'] = $request->boolean('submit_for_moderation') ? 'pending' : 'draft';
@@ -50,6 +53,9 @@ class ListingController extends Controller
 
             $listing = Listing::create($data);
             $listing->amenities()->sync($request->input('amenity_ids', []));
+            foreach ($request->file('images', []) as $index => $image) {
+                $listing->media()->create([...$images->store($image), 'sort_order' => $index]);
+            }
 
             return $listing;
         });
@@ -64,7 +70,7 @@ class ListingController extends Controller
     public function edit(Listing $listing): Response
     {
         Gate::authorize('update', $listing);
-        $listing->load('amenities');
+        $listing->load(['amenities', 'media' => fn ($query) => $query->orderBy('sort_order')]);
 
         return Inertia::render('Account/ListingForm', [
             ...$this->formData(),
@@ -72,16 +78,20 @@ class ListingController extends Controller
         ]);
     }
 
-    public function update(SaveListingRequest $request, Listing $listing): RedirectResponse
+    public function update(SaveListingRequest $request, Listing $listing, ListingImageService $images): RedirectResponse
     {
         Gate::authorize('update', $listing);
 
-        DB::transaction(function () use ($request, $listing) {
+        DB::transaction(function () use ($request, $listing, $images) {
             $data = $this->listingData($request);
             $data['moderation_status'] = $request->boolean('submit_for_moderation') ? 'pending' : 'draft';
             $data['published_at'] = null;
             $listing->update($data);
             $listing->amenities()->sync($request->input('amenity_ids', []));
+            $nextOrder = (int) $listing->media()->max('sort_order') + 1;
+            foreach ($request->file('images', []) as $index => $image) {
+                $listing->media()->create([...$images->store($image), 'sort_order' => $nextOrder + $index]);
+            }
         });
 
         $this->forgetPublicCache();
@@ -96,6 +106,18 @@ class ListingController extends Controller
         $this->forgetPublicCache();
 
         return back()->with('success', 'E’lon arxivlandi.');
+    }
+
+    public function destroyImage(Listing $listing, Media $media): RedirectResponse
+    {
+        Gate::authorize('update', $listing);
+        abort_unless($media->listing_id === $listing->id, 404);
+        abort_if($listing->media()->count() <= 1 && $listing->moderation_status !== ModerationStatus::DRAFT, 422, 'Faol e’londa kamida bitta rasm qolishi kerak.');
+
+        Storage::disk('public')->delete($media->storage_path);
+        $media->delete();
+
+        return back()->with('success', 'Rasm o‘chirildi.');
     }
 
     public function confirm(Listing $listing): RedirectResponse
@@ -142,7 +164,7 @@ class ListingController extends Controller
 
     private function listingData(SaveListingRequest $request): array
     {
-        $data = Arr::except($request->validated(), ['amenity_ids', 'submit_for_moderation']);
+        $data = Arr::except($request->validated(), ['amenity_ids', 'submit_for_moderation', 'images']);
         if ($data['deal_type'] === 'sale') {
             $data['rental_unit'] = null;
             $data['students_allowed'] = null;

@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account/listings/{listing}/edit', [ListingController::class, 'edit'])->name('account.listings.edit');
     Route::put('/account/listings/{listing}', [ListingController::class, 'update'])->name('account.listings.update');
     Route::patch('/account/listings/{listing}/archive', [ListingController::class, 'archive'])->name('account.listings.archive');
+    Route::delete('/account/listings/{listing}/images/{media}', [ListingController::class, 'destroyImage'])->name('account.listings.images.destroy');
     Route::post('/account/listings/{listing}/confirm', [ListingController::class, 'confirm'])->name('account.listings.confirm');
     Route::patch('/account/listings/{listing}/availability', [ListingController::class, 'updateAvailability'])->name('account.listings.availability');
     Route::get('/listings/{listing}/request', [RequestController::class, 'create'])->name('requests.create');

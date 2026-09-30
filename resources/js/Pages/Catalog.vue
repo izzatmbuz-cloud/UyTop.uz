@@ -19,16 +19,16 @@
           <div class="flex items-center justify-between"><h2 class="font-bold text-slate-950">Filtrlar</h2><button class="text-xs font-semibold text-blue-600" @click="clearFilters">Tozalash</button></div>
           <div class="mt-5 space-y-5">
             <label class="block"><span class="field-label">Qidiruv</span><input v-model="filters.search" class="field" placeholder="Hudud yoki tavsif" @keyup.enter="applyFilters" /></label>
-            <label v-if="filters.deal_type === 'rent'" class="block"><span class="field-label">Ijara turi</span><select v-model="filters.rental_unit" class="field"><option value="">Hammasi</option><option value="whole">Butun uy</option><option value="room">Xona</option><option value="bed">O‘rin</option></select></label>
-            <label class="block"><span class="field-label">Hudud</span><select v-model="filters.district_id" class="field"><option value="">Barcha hududlar</option><option v-for="(name, id) in districts" :key="id" :value="id">{{ name }}</option></select></label>
-            <div><span class="field-label">Narx oralig‘i</span><select v-model="filters.currency" class="field mb-2"><option value="UZS">UZS</option><option value="USD">USD</option></select><div class="grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
+            <UiSelect v-if="filters.deal_type === 'rent'" v-model="filters.rental_unit" label="Ijara turi" :options="rentalOptions" />
+            <UiSelect v-model="filters.district_id" label="Hudud" :options="districtOptions" />
+            <div><UiSelect v-model="filters.currency" label="Narx va valyuta" :options="currencyOptions" /><div class="mt-2 grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
             <label v-if="filters.deal_type !== 'sale'" class="flex items-start gap-3 rounded-2xl bg-blue-50 p-3 text-sm text-slate-700"><input v-model="filters.students_allowed" type="checkbox" class="mt-0.5 rounded border-slate-300 text-blue-600" /><span><strong class="block text-slate-900">Talabalar qabul qilinadi</strong>Faqat aniq “ha” deb belgilanganlar</span></label>
             <button class="w-full rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/10" @click="applyFilters">Natijalarni ko‘rsatish</button>
           </div>
         </aside>
 
         <div>
-          <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-slate-500"><strong class="text-slate-950">{{ listings.total }}</strong> ta taklif topildi</p><select v-model="filters.sort" class="rounded-xl border-slate-200 bg-white text-sm" @change="applyFilters"><option value="confirmed_at">Yaqinda tasdiqlangan</option><option value="price_asc">Narx: pastdan</option><option value="price_desc">Narx: yuqoridan</option><option value="date">Yangi e’lonlar</option></select></div>
+          <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-slate-500"><strong class="text-slate-950">{{ listings.total }}</strong> ta taklif topildi</p><UiSelect v-model="filters.sort" :options="sortOptions" @change="applyFilters" /></div>
 
           <div v-if="notice" class="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{{ notice }}</div>
           <div v-if="!listings.data.length" class="rounded-[28px] border border-dashed border-slate-300 bg-white p-12 text-center"><h2 class="text-xl font-bold text-slate-900">Mos taklif topilmadi</h2><p class="mt-2 text-slate-500">Filtrlarni yengillashtirib qayta urinib ko‘ring.</p></div>
@@ -54,13 +54,21 @@
 
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import AppLayout from '../Layouts/AppLayout.vue';
 import { useComparison } from '../composables/useComparison';
+import UiSelect from '../Components/UiSelect.vue';
 
 const props = defineProps({ listings: Object, districts: Object, filters: Object });
 const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '' });
 const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }, { value: '', label: 'Barchasi' }];
+const rentalOptions = [{ value: '', label: 'Hammasi' }, { value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Xona' }, { value: 'bed', label: 'O‘rin' }];
+const districtOptions = computed(() => [
+  { value: '', label: 'Barcha hududlar' },
+  ...Object.entries(props.districts || {}).map(([value, label]) => ({ value, label })),
+]);
+const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }];
+const sortOptions = [{ value: 'confirmed_at', label: 'Yaqinda tasdiqlangan' }, { value: 'price_asc', label: 'Narx: pastdan' }, { value: 'price_desc', label: 'Narx: yuqoridan' }, { value: 'date', label: 'Yangi e’lonlar' }];
 const notice = ref('');
 const { count, contains, toggle, comparisonUrl } = useComparison();
 

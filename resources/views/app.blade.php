@@ -7,6 +7,14 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <script>
+            (() => {
+                const saved = localStorage.getItem('uytop-theme');
+                const dark = saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
+                document.documentElement.classList.toggle('dark', dark);
+            })();
+        </script>
+
         @vite(['resources/js/app.js'])
         @inertiaHead
     </head>

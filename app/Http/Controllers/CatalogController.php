@@ -6,11 +6,14 @@ use App\Models\District;
 use App\Models\Listing;
 use App\Services\CostCalculationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class CatalogController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $query = Listing::query()
             ->where('moderation_status', 'approved')
@@ -91,7 +94,7 @@ class CatalogController extends Controller
             ->paginate(12)
             ->appends($request->query());
 
-        $districts = District::where('active', true)->pluck('name_uz', 'id');
+        $districts = Cache::remember('reference.district-map', now()->addHour(), fn () => District::where('active', true)->orderBy('name_uz')->pluck('name_uz', 'id'));
 
         return Inertia::render('Catalog', [
             'listings' => $listings,
@@ -100,10 +103,10 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function show(Listing $listing, CostCalculationService $costs)
+    public function show(Listing $listing, CostCalculationService $costs): Response
     {
         if (! $listing->isPubliclyVisible()
-            && (! auth()->check() || auth()->id() !== $listing->owner_user_id)) {
+            && (! Auth::check() || Auth::id() !== $listing->owner_user_id)) {
             abort(404);
         }
 

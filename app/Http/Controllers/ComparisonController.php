@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Services\CostCalculationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ComparisonController extends Controller
 {
-    public function __invoke(Request $request, CostCalculationService $costs)
+    public function __invoke(Request $request, CostCalculationService $costs): Response
     {
         $validated = $request->validate([
             'ids' => ['nullable', 'array', 'max:3'],
@@ -45,7 +47,7 @@ class ComparisonController extends Controller
         ]);
     }
 
-    private function compatibility($items): array
+    private function compatibility(Collection $items): array
     {
         if ($items->count() < 2) {
             return ['compatible' => true, 'message' => null];

@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Enums\RequestStatus;
 use App\Models\Listing;
 use App\Models\Request as RequestModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class RequestController extends Controller
 {
-    public function create(Listing $listing)
+    public function create(Listing $listing): Response|RedirectResponse
     {
-        if (! auth()->check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -21,14 +25,14 @@ class RequestController extends Controller
             abort(404);
         }
 
-        abort_if($listing->owner_user_id === auth()->id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
+        abort_if($listing->owner_user_id === Auth::id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
 
         return Inertia::render('CreateRequest', [
             'listing' => $listing->load('owner', 'district'),
         ]);
     }
 
-    public function store(Request $request, Listing $listing)
+    public function store(Request $request, Listing $listing): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -45,7 +49,7 @@ class RequestController extends Controller
             $lockedListing = Listing::query()->lockForUpdate()->findOrFail($listing->id);
 
             abort_unless($lockedListing->isPubliclyVisible(), 409, 'E’lon hozir mavjud emas.');
-            abort_if($lockedListing->owner_user_id === auth()->id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
+            abort_if($lockedListing->owner_user_id === Auth::id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
 
             if ($lockedListing->free_places !== null && ($validated['occupants_count'] ?? 1) > $lockedListing->free_places) {
                 abort(422, 'Yashovchilar soni bo‘sh o‘rinlardan ko‘p.');
@@ -57,7 +61,7 @@ class RequestController extends Controller
             }
 
             $existing = RequestModel::query()
-                ->where('requester_id', auth()->id())
+                ->where('requester_id', Auth::id())
                 ->where('listing_id', $lockedListing->id)
                 ->whereIn('status', [RequestStatus::NEW->value, RequestStatus::ALTERNATIVE_PROPOSED->value, RequestStatus::ACCEPTED->value])
                 ->lockForUpdate()
@@ -69,14 +73,14 @@ class RequestController extends Controller
 
             $created = RequestModel::create([
                 ...$validated,
-                'requester_id' => auth()->id(),
+                'requester_id' => Auth::id(),
                 'recipient_id' => $lockedListing->owner_user_id,
                 'listing_id' => $lockedListing->id,
                 'status' => RequestStatus::NEW,
             ]);
 
             $created->events()->create([
-                'actor_id' => auth()->id(),
+                'actor_id' => Auth::id(),
                 'from_status' => 'created',
                 'to_status' => RequestStatus::NEW->value,
                 'proposed_at' => $created->proposed_at,
@@ -88,9 +92,9 @@ class RequestController extends Controller
         return redirect()->route('account.requests')->with('success', 'Murojaat yuborildi. Javobni kuting.');
     }
 
-    public function updateStatus(RequestModel $request, Request $formRequest)
+    public function updateStatus(RequestModel $request, Request $formRequest): RedirectResponse
     {
-        $this->authorize('update', $request);
+        Gate::authorize('update', $request);
 
         $validated = $formRequest->validate([
             'status' => ['required', 'string', 'in:accepted,alternative_proposed,rejected,cancelled,completed'],
@@ -100,7 +104,7 @@ class RequestController extends Controller
 
         $newStatus = RequestStatus::from($validated['status']);
         $current = $request->status;
-        $isRecipient = auth()->id() === $request->recipient_id;
+        $isRecipient = Auth::id() === $request->recipient_id;
 
         $allowedTransitions = $isRecipient
             ? [
@@ -127,7 +131,7 @@ class RequestController extends Controller
             $request->events()->create([
                 'from_status' => $current->value,
                 'to_status' => $newStatus->value,
-                'actor_id' => auth()->id(),
+                'actor_id' => Auth::id(),
                 'proposed_at' => $validated['proposed_at'] ?? null,
                 'comment' => $validated['comment'] ?? null,
             ]);

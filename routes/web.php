@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/requests/{request}/status', [RequestController::class, 'updateStatus'])->name('requests.status');
     Route::get('/account/requests', function () {
         return Inertia::render('Account/Requests', [
-            'requests' => RequestModel::with(['listing.district', 'recipient'])
+            'requests' => RequestModel::with(['listing.district', 'recipient', 'events.actor'])
                 ->where('requester_id', Auth::id())
                 ->orderByDesc('created_at')
                 ->get(),

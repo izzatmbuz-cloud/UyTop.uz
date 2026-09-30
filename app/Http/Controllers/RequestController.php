@@ -100,35 +100,41 @@ class RequestController extends Controller
             'status' => ['required', 'string', 'in:accepted,alternative_proposed,rejected,cancelled,completed'],
             'comment' => ['nullable', 'string', 'max:1000'],
             'proposed_at' => ['nullable', 'date', 'after_or_equal:today'],
+            'time_start' => ['nullable', 'date_format:H:i'],
+            'time_end' => ['nullable', 'date_format:H:i', 'after:time_start'],
         ]);
 
         $newStatus = RequestStatus::from($validated['status']);
-        $current = $request->status;
         $isRecipient = Auth::id() === $request->recipient_id;
-
-        $allowedTransitions = $isRecipient
-            ? [
-                RequestStatus::NEW->value => [RequestStatus::ACCEPTED, RequestStatus::ALTERNATIVE_PROPOSED, RequestStatus::REJECTED],
-                RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::REJECTED],
-                RequestStatus::ACCEPTED->value => [RequestStatus::COMPLETED, RequestStatus::CANCELLED],
-            ]
-            : [
-                RequestStatus::NEW->value => [RequestStatus::CANCELLED],
-                RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::ACCEPTED, RequestStatus::CANCELLED],
-                RequestStatus::ACCEPTED->value => [RequestStatus::CANCELLED],
-            ];
-
-        if (! in_array($newStatus, $allowedTransitions[$current->value] ?? [], true)) {
-            abort(403);
+        if ($newStatus === RequestStatus::ALTERNATIVE_PROPOSED && empty($validated['proposed_at'])) {
+            return back()->withErrors(['proposed_at' => 'Boshqa vaqt uchun sana majburiy.']);
         }
 
-        DB::transaction(function () use ($request, $current, $newStatus, $validated) {
-            $request->update([
+        DB::transaction(function () use ($request, $isRecipient, $newStatus, $validated) {
+            $lockedRequest = RequestModel::query()->lockForUpdate()->findOrFail($request->id);
+            $current = $lockedRequest->status;
+            $allowedTransitions = $isRecipient
+                ? [
+                    RequestStatus::NEW->value => [RequestStatus::ACCEPTED, RequestStatus::ALTERNATIVE_PROPOSED, RequestStatus::REJECTED],
+                    RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::REJECTED],
+                    RequestStatus::ACCEPTED->value => [RequestStatus::COMPLETED],
+                ]
+                : [
+                    RequestStatus::NEW->value => [RequestStatus::CANCELLED],
+                    RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::ACCEPTED, RequestStatus::CANCELLED],
+                    RequestStatus::ACCEPTED->value => [RequestStatus::CANCELLED],
+                ];
+
+            abort_unless(in_array($newStatus, $allowedTransitions[$current->value] ?? [], true), 403);
+
+            $lockedRequest->update([
                 'status' => $newStatus,
-                'proposed_at' => $validated['proposed_at'] ?? $request->proposed_at,
+                'proposed_at' => $validated['proposed_at'] ?? $lockedRequest->proposed_at,
+                'time_start' => $validated['time_start'] ?? $lockedRequest->time_start,
+                'time_end' => $validated['time_end'] ?? $lockedRequest->time_end,
             ]);
 
-            $request->events()->create([
+            $lockedRequest->events()->create([
                 'from_status' => $current->value,
                 'to_status' => $newStatus->value,
                 'actor_id' => Auth::id(),

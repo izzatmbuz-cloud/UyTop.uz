@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\AvailabilityStatus;
+use App\Enums\DealType;
+use App\Enums\ModerationStatus;
+use App\Enums\PropertyType;
+use App\Enums\RentalUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\DealType;
-use App\Enums\PropertyType;
-use App\Enums\ModerationStatus;
-use App\Enums\AvailabilityStatus;
 
 class Listing extends Model
 {
@@ -58,8 +59,15 @@ class Listing extends Model
     protected $casts = [
         'deal_type' => DealType::class,
         'property_type' => PropertyType::class,
+        'rental_unit' => RentalUnit::class,
         'moderation_status' => ModerationStatus::class,
         'availability_status' => AvailabilityStatus::class,
+        'price' => 'decimal:2',
+        'utilities_amount' => 'decimal:2',
+        'deposit_amount' => 'decimal:2',
+        'commission_amount' => 'decimal:2',
+        'available_from' => 'date',
+        'is_demo' => 'boolean',
         'confirmed_at' => 'datetime',
         'published_at' => 'datetime',
         'archived_at' => 'datetime',
@@ -98,5 +106,13 @@ class Listing extends Model
     public function reports()
     {
         return $this->hasMany(Report::class);
+    }
+
+    public function isPubliclyVisible(): bool
+    {
+        return $this->moderation_status === ModerationStatus::APPROVED
+            && $this->availability_status === AvailabilityStatus::AVAILABLE
+            && $this->archived_at === null
+            && ($this->confirmed_at === null || $this->confirmed_at->gte(now()->subDays(14)));
     }
 }

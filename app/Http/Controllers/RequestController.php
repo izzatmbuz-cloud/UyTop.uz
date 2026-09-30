@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Request as RequestModel;
+use App\Enums\RequestStatus;
 use App\Models\Listing;
-use App\Models\Project;
-use Inertia\Inertia;
+use App\Models\Request as RequestModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class RequestController extends Controller
 {
     public function create(Listing $listing)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return redirect()->route('login');
         }
 
-        if ($listing->moderation_status !== 'approved' || $listing->availability_status !== 'available') {
+        if (! $listing->isPubliclyVisible()) {
             abort(404);
         }
+
+        abort_if($listing->owner_user_id === auth()->id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
 
         return Inertia::render('CreateRequest', [
             'listing' => $listing->load('owner', 'district'),
@@ -30,39 +32,58 @@ class RequestController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string',
-            'proposed_at' => 'nullable|date',
+            'phone' => ['required', 'string', 'max:30', 'regex:/^[0-9+()\-\s]{7,30}$/'],
+            'proposed_at' => 'nullable|date|after_or_equal:today',
             'time_start' => 'nullable|date_format:H:i',
             'time_end' => 'nullable|date_format:H:i',
             'occupants_count' => 'nullable|integer|min:1',
             'message' => 'nullable|string|max:1000',
+            'idempotency_key' => 'required|uuid',
         ]);
 
-        $existingRequest = RequestModel::where('requester_id', auth()->id())
-            ->where('listing_id', $listing->id)
-            ->whereIn('status', ['new', 'alternative_proposed', 'accepted'])
-            ->first();
+        $newRequest = DB::transaction(function () use ($validated, $listing) {
+            $lockedListing = Listing::query()->lockForUpdate()->findOrFail($listing->id);
 
-        if ($existingRequest) {
-            return back()->withErrors([
-                'request' => 'Sizning faol murojaatingiz mavjud.',
+            abort_unless($lockedListing->isPubliclyVisible(), 409, 'E’lon hozir mavjud emas.');
+            abort_if($lockedListing->owner_user_id === auth()->id(), 403, 'O‘z e’loningizga murojaat yubora olmaysiz.');
+
+            if ($lockedListing->free_places !== null && ($validated['occupants_count'] ?? 1) > $lockedListing->free_places) {
+                abort(422, 'Yashovchilar soni bo‘sh o‘rinlardan ko‘p.');
+            }
+
+            $retried = RequestModel::where('idempotency_key', $validated['idempotency_key'])->first();
+            if ($retried) {
+                return $retried;
+            }
+
+            $existing = RequestModel::query()
+                ->where('requester_id', auth()->id())
+                ->where('listing_id', $lockedListing->id)
+                ->whereIn('status', [RequestStatus::NEW->value, RequestStatus::ALTERNATIVE_PROPOSED->value, RequestStatus::ACCEPTED->value])
+                ->lockForUpdate()
+                ->first();
+
+            if ($existing) {
+                abort(409, 'Sizning faol murojaatingiz mavjud.');
+            }
+
+            $created = RequestModel::create([
+                ...$validated,
+                'requester_id' => auth()->id(),
+                'recipient_id' => $lockedListing->owner_user_id,
+                'listing_id' => $lockedListing->id,
+                'status' => RequestStatus::NEW,
             ]);
-        }
 
-        $newRequest = RequestModel::create([
-            'requester_id' => auth()->id(),
-            'recipient_id' => $listing->owner_user_id,
-            'listing_id' => $listing->id,
-            'name' => $validated['name'],
-            'phone' => $validated['phone'],
-            'proposed_at' => $validated['proposed_at'] ?? null,
-            'time_start' => $validated['time_start'] ?? null,
-            'time_end' => $validated['time_end'] ?? null,
-            'occupants_count' => $validated['occupants_count'] ?? null,
-            'message' => $validated['message'] ?? null,
-            'status' => 'new',
-            'idempotency_key' => (string) Str::uuid(),
-        ]);
+            $created->events()->create([
+                'actor_id' => auth()->id(),
+                'from_status' => 'created',
+                'to_status' => RequestStatus::NEW->value,
+                'proposed_at' => $created->proposed_at,
+            ]);
+
+            return $created;
+        });
 
         return redirect()->route('account.requests')->with('success', 'Murojaat yuborildi. Javobni kuting.');
     }
@@ -71,32 +92,47 @@ class RequestController extends Controller
     {
         $this->authorize('update', $request);
 
-        $newStatus = $formRequest->get('status');
-        $comment = $formRequest->get('comment');
+        $validated = $formRequest->validate([
+            'status' => ['required', 'string', 'in:accepted,alternative_proposed,rejected,cancelled,completed'],
+            'comment' => ['nullable', 'string', 'max:1000'],
+            'proposed_at' => ['nullable', 'date', 'after_or_equal:today'],
+        ]);
 
-        $allowedTransitions = [
-            'new' => ['accepted', 'alternative_proposed', 'rejected'],
-            'alternative_proposed' => ['accepted', 'rejected'],
-            'accepted' => ['completed', 'cancelled'],
-            'rejected' => [],
-            'cancelled' => [],
-            'completed' => [],
-        ];
+        $newStatus = RequestStatus::from($validated['status']);
+        $current = $request->status;
+        $isRecipient = auth()->id() === $request->recipient_id;
 
-        if (!in_array($newStatus, $allowedTransitions[$request->status] ?? [])) {
+        $allowedTransitions = $isRecipient
+            ? [
+                RequestStatus::NEW->value => [RequestStatus::ACCEPTED, RequestStatus::ALTERNATIVE_PROPOSED, RequestStatus::REJECTED],
+                RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::REJECTED],
+                RequestStatus::ACCEPTED->value => [RequestStatus::COMPLETED, RequestStatus::CANCELLED],
+            ]
+            : [
+                RequestStatus::NEW->value => [RequestStatus::CANCELLED],
+                RequestStatus::ALTERNATIVE_PROPOSED->value => [RequestStatus::ACCEPTED, RequestStatus::CANCELLED],
+                RequestStatus::ACCEPTED->value => [RequestStatus::CANCELLED],
+            ];
+
+        if (! in_array($newStatus, $allowedTransitions[$current->value] ?? [], true)) {
             abort(403);
         }
 
-        $request->status = $newStatus;
-        $request->save();
+        DB::transaction(function () use ($request, $current, $newStatus, $validated) {
+            $request->update([
+                'status' => $newStatus,
+                'proposed_at' => $validated['proposed_at'] ?? $request->proposed_at,
+            ]);
 
-        $request->events()->create([
-            'from_status' => $request->getOriginal('status'),
-            'to_status' => $newStatus,
-            'actor_id' => auth()->id(),
-            'comment' => $comment,
-        ]);
+            $request->events()->create([
+                'from_status' => $current->value,
+                'to_status' => $newStatus->value,
+                'actor_id' => auth()->id(),
+                'proposed_at' => $validated['proposed_at'] ?? null,
+                'comment' => $validated['comment'] ?? null,
+            ]);
+        });
 
-        return response()->json(['message' => 'Status o\'zgartirildi']);
+        return back()->with('success', 'Status o‘zgartirildi.');
     }
 }

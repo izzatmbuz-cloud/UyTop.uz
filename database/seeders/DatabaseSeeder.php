@@ -2,153 +2,93 @@
 
 namespace Database\Seeders;
 
+use App\Models\Amenity;
 use App\Models\District;
 use App\Models\Listing;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $owner = User::updateOrCreate(['email' => 'owner@uytop.uz'], ['name' => 'Demo uy egasi', 'phone' => '+998 90 111 22 33', 'role' => 'owner', 'password' => Hash::make('password')]);
+        User::updateOrCreate(['email' => 'student@uytop.uz'], ['name' => 'Demo talaba', 'phone' => '+998 90 444 55 66', 'role' => 'user', 'password' => Hash::make('password')]);
+        User::updateOrCreate(['email' => 'admin@uytop.uz'], ['name' => 'Administrator', 'phone' => '+998 90 777 88 99', 'role' => 'admin', 'password' => Hash::make('password')]);
+
+        $districts = collect(['Andijon shahri', 'Asaka', 'Baliqchi', 'Shahrixon', 'Paxtaobod', 'Marhamat'])
+            ->map(fn (string $name) => District::updateOrCreate(['name_uz' => $name], ['active' => true]));
+
+        $amenities = collect([
+            ['code' => 'wifi', 'name_uz' => 'Wi-Fi'], ['code' => 'furniture', 'name_uz' => 'Mebel'],
+            ['code' => 'washing_machine', 'name_uz' => 'Kir yuvish mashinasi'], ['code' => 'air_conditioner', 'name_uz' => 'Konditsioner'],
+        ])->map(fn (array $data) => Amenity::updateOrCreate(['code' => $data['code']], $data))->values();
+
+        $project = Project::updateOrCreate(['name' => 'Navbahor Residence'], [
+            'manager_user_id' => $owner->id, 'district_id' => $districts[0]->id,
+            'name' => 'Navbahor Residence', 'developer_name' => 'UyTop Demo Development',
+            'description' => 'Shahar markaziga yaqin, energiya tejamkor yangi turar joy majmuasi.',
+            'stage' => 'building', 'completion_text' => '2027-yil III chorak',
+            'moderation_status' => 'approved', 'is_demo' => true,
         ]);
 
-        $districts = [
-            ['name_uz' => 'Bo‘ston', 'active' => true],
-            ['name_uz' => 'Markaziy', 'active' => true],
-            ['name_uz' => 'Asaka', 'active' => true],
-            ['name_uz' => 'Paxtaobod', 'active' => true],
+        $titles = [
+            'Universitet yaqinida talabalar uchun o‘rin', 'Markazda yorug‘ xona', 'Ikki talaba uchun qulay xona',
+            'Bozor yaqinida alohida o‘rin', 'Oilaga va talabalarga mos kvartira', 'Tinch hududdagi ikki xonali uy',
+            'Wi-Fi bilan jihozlangan xona', 'Bekat yaqinidagi talabalar uyi', 'Qizlar uchun ozoda o‘rin',
+            'Yigitlar uchun arzon xona', 'Yangi ta’mirlangan kvartira', 'Hovlili uy ijaraga beriladi',
+            'Markaziy ko‘chadagi bir xonali uy', 'Universitetgacha piyoda 10 daqiqa', 'Uch kishilik keng xona',
+            'Kommunal to‘lovlari kiritilgan o‘rin', 'Depozitsiz talabalar xonasi', 'Uzoq muddatga butun kvartira',
+            'Asaka markazida sotiladigan kvartira', 'Yangi qurilishdagi ikki xonali kvartira',
+            'Hovlili uy sotiladi', 'Tayyor ta’mirli yangi kvartira', 'Shahrixonda uch xonali uy', 'Markazda ofisga mos kvartira',
         ];
 
-        foreach ($districts as $district) {
-            District::create($district);
-        }
+        foreach ($titles as $index => $title) {
+            $sale = $index >= 18;
+            $unit = $sale ? null : (['bed', 'room', 'whole'][$index % 3]);
+            $currency = $index % 8 === 0 ? 'USD' : 'UZS';
+            $price = $sale
+                ? ($currency === 'USD' ? 42000 + ($index * 900) : 260000000 + ($index * 3500000))
+                : ($currency === 'USD' ? 90 + ($index * 4) : 550000 + ($index * 85000));
+            $utilitiesMode = $index % 4 === 0 ? 'unknown' : ($index % 3 === 0 ? 'included' : 'fixed');
 
-        $districtIds = District::pluck('id')->all();
-
-        $project = Project::create([
-            'manager_user_id' => $user->id,
-            'district_id' => $districtIds[0],
-            'name' => 'Samarqand ko‘chasi loyihasi',
-            'developer_name' => 'Demo Developer',
-            'description' => 'Yangi loyiha demo ma’lumot uchun yaratilgan.',
-            'stage' => 'building',
-            'completion_text' => '2027 yil',
-            'moderation_status' => 'approved',
-            'is_demo' => true,
-        ]);
-
-        $listingData = [
-            [
-                'owner_user_id' => $user->id,
-                'project_id' => $project->id,
-                'district_id' => $districtIds[0],
-                'deal_type' => 'rent',
-                'rental_unit' => 'whole',
-                'property_type' => 'apartment',
-                'students_allowed' => 'yes',
-                'title' => '2 xonali kvartira, qulay narxda',
-                'description' => 'Yaqin joylashgan, toza va qulay kvartira. Talabalar uchun mos.',
-                'currency' => 'UZS',
-                'price' => 9000000,
-                'price_basis' => 'monthly_unit',
-                'utilities_mode' => 'fixed',
-                'utilities_amount' => 180000,
-                'utilities_payment_timing' => 'later',
-                'deposit_mode' => 'fixed',
-                'deposit_amount' => 5000000,
-                'commission_mode' => 'none',
-                'commission_amount' => 0,
-                'capacity' => 4,
-                'free_places' => 1,
-                'available_from' => now()->addDays(7)->toDateString(),
-                'min_months' => 6,
-                'area_m2' => 58,
-                'rooms' => 2,
-                'floor' => 5,
-                'location_text' => 'Bo‘ston ko‘chasi',
-                'moderation_status' => 'approved',
-                'availability_status' => 'available',
-                'confirmed_at' => now(),
-                'published_at' => now(),
-                'is_demo' => true,
-            ],
-            [
-                'owner_user_id' => $user->id,
-                'project_id' => null,
-                'district_id' => $districtIds[1],
-                'deal_type' => 'rent',
-                'rental_unit' => 'room',
-                'property_type' => 'apartment',
-                'students_allowed' => 'yes',
-                'title' => 'Yotoqxona xonasi, talabalar uchun',
-                'description' => 'O‘qishga yaqin, qulay joylashgan xona. Kommunal to‘lovlar kiritilgan.',
-                'currency' => 'UZS',
-                'price' => 2600000,
-                'price_basis' => 'monthly_unit',
-                'utilities_mode' => 'included',
-                'utilities_amount' => 0,
-                'utilities_payment_timing' => 'move_in',
-                'deposit_mode' => 'fixed',
-                'deposit_amount' => 1500000,
-                'commission_mode' => 'none',
-                'commission_amount' => 0,
-                'capacity' => 2,
-                'free_places' => 1,
-                'available_from' => now()->toDateString(),
-                'min_months' => 3,
-                'area_m2' => 18,
-                'rooms' => 1,
-                'floor' => 2,
-                'location_text' => 'Markaziy tumani',
-                'moderation_status' => 'approved',
-                'availability_status' => 'available',
-                'confirmed_at' => now(),
-                'published_at' => now(),
-                'is_demo' => true,
-            ],
-            [
-                'owner_user_id' => $user->id,
-                'project_id' => null,
-                'district_id' => $districtIds[2],
-                'deal_type' => 'sale',
-                'rental_unit' => null,
-                'property_type' => 'apartment',
-                'students_allowed' => null,
-                'title' => 'Sotuvdagi kvartira',
-                'description' => 'Yashash uchun qulay, kerakli barcha shartlar mavjud.',
-                'currency' => 'UZS',
-                'price' => 280000000,
-                'price_basis' => 'total',
-                'utilities_mode' => 'unknown',
-                'utilities_amount' => null,
-                'utilities_payment_timing' => 'unknown',
-                'deposit_mode' => 'none',
-                'deposit_amount' => 0,
-                'commission_mode' => 'unknown',
+            $listing = Listing::updateOrCreate(['title' => $title, 'source_type' => 'demo'], [
+                'owner_user_id' => $owner->id,
+                'project_id' => in_array($index, [19, 21], true) ? $project->id : null,
+                'district_id' => $districts[$index % $districts->count()]->id,
+                'deal_type' => $sale ? 'sale' : 'rent',
+                'rental_unit' => $unit,
+                'property_type' => $index % 7 === 0 ? 'house' : 'apartment',
+                'students_allowed' => $sale ? null : ($index % 5 === 0 ? 'unknown' : 'yes'),
+                'title' => $title,
+                'description' => 'Demo e’lon. Shartlar, xarajatlar va mavjudlik foydalanuvchi tomonidan nashrdan oldin tekshiriladi.',
+                'currency' => $currency,
+                'price' => $price,
+                'price_basis' => $sale ? ($index % 3 === 0 ? 'from_total' : 'total') : 'monthly_unit',
+                'utilities_mode' => $sale ? 'unknown' : $utilitiesMode,
+                'utilities_amount' => $utilitiesMode === 'fixed' ? ($currency === 'USD' ? 15 : 120000) : null,
+                'utilities_payment_timing' => $utilitiesMode === 'fixed' ? ($index % 2 ? 'later' : 'move_in') : 'unknown',
+                'deposit_mode' => $sale ? 'none' : ($index % 4 === 1 ? 'unknown' : 'fixed'),
+                'deposit_amount' => ! $sale && $index % 4 !== 1 ? $price : null,
+                'commission_mode' => $index % 6 === 0 ? 'unknown' : 'none',
                 'commission_amount' => null,
-                'capacity' => 5,
-                'free_places' => null,
-                'available_from' => now()->toDateString(),
-                'min_months' => null,
-                'area_m2' => 70,
-                'rooms' => 3,
-                'floor' => 8,
-                'location_text' => 'Asaka ko‘chasi',
-                'moderation_status' => 'approved',
-                'availability_status' => 'available',
-                'confirmed_at' => now(),
-                'published_at' => now(),
-                'is_demo' => true,
-            ],
-        ];
+                'capacity' => $sale ? null : 2 + ($index % 4),
+                'free_places' => $sale ? null : 1 + ($index % 3),
+                'available_from' => $sale ? null : now()->addDays($index % 10)->toDateString(),
+                'min_months' => $sale ? null : 3 + ($index % 4),
+                'area_m2' => 24 + ($index * 3),
+                'rooms' => 1 + ($index % 4),
+                'floor' => 1 + ($index % 9),
+                'location_text' => $districts[$index % $districts->count()]->name_uz.' markazi',
+                'author_type' => $sale && $index % 2 ? 'developer' : 'owner',
+                'source_type' => 'demo',
+                'moderation_status' => 'approved', 'availability_status' => 'available',
+                'confirmed_at' => now()->subDays($index % 7), 'published_at' => now()->subDays($index), 'is_demo' => true,
+            ]);
 
-        foreach ($listingData as $data) {
-            Listing::create($data);
+            $listing->amenities()->sync([$amenities[0]->id, $amenities[1 + ($index % 3)]->id]);
         }
     }
 }

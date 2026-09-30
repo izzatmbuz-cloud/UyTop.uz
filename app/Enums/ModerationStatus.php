@@ -14,10 +14,10 @@ enum ModerationStatus: string
     {
         return match ($this) {
             self::DRAFT => 'Qoralama',
-            self::PENDING => "Moderatsiyada",
-            self::APPROVED => "Tasdiqni",
-            self::REJECTED => "Rad etilgan",
-            self::BLOCKED => "Bloklangan",
+            self::PENDING => 'Moderatsiyada',
+            self::APPROVED => 'Tasdiqni',
+            self::REJECTED => 'Rad etilgan',
+            self::BLOCKED => 'Bloklangan',
         };
     }
 

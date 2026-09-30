@@ -1,146 +1,52 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8">
-    <div v-if="listing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-6 flex items-center justify-between">
-        <Link href="/catalog" class="text-blue-600 hover:text-blue-700 font-medium">← Katalogga qaytish</Link>
-        <button @click="toggleCompare" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
-          {{ inCompare ? 'Solishtirishdan olib tashlash' : 'Solishtirishga qo‘shish' }}
-        </button>
-      </div>
+  <AppLayout>
+    <Head :title="listing.title" />
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="mb-5 flex items-center justify-between gap-4"><Link href="/catalog" class="text-sm font-semibold text-slate-500 hover:text-blue-600">← Katalogga qaytish</Link><button class="rounded-full border px-4 py-2 text-sm font-semibold" :class="contains(listing.id) ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 bg-white text-slate-700'" @click="toggleItem">{{ contains(listing.id) ? 'Tanlangan' : 'Solishtirishga qo‘shish' }}</button></div>
+      <div v-if="notice" class="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{{ notice }}</div>
 
-      <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div class="grid grid-cols-1 lg:grid-cols-2">
-          <div class="p-4">
-            <div class="h-[420px] rounded-xl bg-gray-200 overflow-hidden">
-              <img v-if="listing.media?.length" :src="`/storage/${listing.media[0].storage_path}`" :alt="listing.title" class="w-full h-full object-cover" />
-              <div v-else class="w-full h-full flex items-center justify-center text-gray-500">Rasm mavjud emas</div>
-            </div>
-          </div>
-
-          <div class="p-6 lg:p-8">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="rounded-full bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1">{{ labelForDeal(listing.deal_type) }}</span>
-              <span class="rounded-full bg-green-100 text-green-700 text-xs font-medium px-2 py-1">{{ labelForUnit(listing.rental_unit) }}</span>
-            </div>
-
-            <h1 class="text-3xl font-bold text-gray-900 mb-3">{{ listing.title }}</h1>
-
-            <div class="text-lg font-semibold text-blue-600 mb-4">
-              {{ formatPrice(listing.price, listing.currency) }}
-              <span class="text-sm text-gray-500 font-normal">{{ listing.price_basis ? `(${priceBasisLabel(listing.price_basis)})` : '' }}</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 text-sm text-gray-700 mb-6">
-              <div><span class="text-gray-500">Hudud:</span> {{ listing.district?.name_uz || 'Noma’lum' }}</div>
-              <div><span class="text-gray-500">Mavjudlik:</span> {{ listing.available_from || 'Tez orada' }}</div>
-              <div><span class="text-gray-500">Xonalar:</span> {{ listing.rooms || 'Noma’lum' }}</div>
-              <div><span class="text-gray-500">Bo‘sh o‘rinlar:</span> {{ listing.free_places ?? 'Noma’lum' }}</div>
-            </div>
-
-            <p class="text-gray-700 leading-7 mb-6">{{ listing.description }}</p>
-
-            <div class="flex flex-wrap gap-3 mb-8">
-              <Link :href="`/listings/${listing.id}/request`" class="px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">Ko‘rish uchun murojaat</Link>
-              <Link href="/compare" class="px-5 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium">Solishtirish</Link>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 rounded-xl p-4">
-              <div>
-                <h2 class="text-lg font-bold text-gray-900 mb-3">Xarajatlar</h2>
-                <ul class="space-y-2 text-sm text-gray-700">
-                  <li>Ijara: {{ formatPrice(listing.price, listing.currency) }}</li>
-                  <li>Kommunal: {{ listing.utilities_mode ? costLabel(listing.utilities_mode, listing.utilities_amount) : 'Ko‘rsatilmagan' }}</li>
-                  <li>Depozit: {{ listing.deposit_mode ? depositLabel(listing.deposit_mode, listing.deposit_amount) : 'Ko‘rsatilmagan' }}</li>
-                  <li>Komissiya: {{ listing.commission_mode ? commissionLabel(listing.commission_mode, listing.commission_amount) : 'Ko‘rsatilmagan' }}</li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 class="text-lg font-bold text-gray-900 mb-3">Shartlar</h2>
-                <ul class="space-y-2 text-sm text-gray-700">
-                  <li>Talabalar: {{ listing.students_allowed === 'yes' ? 'Qabul qilinadi' : listing.students_allowed === 'no' ? 'Qabul qilinmaydi' : 'Ko‘rsatilmagan' }}</li>
-                  <li>Hudud: {{ listing.location_text || 'Noma’lum' }}</li>
-                  <li>Muallif turi: {{ listing.author_type || 'Noma’lum' }}</li>
-                  <li>Manba: {{ listing.source_type || 'Noma’lum' }}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      <div class="grid gap-7 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <div class="overflow-hidden rounded-[30px] border border-slate-200 bg-slate-200 shadow-sm"><img v-if="listing.media?.length" :src="`/storage/${listing.media[0].storage_path}`" :alt="listing.title" class="h-[420px] w-full object-cover" /><div v-else class="flex h-[420px] items-center justify-center text-slate-400">Rasm mavjud emas</div></div>
+          <div class="mt-6 rounded-[26px] border border-slate-200 bg-white p-6"><h2 class="text-xl font-bold text-slate-950">E’lon haqida</h2><p class="mt-4 whitespace-pre-line leading-7 text-slate-600">{{ listing.description }}</p></div>
         </div>
+
+        <aside class="h-fit rounded-[30px] border border-slate-200 bg-white p-6 shadow-[0_20px_55px_rgba(15,23,42,0.08)] lg:sticky lg:top-24">
+          <div class="flex flex-wrap gap-2"><span class="tag bg-blue-50 text-blue-700">{{ listing.deal_type === 'rent' ? 'Ijara' : 'Sotuv' }}</span><span v-if="listing.rental_unit" class="tag bg-slate-100 text-slate-700">{{ unitLabel(listing.rental_unit) }}</span><span v-if="listing.is_demo" class="tag bg-amber-50 text-amber-700">Demo</span></div>
+          <h1 class="mt-4 text-3xl font-black leading-tight tracking-[-0.05em] text-slate-950">{{ listing.title }}</h1>
+          <p class="mt-3 text-sm text-slate-500">{{ listing.district?.name_uz }} · {{ listing.location_text || 'Mo‘ljal ko‘rsatilmagan' }}</p>
+          <p class="mt-6 text-3xl font-black tracking-[-0.05em] text-blue-600">{{ money(listing.price) }} <span class="text-sm font-semibold text-slate-400">{{ basisLabel(listing.price_basis) }}</span></p>
+
+          <div v-if="costs" class="mt-6 grid grid-cols-2 gap-3"><div class="rounded-2xl bg-slate-950 p-4 text-white"><p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Oyiga</p><p class="mt-2 text-lg font-bold">{{ money(costs.monthly_payment) }}</p><p v-if="!costs.monthly_complete" class="mt-1 text-xs text-amber-300">Qisman ma’lum</p></div><div class="rounded-2xl bg-blue-600 p-4 text-white"><p class="text-[10px] font-bold uppercase tracking-wider text-blue-200">Joylashishda</p><p class="mt-2 text-lg font-bold">{{ money(costs.movein_cost) }}</p><p v-if="!costs.movein_complete" class="mt-1 text-xs text-blue-100">Qisman ma’lum</p></div></div>
+
+          <dl class="mt-6 divide-y divide-slate-100 text-sm"><InfoRow label="Talabalar" :value="studentLabel(listing.students_allowed)" /><InfoRow label="Bo‘sh o‘rin" :value="listing.free_places ?? 'Noma’lum'" /><InfoRow label="Xonalar" :value="listing.rooms ?? 'Noma’lum'" /><InfoRow label="Mavjud sana" :value="formatDate(listing.available_from)" /><InfoRow label="Kommunal" :value="costMode(listing.utilities_mode, listing.utilities_amount)" /><InfoRow label="Depozit" :value="costMode(listing.deposit_mode, listing.deposit_amount)" /><InfoRow label="Komissiya" :value="costMode(listing.commission_mode, listing.commission_amount)" /></dl>
+
+          <Link :href="`/listings/${listing.id}/request`" class="mt-6 flex w-full items-center justify-center rounded-2xl bg-slate-950 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-900/15">Ko‘rish uchun murojaat</Link>
+        </aside>
       </div>
-    </div>
-  </div>
+    </section>
+  </AppLayout>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { h, ref } from 'vue';
+import { Head, Link } from '@inertiajs/vue3';
+import AppLayout from '../Layouts/AppLayout.vue';
+import { useComparison } from '../composables/useComparison';
 
-const props = defineProps({
-  listing: Object,
-});
+const props = defineProps({ listing: Object, costs: Object });
+const { contains, toggle } = useComparison();
+const notice = ref('');
+const InfoRow = ({ label, value }) => h('div', { class: 'flex justify-between gap-4 py-3' }, [h('dt', { class: 'text-slate-500' }, label), h('dd', { class: 'text-right font-semibold text-slate-900' }, String(value))]);
+InfoRow.props = ['label', 'value'];
 
-const selected = computed(() => {
-  const ids = localStorage.getItem('compare_ids');
-  return ids ? JSON.parse(ids) : [];
-});
-
-const inCompare = computed(() => props.listing && selected.value.includes(Number(props.listing.id)));
-
-function formatPrice(price, currency) {
-  if (!price) return 'So‘rov bo‘yicha';
-  return new Intl.NumberFormat('uz-UZ', {
-    style: 'currency',
-    currency: currency || 'UZS',
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
-function labelForDeal(v) {
-  return { rent: 'Ijara', sale: 'Sotish' }[v] || 'Noma’lum';
-}
-
-function labelForUnit(v) {
-  return { whole: 'Butun kvartira/uy', room: 'Xona', bed: 'O‘rin' }[v] || 'Noma’lum';
-}
-
-function priceBasisLabel(v) {
-  return { monthly_unit: 'oyiga', total: 'umumiy', per_m2: 'm² uchun', on_request: 'so‘rov bo‘yicha' }[v] || '';
-}
-
-function costLabel(mode, amount) {
-  if (mode === 'included') return 'Narxga kiritilgan';
-  if (mode === 'fixed') return formatPrice(amount, props.listing?.currency || 'UZS');
-  return 'Noma’lum';
-}
-
-function depositLabel(mode, amount) {
-  if (mode === 'none') return 'Yo‘q';
-  if (mode === 'fixed') return formatPrice(amount, props.listing?.currency || 'UZS');
-  return 'Noma’lum';
-}
-
-function commissionLabel(mode, amount) {
-  if (mode === 'none') return 'Yo‘q';
-  if (mode === 'fixed') return formatPrice(amount, props.listing?.currency || 'UZS');
-  return 'Noma’lum';
-}
-
-function toggleCompare() {
-  const items = JSON.parse(localStorage.getItem('compare_ids') || '[]');
-  const id = Number(props.listing.id);
-  const idx = items.indexOf(id);
-
-  if (idx >= 0) {
-    items.splice(idx, 1);
-  } else {
-    if (items.length >= 3) {
-      items.shift();
-    }
-    items.push(id);
-  }
-
-  localStorage.setItem('compare_ids', JSON.stringify(items));
-  window.location.reload();
-}
+function toggleItem() { const result = toggle(props.listing.id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif olib tashlandi.'); }
+function money(value) { return value == null ? 'Noma’lum' : new Intl.NumberFormat('uz-UZ').format(value) + ` ${props.listing.currency}`; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Noma’lum'; }
+function basisLabel(value) { return { monthly_unit: '/ oy', total: 'umumiy', from_total: 'dan boshlab', per_m2: '/ m²' }[value] || ''; }
+function studentLabel(value) { return { yes: 'Qabul qilinadi', no: 'Qabul qilinmaydi', unknown: 'Ko‘rsatilmagan' }[value] || 'Ko‘rsatilmagan'; }
+function formatDate(value) { return value ? new Intl.DateTimeFormat('uz-UZ').format(new Date(value)) : 'Noma’lum'; }
+function costMode(mode, amount) { if (mode === 'none') return 'Yo‘q'; if (mode === 'included') return 'Narxga kiritilgan'; if (mode === 'fixed') return money(amount); return 'Aniqlashtiriladi'; }
 </script>
+
+<style scoped>.tag { @apply rounded-full px-3 py-1 text-xs font-bold; }</style>

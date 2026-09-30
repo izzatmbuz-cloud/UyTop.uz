@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('proposed_at')->nullable();
             $table->text('comment')->nullable();
             $table->timestamp('created_at');
-            
+
             // Indexes
             $table->index(['request_id', 'created_at']);
         });

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ComparisonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestController;
-use Illuminate\Foundation\Application;
+use App\Models\Project;
+use App\Models\Request as RequestModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,44 +20,34 @@ Route::get('/home', function () {
 
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
 Route::get('/listings/{listing}', [CatalogController::class, 'show'])->name('listings.show');
-Route::get('/compare', function () {
-    $ids = array_filter(array_map('intval', explode(',', request('ids', ''))));
-
-    $listings = collect();
-    if (!empty($ids)) {
-        $listings = \App\Models\Listing::with(['media', 'district', 'owner'])
-            ->whereIn('id', $ids)
-            ->where('moderation_status', 'approved')
-            ->get();
-    }
-
-    return Inertia::render('Compare', [
-        'items' => $listings,
-        'selectedIds' => $ids,
-    ]);
-})->name('compare');
+Route::get('/compare', ComparisonController::class)->name('compare');
 
 Route::get('/projects', function () {
     return Inertia::render('Projects', [
-        'projects' => \App\Models\Project::with('district')->where('moderation_status', 'approved')->get(),
+        'projects' => Project::with('district')->where('moderation_status', 'approved')->get(),
     ]);
 })->name('projects');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/listings/{listing}/request', [RequestController::class, 'create'])->name('requests.create');
     Route::post('/listings/{listing}/requests', [RequestController::class, 'store'])->name('requests.store');
+    Route::patch('/requests/{request}/status', [RequestController::class, 'updateStatus'])->name('requests.status');
     Route::get('/account/requests', function () {
         return Inertia::render('Account/Requests', [
-            'requests' => \App\Models\Request::with(['listing.district', 'recipient'])
-                ->where('requester_id', auth()->id())
+            'requests' => RequestModel::with(['listing.district', 'recipient'])
+                ->where('requester_id', Auth::id())
                 ->orderByDesc('created_at')
                 ->get(),
         ]);
     })->name('account.requests');
-});
-
-Route::get('/mahdiya', function(){
-    return Inertia::render('Mahdiya');
+    Route::get('/account/inbox', function () {
+        return Inertia::render('Account/Inbox', [
+            'requests' => RequestModel::with(['listing.district', 'requester', 'events.actor'])
+                ->where('recipient_id', Auth::id())
+                ->latest()
+                ->get(),
+        ]);
+    })->name('account.inbox');
 });
 
 Route::get('/dashboard', function () {

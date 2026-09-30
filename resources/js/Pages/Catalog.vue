@@ -1,231 +1,78 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Page title -->
-      <h1 class="text-3xl font-bold text-gray-900 mb-8">Katalog</h1>
-
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <!-- Filters sidebar -->
-        <div class="lg:col-span-1">
-          <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-            <h2 class="text-lg font-bold text-gray-900 mb-4">Filtrlar</h2>
-
-            <!-- Deal type -->
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Bo'lim</label>
-              <select v-model="filters.deal_type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
-                <option value="">Hammasi</option>
-                <option value="rent">Ijara</option>
-                <option value="sale">Sotish</option>
-              </select>
-            </div>
-
-            <!-- Rental unit -->
-            <div class="mb-6" v-if="filters.deal_type === 'rent'">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Tur</label>
-              <select v-model="filters.rental_unit" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
-                <option value="">Hammasi</option>
-                <option value="whole">Butun kvartira/uy</option>
-                <option value="room">Xona</option>
-                <option value="bed">O'rin</option>
-              </select>
-            </div>
-
-            <!-- Students allowed -->
-            <div class="mb-6">
-              <label class="flex items-center gap-2">
-                <input type="checkbox" v-model="filters.students_allowed" :value="'yes'" class="w-4 h-4 text-blue-600 border-gray-300 rounded">
-                <span class="text-sm text-gray-700">Talabalar qabul qilinadi</span>
-              </label>
-            </div>
-
-            <!-- District -->
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Hududlar</label>
-              <select v-model="filters.district_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
-                <option value="">Tanlang...</option>
-                <option v-for="(name, id) in districts" :key="id" :value="id">{{ name }}</option>
-              </select>
-            </div>
-
-            <!-- Price range -->
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Narx oralig'i</label>
-              <select v-model="filters.currency" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2 text-sm focus:ring-2 focus:ring-blue-600">
-                <option value="UZS">UZS</option>
-                <option value="USD">USD</option>
-              </select>
-              <input type="number" v-model="filters.price_min" placeholder="Eng kam" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-2 text-sm" />
-              <input type="number" v-model="filters.price_max" placeholder="Eng ko'p" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" />
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex gap-2">
-              <button @click="applyFilters" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm font-medium">
-                Qidiruv
-              </button>
-              <button @click="clearFilters" class="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition text-sm font-medium">
-                Tozalash
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Listings -->
-        <div class="lg:col-span-3">
-          <!-- Sort -->
-          <div class="mb-6 flex justify-between items-center">
-            <p class="text-sm text-gray-600">
-              {{ listings.total }} ta taklif topildi
-            </p>
-            <select v-model="filters.sort" @change="applyFilters" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-600">
-              <option value="confirmed_at">Yangi avval</option>
-              <option value="price_asc">Narx past avval</option>
-              <option value="price_desc">Narx yuqori avval</option>
-              <option value="date">Nashr sanasi</option>
-            </select>
-          </div>
-
-          <!-- Empty state -->
-          <div v-if="listings.data.length === 0" class="text-center py-12">
-            <p class="text-gray-500 text-lg mb-4">Hech qanday taklif topilmadi</p>
-            <button @click="clearFilters" class="px-4 py-2 text-blue-600 hover:text-blue-700 transition font-medium">
-              Filtrlarni tozalash
-            </button>
-          </div>
-
-          <!-- Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div v-for="listing in listings.data" :key="listing.id" @click="goToListing(listing.id)" class="bg-white rounded-lg shadow hover:shadow-lg transition cursor-pointer overflow-hidden">
-              <!-- Image -->
-              <div class="w-full h-48 bg-gray-200 overflow-hidden">
-                <img v-if="listing.media.length" :src="`/storage/${listing.media[0].storage_path}`" :alt="listing.title" class="w-full h-full object-cover" />
-                <div v-else class="w-full h-full flex items-center justify-center bg-gray-300">
-                  <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-              </div>
-
-              <!-- Content -->
-              <div class="p-4">
-                <h3 class="font-bold text-gray-900 mb-1 line-clamp-2">{{ listing.title }}</h3>
-                
-                <div class="flex items-center gap-2 mb-2 text-sm text-gray-600">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                  </svg>
-                  {{ listing.district.name_uz }}
-                </div>
-
-                <!-- Price -->
-                <div class="mb-3 font-bold text-lg text-blue-600">
-                  {{ formatPrice(listing.price, listing.currency) }}
-                  <span class="text-xs font-normal text-gray-600 ml-1">{{ getPriceBasis(listing.price_basis) }}</span>
-                </div>
-
-                <!-- Details -->
-                <div class="space-y-1 text-xs text-gray-600 mb-3">
-                  <div v-if="listing.rooms">{{ listing.rooms }} xona</div>
-                  <div v-if="listing.free_places">{{ listing.free_places }} o'rin</div>
-                  <div v-if="listing.students_allowed === 'yes'" class="flex items-center gap-1 text-blue-600">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M6 2a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Talabalar
-                  </div>
-                </div>
-
-                <!-- Status -->
-                <div class="flex gap-2">
-                  <Link :href="`/listings/${listing.id}`" class="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition text-center font-medium">
-                    Ko'rish
-                  </Link>
-                  <button @click.stop="compareRequest(listing.id)" class="flex-1 px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded hover:bg-gray-200 transition font-medium">
-                    Solishtirish
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pagination -->
-          <div v-if="listings.total > listings.per_page" class="flex justify-center gap-2 mt-8">
-            <Link v-for="link in listings.links" :key="link.url" :href="link.url || '#'" :class="[
-              'px-3 py-2 rounded text-sm font-medium',
-              link.active ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50',
-            ]" v-html="link.label" />
+  <AppLayout>
+    <Head title="Katalog" />
+    <section class="border-b border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Andijondagi takliflar</p>
+        <div class="mt-2 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div><h1 class="text-4xl font-black tracking-[-0.06em] text-slate-950">Mos uy-joyni toping</h1><p class="mt-3 text-slate-600">Narx, yashash turi va talabalar uchun shartlar bo‘yicha qidiring.</p></div>
+          <div class="flex gap-2 rounded-2xl bg-slate-100 p-1.5">
+            <button v-for="option in dealOptions" :key="option.value" class="rounded-xl px-4 py-2 text-sm font-semibold transition" :class="filters.deal_type === option.value ? 'bg-white text-slate-950 shadow-sm' : 'text-slate-500'" @click="filters.deal_type = option.value; applyFilters()">{{ option.label }}</button>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="grid gap-7 lg:grid-cols-[280px_1fr]">
+        <aside class="h-fit rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+          <div class="flex items-center justify-between"><h2 class="font-bold text-slate-950">Filtrlar</h2><button class="text-xs font-semibold text-blue-600" @click="clearFilters">Tozalash</button></div>
+          <div class="mt-5 space-y-5">
+            <label class="block"><span class="field-label">Qidiruv</span><input v-model="filters.search" class="field" placeholder="Hudud yoki tavsif" @keyup.enter="applyFilters" /></label>
+            <label v-if="filters.deal_type === 'rent'" class="block"><span class="field-label">Ijara turi</span><select v-model="filters.rental_unit" class="field"><option value="">Hammasi</option><option value="whole">Butun uy</option><option value="room">Xona</option><option value="bed">O‘rin</option></select></label>
+            <label class="block"><span class="field-label">Hudud</span><select v-model="filters.district_id" class="field"><option value="">Barcha hududlar</option><option v-for="(name, id) in districts" :key="id" :value="id">{{ name }}</option></select></label>
+            <div><span class="field-label">Narx oralig‘i</span><select v-model="filters.currency" class="field mb-2"><option value="UZS">UZS</option><option value="USD">USD</option></select><div class="grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
+            <label v-if="filters.deal_type !== 'sale'" class="flex items-start gap-3 rounded-2xl bg-blue-50 p-3 text-sm text-slate-700"><input v-model="filters.students_allowed" type="checkbox" class="mt-0.5 rounded border-slate-300 text-blue-600" /><span><strong class="block text-slate-900">Talabalar qabul qilinadi</strong>Faqat aniq “ha” deb belgilanganlar</span></label>
+            <button class="w-full rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/10" @click="applyFilters">Natijalarni ko‘rsatish</button>
+          </div>
+        </aside>
+
+        <div>
+          <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-slate-500"><strong class="text-slate-950">{{ listings.total }}</strong> ta taklif topildi</p><select v-model="filters.sort" class="rounded-xl border-slate-200 bg-white text-sm" @change="applyFilters"><option value="confirmed_at">Yaqinda tasdiqlangan</option><option value="price_asc">Narx: pastdan</option><option value="price_desc">Narx: yuqoridan</option><option value="date">Yangi e’lonlar</option></select></div>
+
+          <div v-if="notice" class="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{{ notice }}</div>
+          <div v-if="!listings.data.length" class="rounded-[28px] border border-dashed border-slate-300 bg-white p-12 text-center"><h2 class="text-xl font-bold text-slate-900">Mos taklif topilmadi</h2><p class="mt-2 text-slate-500">Filtrlarni yengillashtirib qayta urinib ko‘ring.</p></div>
+
+          <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <article v-for="listing in listings.data" :key="listing.id" class="group overflow-hidden rounded-[26px] border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.04)] transition hover:-translate-y-1 hover:shadow-[0_22px_45px_rgba(15,23,42,0.09)]">
+              <Link :href="`/listings/${listing.id}`" class="block">
+                <div class="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200"><img v-if="listing.media?.length" :src="`/storage/${listing.media[0].storage_path}`" :alt="listing.title" class="h-full w-full object-cover" /><div v-else class="flex h-full items-center justify-center text-sm font-medium text-slate-400">Rasm tayyorlanmoqda</div><span v-if="listing.is_demo" class="absolute left-3 top-3 rounded-full bg-slate-950/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Demo</span></div>
+                <div class="p-5"><div class="flex items-center justify-between gap-2 text-xs font-semibold text-slate-500"><span>{{ listing.district?.name_uz }}</span><span :class="listing.students_allowed === 'yes' ? 'text-emerald-600' : ''">{{ listing.students_allowed === 'yes' ? 'Talabalar uchun' : 'Shartni aniqlang' }}</span></div><h2 class="mt-3 line-clamp-2 min-h-12 text-lg font-bold leading-6 text-slate-950">{{ listing.title }}</h2><p class="mt-3 text-2xl font-black tracking-[-0.04em] text-slate-950">{{ formatPrice(listing.price, listing.currency) }} <span class="text-xs font-medium text-slate-400">{{ priceBasis(listing.price_basis) }}</span></p><div class="mt-4 flex gap-3 text-xs text-slate-500"><span>{{ unitLabel(listing.rental_unit) }}</span><span v-if="listing.rooms">{{ listing.rooms }} xona</span><span v-if="listing.free_places">{{ listing.free_places }} bo‘sh</span></div></div>
+              </Link>
+              <div class="flex gap-2 border-t border-slate-100 p-3"><Link :href="`/listings/${listing.id}`" class="flex-1 rounded-xl bg-slate-950 px-3 py-2.5 text-center text-sm font-semibold text-white">Batafsil</Link><button class="flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold transition" :class="contains(listing.id) ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-700'" @click="toggleCompare(listing.id)">{{ contains(listing.id) ? 'Tanlandi' : 'Solishtirish' }}</button></div>
+            </article>
+          </div>
+
+          <div v-if="listings.links?.length > 3" class="mt-8 flex flex-wrap justify-center gap-2"><Link v-for="link in listings.links" :key="link.label" :href="link.url || '#'" class="rounded-xl border px-3 py-2 text-sm" :class="link.active ? 'border-slate-950 bg-slate-950 text-white' : 'border-slate-200 bg-white text-slate-600'" v-html="link.label" /></div>
+        </div>
+      </div>
+    </section>
+
+    <Link v-if="count" :href="comparisonUrl()" class="fixed bottom-5 left-1/2 z-40 -translate-x-1/2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-2xl shadow-blue-600/30">Solishtirish · {{ count }}</Link>
+  </AppLayout>
 </template>
 
 <script setup>
-import { Link, useForm, router } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { reactive, ref } from 'vue';
+import AppLayout from '../Layouts/AppLayout.vue';
+import { useComparison } from '../composables/useComparison';
 
-defineProps({
-  listings: Object,
-  districts: Object,
-  filters: Object,
-});
+const props = defineProps({ listings: Object, districts: Object, filters: Object });
+const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '' });
+const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }, { value: '', label: 'Barchasi' }];
+const notice = ref('');
+const { count, contains, toggle, comparisonUrl } = useComparison();
 
-const filters = ref({
-  deal_type: '',
-  rental_unit: '',
-  students_allowed: false,
-  district_id: '',
-  price_min: '',
-  price_max: '',
-  currency: 'UZS',
-  sort: 'confirmed_at',
-  search: '',
-});
-
-function formatPrice(price, currency) {
-  if (!price) return 'So\'rov bo\'yicha';
-  return new Intl.NumberFormat('uz-UZ', {
-    style: 'currency',
-    currency: currency,
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
-function getPriceBasis(basis) {
-  const map = {
-    'monthly_unit': 'oyiga',
-    'total': 'umumiy',
-    'per_m2': 'm² uchun',
-    'on_request': 'so\'rov bo\'yicha',
-  };
-  return map[basis] || '';
-}
-
-function applyFilters() {
-  router.get('/catalog', filters.value);
-}
-
-function clearFilters() {
-  filters.value = {
-    deal_type: '',
-    rental_unit: '',
-    students_allowed: false,
-    district_id: '',
-    price_min: '',
-    price_max: '',
-    currency: 'UZS',
-    sort: 'confirmed_at',
-  };
-  applyFilters();
-}
-
-function goToListing(id) {
-  router.visit(`/listings/${id}`);
-}
-
-function compareRequest(id) {
-  console.log('Compare:', id);
-}
+function applyFilters() { router.get('/catalog', { ...filters, students_allowed: filters.students_allowed ? 'yes' : undefined }, { preserveState: true, replace: true }); }
+function clearFilters() { Object.assign(filters, { deal_type: 'rent', rental_unit: '', students_allowed: false, district_id: '', price_min: '', price_max: '', currency: 'UZS', sort: 'confirmed_at', search: '' }); applyFilters(); }
+function toggleCompare(id) { const result = toggle(id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif solishtirishdan olib tashlandi.'); }
+function formatPrice(price, currency) { return price == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(price) + ` ${currency}`; }
+function priceBasis(value) { return { monthly_unit: '/ oy', total: 'umumiy', from_total: 'dan boshlab', per_m2: '/ m²' }[value] || ''; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Sotuv'; }
 </script>
+
+<style scoped>
+.field-label { @apply mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-500; }
+.field { @apply w-full rounded-xl border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-blue-100; }
+</style>

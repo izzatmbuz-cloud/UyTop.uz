@@ -9,6 +9,8 @@ class RequestEvent extends Model
 {
     use HasFactory;
 
+    public const UPDATED_AT = null;
+
     protected $fillable = [
         'request_id',
         'actor_id',

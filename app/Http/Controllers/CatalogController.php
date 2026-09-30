@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Listing;
 use App\Models\District;
-use Inertia\Inertia;
+use App\Models\Listing;
+use App\Services\CostCalculationService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CatalogController extends Controller
 {
@@ -99,10 +100,10 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function show(Listing $listing)
+    public function show(Listing $listing, CostCalculationService $costs)
     {
-        if ($listing->moderation_status !== 'approved' && 
-            (!auth()->check() || auth()->id() !== $listing->owner_user_id)) {
+        if (! $listing->isPubliclyVisible()
+            && (! auth()->check() || auth()->id() !== $listing->owner_user_id)) {
             abort(404);
         }
 
@@ -110,6 +111,7 @@ class CatalogController extends Controller
 
         return Inertia::render('ListingDetail', [
             'listing' => $listing,
+            'costs' => $listing->deal_type->value === 'rent' ? $costs->calculate($listing) : null,
         ]);
     }
 }

@@ -15,7 +15,7 @@ enum AvailabilityStatus: string
             self::AVAILABLE => 'Mavjud',
             self::RENTED => 'Ijaraga berilgan',
             self::SOLD => 'Sotilgan',
-            self::WITHDRAWN => "Olib taslangan",
+            self::WITHDRAWN => 'Olib taslangan',
         };
     }
 }

@@ -15,11 +15,11 @@ enum RequestStatus: string
     {
         return match ($this) {
             self::NEW => 'Yangi',
-            self::ACCEPTED => "Qabul qilingan",
-            self::ALTERNATIVE_PROPOSED => "Boshqa taklif",
-            self::REJECTED => "Rad etilgan",
-            self::CANCELLED => "Bekor qilingan",
-            self::COMPLETED => "Yakunlangan",
+            self::ACCEPTED => 'Qabul qilingan',
+            self::ALTERNATIVE_PROPOSED => 'Boshqa taklif',
+            self::REJECTED => 'Rad etilgan',
+            self::CANCELLED => 'Bekor qilingan',
+            self::COMPLETED => 'Yakunlangan',
         };
     }
 

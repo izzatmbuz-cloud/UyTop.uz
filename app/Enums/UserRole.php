@@ -16,8 +16,8 @@ enum UserRole: string
             self::GUEST => 'Mehmon',
             self::USER => "Ro'yxatdan o'tgan",
             self::OWNER => "E'lon muallifi",
-            self::DEVELOPER => "Quruvchi vakili",
-            self::ADMIN => "Administrator",
+            self::DEVELOPER => 'Quruvchi vakili',
+            self::ADMIN => 'Administrator',
         };
     }
 }

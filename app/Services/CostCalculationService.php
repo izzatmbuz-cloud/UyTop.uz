@@ -3,13 +3,12 @@
 namespace App\Services;
 
 use App\Models\Listing;
-use Decimal\Decimal;
 
 class CostCalculationService
 {
     /**
      * Calculate monthly and move-in costs
-     * 
+     *
      * R = rental price
      * U = utilities
      * D = deposit
@@ -17,12 +16,12 @@ class CostCalculationService
      */
     public function calculate(Listing $listing): array
     {
-        $R = $listing->price;
-        $U_amount = $listing->utilities_amount;
+        $R = $this->amount($listing->price);
+        $U_amount = $this->amount($listing->utilities_amount);
         $U_mode = $listing->utilities_mode;
-        $D_amount = $listing->deposit_amount;
+        $D_amount = $this->amount($listing->deposit_amount);
         $D_mode = $listing->deposit_mode;
-        $C_amount = $listing->commission_amount;
+        $C_amount = $this->amount($listing->commission_amount);
         $C_mode = $listing->commission_mode;
 
         // Monthly payment M = R + U (if U is known)
@@ -40,16 +39,12 @@ class CostCalculationService
         // Add utilities if fixed
         if ($U_mode === 'included') {
             // Already included in price
-            if ($monthly_payment === null) {
-                $monthly_payment = 0;
-            }
+            // Included utilities do not change the advertised rent.
         } elseif ($U_mode === 'fixed' && $U_amount !== null) {
-            $monthly_payment = $monthly_payment ? $monthly_payment + $U_amount : $U_amount;
+            $monthly_payment = ($monthly_payment ?? 0) + $U_amount;
         } elseif ($U_mode === 'unknown' || $U_mode === null) {
-            if ($U_mode === 'unknown') {
-                $monthly_complete = false;
-                $unknown_monthly_items[] = 'Kommunal to\'lovlar';
-            }
+            $monthly_complete = false;
+            $unknown_monthly_items[] = 'Kommunal to\'lovlar';
         }
 
         // Move-in cost E = R + D + C + U₀
@@ -66,33 +61,25 @@ class CostCalculationService
 
         // Add deposit
         if ($D_mode === 'fixed' && $D_amount !== null) {
-            $movein_cost = $movein_cost ? $movein_cost + $D_amount : $D_amount;
+            $movein_cost = ($movein_cost ?? 0) + $D_amount;
         } elseif ($D_mode === 'unknown' || $D_mode === null) {
-            if ($D_mode === 'unknown') {
-                $movein_complete = false;
-                $unknown_movein_items[] = 'Depozit';
-            }
+            $movein_complete = false;
+            $unknown_movein_items[] = 'Depozit';
         }
         // D_mode === 'none' means no deposit
 
         // Add commission
         if ($C_mode === 'fixed' && $C_amount !== null) {
-            $movein_cost = $movein_cost ? $movein_cost + $C_amount : $C_amount;
+            $movein_cost = ($movein_cost ?? 0) + $C_amount;
         } elseif ($C_mode === 'unknown' || $C_mode === null) {
-            if ($C_mode === 'unknown') {
-                $movein_complete = false;
-                $unknown_movein_items[] = 'Vositachilik haqi';
-            }
+            $movein_complete = false;
+            $unknown_movein_items[] = 'Vositachilik haqi';
         }
         // C_mode === 'none' means no commission
 
         // Add utilities at move-in if applicable
-        if ($U_mode === 'move_in' && $U_amount !== null) {
-            $movein_cost = $movein_cost ? $movein_cost + $U_amount : $U_amount;
-        } elseif ($U_mode === 'fixed' && $U_amount !== null && $R !== null) {
-            if ($listing->utilities_payment_timing === 'move_in') {
-                $movein_cost = $movein_cost ? $movein_cost + $U_amount : $U_amount;
-            }
+        if ($U_mode === 'fixed' && $U_amount !== null && $listing->utilities_payment_timing === 'move_in') {
+            $movein_cost = ($movein_cost ?? 0) + $U_amount;
         }
 
         return [
@@ -107,8 +94,13 @@ class CostCalculationService
             'unknown_movein_items' => $unknown_movein_items,
 
             'currency' => $listing->currency,
-            'has_unknown_costs' => !$monthly_complete || !$movein_complete,
+            'has_unknown_costs' => ! $monthly_complete || ! $movein_complete,
         ];
+    }
+
+    private function amount(mixed $value): ?float
+    {
+        return $value === null ? null : (float) $value;
     }
 
     private function formatCurrency(string $currency, ?float $amount): string
@@ -117,6 +109,6 @@ class CostCalculationService
             return 'Ko\'rsatilmagan';
         }
 
-        return number_format($amount, 0, ',', ' ') . ' ' . $currency;
+        return number_format($amount, 0, ',', ' ').' '.$currency;
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('listing_amenity', function (Blueprint $table) {
             $table->foreignId('listing_id')->constrained('listings')->onDelete('cascade');
             $table->foreignId('amenity_id')->constrained('amenities')->onDelete('cascade');
-            
+
             $table->primary(['listing_id', 'amenity_id']);
         });
     }

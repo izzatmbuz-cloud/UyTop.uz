@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('listing_id')->nullable()->constrained('listings')->onDelete('cascade');
             $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
-            
+
             $table->string('name');
             $table->string('phone');
             $table->timestamp('proposed_at')->nullable();
@@ -22,12 +22,12 @@ return new class extends Migration
             $table->time('time_end')->nullable();
             $table->unsignedSmallInteger('occupants_count')->nullable();
             $table->text('message')->nullable();
-            
+
             $table->string('status')->default('new');
             $table->string('idempotency_key')->unique()->nullable();
-            
+
             $table->timestamps();
-            
+
             // Indexes
             $table->index('recipient_id');
             $table->index(['status', 'created_at']);

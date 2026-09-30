@@ -1,51 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Mening murojaatlarim</h1>
-        <Link href="/catalog" class="text-blue-600 hover:text-blue-700 font-medium">Katalogga qaytish</Link>
-      </div>
-
-      <div v-if="requests.length === 0" class="bg-white rounded-2xl shadow-sm p-8 text-center text-gray-600">
-        Hozircha murojaatlar yo‘q.
-      </div>
-
-      <div v-else class="space-y-4">
-        <div v-for="request in requests" :key="request.id" class="bg-white rounded-2xl shadow-sm p-5">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div>
-              <div class="text-lg font-semibold text-gray-900">{{ request.listing?.title || 'E’lon' }}</div>
-              <div class="text-sm text-gray-500">{{ request.listing?.district?.name_uz || 'Hudud' }}</div>
-            </div>
-            <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">{{ statusLabel(request.status) }}</span>
-          </div>
-
-          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-gray-700">
-            <div><span class="text-gray-500">Telefon:</span> {{ request.phone }}</div>
-            <div><span class="text-gray-500">Sana:</span> {{ request.proposed_at || 'Aniqlanmagan' }}</div>
-            <div><span class="text-gray-500">Yashovchilar:</span> {{ request.occupants_count || '-' }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <AppLayout><Head title="Mening murojaatlarim" /><section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8"><div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-xs font-bold uppercase tracking-wider text-blue-600">Shaxsiy kabinet</p><h1 class="mt-2 text-4xl font-black tracking-[-0.05em] text-slate-950">Mening murojaatlarim</h1></div><Link href="/account/inbox" class="text-sm font-semibold text-blue-600">Kelgan murojaatlar →</Link></div><div v-if="!requests.length" class="mt-8 rounded-[26px] border border-dashed border-slate-300 bg-white p-12 text-center"><h2 class="font-bold text-slate-900">Hozircha murojaatlar yo‘q</h2><Link href="/catalog" class="mt-3 inline-block text-sm font-semibold text-blue-600">Katalogni ochish</Link></div><div class="mt-8 grid gap-4 md:grid-cols-2"><article v-for="item in requests" :key="item.id" class="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-start justify-between gap-3"><div><p class="text-xs font-bold uppercase tracking-wider text-blue-600">{{ statusLabel(item.status) }}</p><Link :href="`/listings/${item.listing_id}`" class="mt-1 block text-lg font-bold text-slate-950 hover:text-blue-600">{{ item.listing?.title || 'E’lon' }}</Link><p class="mt-1 text-sm text-slate-500">{{ item.listing?.district?.name_uz }}</p></div><span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">#{{ item.id }}</span></div><div class="mt-5 grid grid-cols-2 gap-3 text-sm"><div class="rounded-xl bg-slate-50 p-3"><p class="text-xs text-slate-400">Ko‘rish sanasi</p><p class="mt-1 font-semibold">{{ formatDate(item.proposed_at) }}</p></div><div class="rounded-xl bg-slate-50 p-3"><p class="text-xs text-slate-400">Qabul qiluvchi</p><p class="mt-1 font-semibold">{{ item.recipient?.name }}</p></div></div><button v-if="['new','alternative_proposed','accepted'].includes(item.status)" class="mt-4 text-sm font-semibold text-red-600" @click="cancel(item.id)">Murojaatni bekor qilish</button></article></div></section></AppLayout>
 </template>
-
 <script setup>
-import { Link } from '@inertiajs/vue3';
-
-const props = defineProps({
-  requests: Array,
-});
-
-function statusLabel(status) {
-  return {
-    new: 'Yangi',
-    accepted: 'Qabul qilindi',
-    alternative_proposed: 'Boshqa vaqt taklif qilindi',
-    rejected: 'Rad etildi',
-    cancelled: 'Bekor qilindi',
-    completed: 'Yakunlangan',
-  }[status] || status;
-}
+import { Head, Link, router } from '@inertiajs/vue3'; import AppLayout from '../../Layouts/AppLayout.vue';
+defineProps({ requests: { type: Array, default: () => [] } });
+function cancel(id) { router.patch(`/requests/${id}/status`, { status: 'cancelled' }, { preserveScroll: true }); }
+function statusLabel(s) { return { new:'Yangi', accepted:'Qabul qilindi', alternative_proposed:'Boshqa vaqt taklif qilindi', rejected:'Rad etildi', cancelled:'Bekor qilindi', completed:'Yakunlandi' }[s] || s; }
+function formatDate(value) { return value ? new Intl.DateTimeFormat('uz-UZ').format(new Date(value)) : 'Kelishiladi'; }
 </script>

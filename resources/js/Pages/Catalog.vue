@@ -14,20 +14,31 @@
     </section>
 
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <button class="mb-4 flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-900 shadow-sm lg:hidden" @click="filterOpen = !filterOpen">
+        <span>Filtrlar <span v-if="activeFilters.length" class="ml-1 text-blue-600">({{ activeFilters.length }})</span></span>
+        <span>{{ filterOpen ? 'Yopish' : 'Ochish' }}</span>
+      </button>
       <div class="grid gap-7 lg:grid-cols-[280px_1fr]">
-        <aside class="h-fit rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+        <aside class="h-fit rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24 lg:block" :class="filterOpen ? 'block' : 'hidden'">
           <div class="flex items-center justify-between"><h2 class="font-bold text-slate-950">Filtrlar</h2><button class="text-xs font-semibold text-blue-600" @click="clearFilters">Tozalash</button></div>
           <div class="mt-5 space-y-5">
             <label class="block"><span class="field-label">Qidiruv</span><input v-model="filters.search" class="field" placeholder="Hudud yoki tavsif" @keyup.enter="applyFilters" /></label>
             <UiSelect v-if="filters.deal_type === 'rent'" v-model="filters.rental_unit" label="Ijara turi" :options="rentalOptions" />
             <UiSelect v-model="filters.district_id" label="Hudud" :options="districtOptions" />
+            <UiSelect v-model="filters.property_type" label="Uy turi" :options="propertyOptions" />
+            <UiSelect v-model="filters.author_type" label="E’lon beruvchi" :options="authorOptions" />
             <div><UiSelect v-model="filters.currency" label="Narx va valyuta" :options="currencyOptions" /><div class="mt-2 grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
+            <p v-if="$page.props.errors?.price_max" class="text-xs font-semibold text-red-600">{{ $page.props.errors.price_max }}</p>
+            <div class="grid grid-cols-2 gap-2"><label><span class="field-label">Xonalar</span><input v-model="filters.rooms_min" type="number" min="1" class="field" placeholder="Kamida" /></label><label v-if="filters.deal_type === 'rent' && ['room', 'bed'].includes(filters.rental_unit)"><span class="field-label">Bo‘sh joy</span><input v-model="filters.free_places_min" type="number" min="1" class="field" placeholder="Kamida" /></label></div>
+            <label class="block"><span class="field-label">Ko‘chib kirish sanasi</span><input v-model="filters.available_from" type="date" class="field" /></label>
+            <div v-if="amenityOptions.length"><span class="field-label">Qulayliklar</span><div class="space-y-2"><label v-for="option in amenityOptions" :key="option.value" class="flex items-center gap-2 text-sm text-slate-700"><input v-model="filters.amenities" type="checkbox" :value="option.value" class="rounded border-slate-300 text-blue-600" />{{ option.label }}</label></div></div>
             <label v-if="filters.deal_type !== 'sale'" class="flex items-start gap-3 rounded-2xl bg-blue-50 p-3 text-sm text-slate-700"><input v-model="filters.students_allowed" type="checkbox" class="mt-0.5 rounded border-slate-300 text-blue-600" /><span><strong class="block text-slate-900">Talabalar qabul qilinadi</strong>Faqat aniq “ha” deb belgilanganlar</span></label>
             <button class="w-full rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/10" @click="applyFilters">Natijalarni ko‘rsatish</button>
           </div>
         </aside>
 
         <div>
+          <div v-if="activeFilters.length" class="mb-4 flex flex-wrap gap-2"><button v-for="item in activeFilters" :key="`${item.key}-${item.value || ''}`" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 transition hover:bg-blue-100" @click="clearFilter(item)">{{ item.label }} ×</button></div>
           <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-slate-500"><strong class="text-slate-950">{{ listings.total }}</strong> ta taklif topildi</p><UiSelect v-model="filters.sort" :options="sortOptions" @change="applyFilters" /></div>
 
           <div v-if="notice" class="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{{ notice }}</div>
@@ -59,8 +70,8 @@ import AppLayout from '../Layouts/AppLayout.vue';
 import { useComparison } from '../composables/useComparison';
 import UiSelect from '../Components/UiSelect.vue';
 
-const props = defineProps({ listings: Object, districts: Object, filters: Object });
-const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '' });
+const props = defineProps({ listings: Object, districts: Object, amenities: Object, filters: Object, priceSortAvailable: Boolean });
+const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '', property_type: props.filters?.property_type || '', author_type: props.filters?.author_type || '', rooms_min: props.filters?.rooms_min || '', free_places_min: props.filters?.free_places_min || '', available_from: props.filters?.available_from || '', amenities: props.filters?.amenities || [] });
 const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }, { value: '', label: 'Barchasi' }];
 const rentalOptions = [{ value: '', label: 'Hammasi' }, { value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Xona' }, { value: 'bed', label: 'O‘rin' }];
 const districtOptions = computed(() => [
@@ -68,12 +79,31 @@ const districtOptions = computed(() => [
   ...Object.entries(props.districts || {}).map(([value, label]) => ({ value, label })),
 ]);
 const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }];
-const sortOptions = [{ value: 'confirmed_at', label: 'Yaqinda tasdiqlangan' }, { value: 'price_asc', label: 'Narx: pastdan' }, { value: 'price_desc', label: 'Narx: yuqoridan' }, { value: 'date', label: 'Yangi e’lonlar' }];
+const propertyOptions = [{ value: '', label: 'Barcha turlar' }, { value: 'apartment', label: 'Kvartira' }, { value: 'house', label: 'Hovli' }, { value: 'dormitory', label: 'Yotoqxona' }];
+const authorOptions = [{ value: '', label: 'Barchasi' }, { value: 'owner', label: 'Uy egasi' }, { value: 'agent', label: 'Agent' }, { value: 'developer', label: 'Quruvchi' }];
+const amenityOptions = computed(() => Object.entries(props.amenities || {}).map(([value, label]) => ({ value, label })));
+const canSortByPrice = computed(() => filters.currency && (filters.deal_type === 'sale' || filters.rental_unit));
+const sortOptions = computed(() => [{ value: 'confirmed_at', label: 'Yaqinda tasdiqlangan' }, { value: 'date', label: 'Yangi e’lonlar' }, ...(canSortByPrice.value ? [{ value: 'price_asc', label: 'Narx: pastdan' }, { value: 'price_desc', label: 'Narx: yuqoridan' }] : [])]);
+const filterOpen = ref(false);
 const notice = ref('');
 const { count, contains, toggle, comparisonUrl } = useComparison();
 
-function applyFilters() { router.get('/catalog', { ...filters, students_allowed: filters.students_allowed ? 'yes' : undefined }, { preserveState: true, replace: true }); }
-function clearFilters() { Object.assign(filters, { deal_type: 'rent', rental_unit: '', students_allowed: false, district_id: '', price_min: '', price_max: '', currency: 'UZS', sort: 'confirmed_at', search: '' }); applyFilters(); }
+const activeFilters = computed(() => {
+  const items = [];
+  const add = (key, label, active = filters[key]) => { if (active) items.push({ key, label }); };
+  add('search', `Qidiruv: ${filters.search}`); add('district_id', `Hudud: ${props.districts?.[filters.district_id] || ''}`);
+  add('property_type', `Uy turi: ${propertyOptions.find(o => o.value === filters.property_type)?.label || ''}`);
+  add('author_type', `Muallif: ${authorOptions.find(o => o.value === filters.author_type)?.label || ''}`);
+  add('price_min', `Narx ≥ ${filters.price_min}`); add('price_max', `Narx ≤ ${filters.price_max}`);
+  add('rooms_min', `Xonalar ≥ ${filters.rooms_min}`); add('free_places_min', `Bo‘sh joy ≥ ${filters.free_places_min}`);
+  add('available_from', `Sana: ${filters.available_from}`); add('students_allowed', 'Talabalar uchun');
+  filters.amenities.forEach(id => items.push({ key: 'amenities', value: id, label: amenityOptions.value.find(o => o.value === id)?.label || 'Qulaylik' }));
+  return items;
+});
+
+function applyFilters() { if (!canSortByPrice.value && filters.sort.startsWith('price_')) filters.sort = 'confirmed_at'; filterOpen.value = false; router.get('/catalog', { ...filters, students_allowed: filters.students_allowed ? 'yes' : undefined }, { preserveState: true, replace: true }); }
+function clearFilters() { Object.assign(filters, { deal_type: 'rent', rental_unit: '', students_allowed: false, district_id: '', price_min: '', price_max: '', currency: 'UZS', sort: 'confirmed_at', search: '', property_type: '', author_type: '', rooms_min: '', free_places_min: '', available_from: '', amenities: [] }); applyFilters(); }
+function clearFilter(item) { if (item.key === 'amenities') filters.amenities = filters.amenities.filter(id => id !== item.value); else filters[item.key] = item.key === 'students_allowed' ? false : ''; applyFilters(); }
 function toggleCompare(id) { const result = toggle(id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif solishtirishdan olib tashlandi.'); }
 function formatPrice(price, currency) { return price == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(price) + ` ${currency}`; }
 function priceBasis(value) { return { monthly_unit: '/ oy', total: 'umumiy', from_total: 'dan boshlab', per_m2: '/ m²' }[value] || ''; }

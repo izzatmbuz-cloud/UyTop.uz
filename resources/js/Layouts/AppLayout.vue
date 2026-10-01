@@ -12,7 +12,7 @@
           <Link :href="comparisonUrl()" class="relative transition hover:text-[#e85d3f]">{{ t('compare') }}<span v-if="count" class="absolute -right-4 -top-3 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#e85d3f] px-1 text-[10px] text-white">{{ count }}</span></Link>
           <Link href="/projects" class="transition hover:text-[#e85d3f]">{{ t('projects') }}</Link>
           <Link v-if="$page.props.auth?.user" href="/account/listings" class="transition hover:text-[#e85d3f]">{{ t('cabinet') }}</Link>
-          <Link v-if="$page.props.auth?.user?.role === 'admin'" href="/admin/moderation" class="transition hover:text-[#e85d3f]">{{ t('moderation') }}</Link>
+          <Link v-if="$page.props.auth?.user?.role === 'admin'" href="/admin" class="transition hover:text-[#e85d3f]">Admin panel</Link>
         </nav>
 
         <div class="hidden items-center gap-2 md:flex">
@@ -37,7 +37,7 @@
           <Link v-if="$page.props.auth?.user" href="/account/inbox" class="rounded-xl px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">{{ t('messages') }}</Link>
           <Link v-if="$page.props.auth?.user" href="/profile" class="rounded-xl px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">{{ t('profile') }}</Link>
           <Link v-if="$page.props.auth?.user" href="/logout" method="post" as="button" class="rounded-xl px-3 py-2 text-left text-red-600" @click="clearComparison">{{ t('logout') }}</Link>
-          <Link v-if="$page.props.auth?.user?.role === 'admin'" href="/admin/moderation" class="rounded-xl px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">Moderatsiya</Link>
+          <Link v-if="$page.props.auth?.user?.role === 'admin'" href="/admin" class="rounded-xl px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">Admin panel</Link>
           <button class="rounded-xl px-3 py-2 text-left hover:bg-black/5 dark:hover:bg-white/5" @click="toggleLocale">Til / Язык: {{ nextLocale }}</button><button class="rounded-xl px-3 py-2 text-left hover:bg-black/5 dark:hover:bg-white/5" @click="toggleTheme">{{ label }}</button>
         </div>
       </nav>

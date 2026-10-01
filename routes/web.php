@@ -29,6 +29,7 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin', fn () => redirect()->route('admin.moderation'))->name('admin.dashboard');
     Route::get('/account/listings', [ListingController::class, 'index'])->name('account.listings');
     Route::get('/account/listings/create', [ListingController::class, 'create'])->name('account.listings.create');
     Route::post('/account/listings', [ListingController::class, 'store'])->name('account.listings.store');

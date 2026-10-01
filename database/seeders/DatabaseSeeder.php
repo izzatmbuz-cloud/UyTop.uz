@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $owner = User::updateOrCreate(['email' => 'owner@uytop.uz'], ['name' => 'Demo uy egasi', 'phone' => '+998 90 111 22 33', 'role' => 'owner', 'password' => Hash::make('password')]);
-        User::updateOrCreate(['email' => 'student@uytop.uz'], ['name' => 'Demo talaba', 'phone' => '+998 90 444 55 66', 'role' => 'user', 'password' => Hash::make('password')]);
-        User::updateOrCreate(['email' => 'admin@uytop.uz'], ['name' => 'Administrator', 'phone' => '+998 90 777 88 99', 'role' => 'admin', 'password' => Hash::make('password')]);
+        $owner = User::updateOrCreate(['email' => 'owner@uytop.uz'], ['name' => 'Demo uy egasi', 'phone' => '+998 90 111 22 33', 'role' => 'owner', 'email_verified_at' => now(), 'password' => Hash::make('password')]);
+        User::updateOrCreate(['email' => 'student@uytop.uz'], ['name' => 'Demo talaba', 'phone' => '+998 90 444 55 66', 'role' => 'user', 'email_verified_at' => now(), 'password' => Hash::make('password')]);
+        User::updateOrCreate(['email' => 'admin@uytop.uz'], ['name' => 'Administrator', 'phone' => '+998 90 777 88 99', 'role' => 'admin', 'email_verified_at' => now(), 'password' => Hash::make('password')]);
 
         $districts = collect(['Andijon shahri', 'Asaka', 'Baliqchi', 'Shahrixon', 'Paxtaobod', 'Marhamat'])
             ->map(fn (string $name) => District::updateOrCreate(['name_uz' => $name], ['active' => true]));

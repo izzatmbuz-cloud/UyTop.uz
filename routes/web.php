@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ReportModerationController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ComparisonController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListingAiController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectConsultationController;
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account/listings', [ListingController::class, 'index'])->name('account.listings');
     Route::get('/account/listings/create', [ListingController::class, 'create'])->name('account.listings.create');
     Route::post('/account/listings', [ListingController::class, 'store'])->name('account.listings.store');
+    Route::post('/account/listings/ai-parse', ListingAiController::class)->middleware('throttle:10,1')->name('account.listings.ai-parse');
     Route::get('/account/listings/{listing}/edit', [ListingController::class, 'edit'])->name('account.listings.edit');
     Route::put('/account/listings/{listing}', [ListingController::class, 'update'])->name('account.listings.update');
     Route::patch('/account/listings/{listing}/archive', [ListingController::class, 'archive'])->name('account.listings.archive');

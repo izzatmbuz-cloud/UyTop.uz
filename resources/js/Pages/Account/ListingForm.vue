@@ -4,6 +4,13 @@
     <section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Link href="/account/listings" class="text-sm font-bold text-[#e85d3f]">← E’lonlarim</Link>
       <div class="mt-5"><p class="eyebrow">E’lon ustasi</p><h1 class="page-title">{{ listing ? 'E’lonni tahrirlash' : 'Yangi e’lon yarating' }}</h1><p class="mt-3 text-slate-600 dark:text-slate-300">Avval qoralama saqlang yoki tayyor bo‘lsa moderatsiyaga yuboring.</p></div>
+      <section class="mt-8 overflow-hidden rounded-[28px] border border-[#e85d3f]/20 bg-gradient-to-br from-[#fff5ef] to-white p-5 dark:from-[#2a1814] dark:to-slate-900 sm:p-7">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"><div><p class="eyebrow">AI yordamchi</p><h2 class="section-title mt-1">Telegram matnidan to‘ldirish</h2><p class="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-300">E’lon matnini kiriting. AI faqat matnda bor ma’lumotlarni taklif qiladi, yakuniy tekshiruv sizda qoladi.</p></div><span class="w-fit rounded-full bg-[#bedc79] px-3 py-1 text-xs font-black text-[#24310d]">Beta</span></div>
+        <textarea v-model="aiText" rows="5" class="field mt-5 resize-y" placeholder="Andijon shahar, universitet yonida 3 xonali kvartiraga..." />
+        <p v-if="aiError" class="error">{{ aiError }}</p>
+        <div v-if="reviewFields.length" class="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><strong>Tekshirish kerak:</strong><ul class="mt-2 list-disc space-y-1 pl-5"><li v-for="note in reviewFields" :key="note">{{ note }}</li></ul></div>
+        <button type="button" class="mt-4 rounded-full bg-slate-950 px-5 py-3 text-sm font-black text-white disabled:cursor-wait disabled:opacity-60 dark:bg-white dark:text-slate-950" :disabled="aiLoading || aiText.trim().length < 20" @click="parseWithAi">{{ aiLoading ? 'Tahlil qilinmoqda…' : 'Matndan to‘ldirish' }}</button>
+      </section>
       <form class="mt-8 space-y-6" @submit.prevent>
         <section class="surface rounded-[28px] p-5 sm:p-7"><h2 class="section-title">1. Asosiy ma’lumotlar</h2><div class="mt-5 grid gap-4 sm:grid-cols-2">
           <UiSelect v-model="form.deal_type" label="Bitim turi" :options="dealOptions" :error="form.errors.deal_type" />
@@ -21,6 +28,7 @@
           <UiSelect v-model="form.price_basis" label="Narx birligi" :options="priceOptions" :error="form.errors.price_basis" />
           <UiSelect v-model="form.utilities_mode" label="Kommunal" :options="utilitiesOptions" />
           <label v-if="form.utilities_mode === 'fixed'"><span class="field-label">Kommunal summasi</span><input v-model="form.utilities_amount" type="number" min="0" class="field" /><span class="error">{{ form.errors.utilities_amount }}</span></label>
+          <UiSelect v-if="form.deal_type === 'rent'" v-model="form.utilities_payment_timing" label="Kommunal to‘lov vaqti" :options="utilitiesTimingOptions" />
           <UiSelect v-model="form.deposit_mode" label="Depozit" :options="paymentOptions" />
           <label v-if="form.deposit_mode === 'fixed'"><span class="field-label">Depozit summasi</span><input v-model="form.deposit_amount" type="number" min="0" class="field" /></label>
           <UiSelect v-model="form.commission_mode" label="Komissiya" :options="paymentOptions" />
@@ -32,6 +40,7 @@
           <label><span class="field-label">Xonalar</span><input v-model="form.rooms" type="number" min="1" class="field" /></label><label><span class="field-label">Maydon, m²</span><input v-model="form.area_m2" type="number" min="1" class="field" /></label>
           <label v-if="form.deal_type === 'rent'"><span class="field-label">Jami sig‘im</span><input v-model="form.capacity" type="number" min="1" class="field" /></label><label v-if="form.deal_type === 'rent'"><span class="field-label">Bo‘sh joylar</span><input v-model="form.free_places" type="number" min="0" class="field" /><span class="error">{{ form.errors.free_places }}</span></label>
           <label><span class="field-label">Qavat</span><input v-model="form.floor" type="number" min="0" class="field" /></label><label v-if="form.deal_type === 'rent'"><span class="field-label">Mavjud sana</span><input v-model="form.available_from" type="date" class="field" /></label>
+          <label v-if="form.deal_type === 'rent'"><span class="field-label">Minimal muddat, oy</span><input v-model="form.min_months" type="number" min="1" class="field" /></label>
           <div class="sm:col-span-2 lg:col-span-3"><span class="field-label">Qulayliklar</span><div class="flex flex-wrap gap-2"><label v-for="amenity in amenities" :key="amenity.id" class="cursor-pointer rounded-full border border-black/10 px-4 py-2 text-sm font-semibold dark:border-white/10" :class="form.amenity_ids.includes(amenity.id) ? 'bg-[#bedc79] text-[#24310d]' : ''"><input v-model="form.amenity_ids" type="checkbox" :value="amenity.id" class="sr-only" />{{ amenity.name_uz }}</label></div></div>
         </div></section>
 
@@ -49,14 +58,30 @@
 <script setup>
 import { computed, onBeforeUnmount, ref } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
+import axios from 'axios';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import UiSelect from '../../Components/UiSelect.vue';
 const props = defineProps({ listing: { type: Object, default: null }, districts: { type: Array, default: () => [] }, amenities: { type: Array, default: () => [] } });
 const item = props.listing;
 const form = useForm({ deal_type: item?.deal_type || 'rent', rental_unit: item?.rental_unit || 'whole', property_type: item?.property_type || 'apartment', students_allowed: item?.students_allowed || 'unknown', district_id: item?.district_id || '', title: item?.title || '', description: item?.description || '', currency: item?.currency || 'UZS', price: item?.price || '', price_basis: item?.price_basis || 'monthly_unit', utilities_mode: item?.utilities_mode || 'unknown', utilities_amount: item?.utilities_amount || '', utilities_payment_timing: item?.utilities_payment_timing || 'unknown', deposit_mode: item?.deposit_mode || 'unknown', deposit_amount: item?.deposit_amount || '', commission_mode: item?.commission_mode || 'unknown', commission_amount: item?.commission_amount || '', capacity: item?.capacity || '', free_places: item?.free_places ?? '', available_from: item?.available_from?.slice(0, 10) || '', min_months: item?.min_months || '', area_m2: item?.area_m2 || '', rooms: item?.rooms || '', floor: item?.floor ?? '', location_text: item?.location_text || '', amenity_ids: item?.amenities?.map((a) => a.id) || [], images: [], submit_for_moderation: false });
 const existingImages = ref([...(item?.media || [])]); const previews = ref([]); const fileInputKey = ref(0); const totalImages = computed(() => existingImages.value.length + form.images.length);
+const aiText = ref(''); const aiLoading = ref(false); const aiError = ref(''); const reviewFields = ref([]);
 const districtOptions = computed(() => props.districts.map((d) => ({ value: d.id, label: d.name_uz })));
 const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }]; const propertyOptions = [{ value: 'apartment', label: 'Kvartira' }, { value: 'house', label: 'Hovli uy' }, { value: 'dormitory', label: 'Yotoqxona' }]; const rentalOptions = [{ value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Xona' }, { value: 'bed', label: 'O‘rin' }]; const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }]; const priceOptions = [{ value: 'monthly_unit', label: 'Oyiga' }, { value: 'total', label: 'Umumiy' }, { value: 'from_total', label: 'Boshlang‘ich narx' }, { value: 'per_m2', label: '1 m² uchun' }, { value: 'on_request', label: 'So‘rov bo‘yicha' }]; const utilitiesOptions = [{ value: 'included', label: 'Narx ichida' }, { value: 'fixed', label: 'Alohida summa' }, { value: 'unknown', label: 'Aniqlashtiriladi' }]; const paymentOptions = [{ value: 'none', label: 'Yo‘q' }, { value: 'fixed', label: 'Belgilangan summa' }, { value: 'unknown', label: 'Aniqlashtiriladi' }]; const studentOptions = [{ value: 'yes', label: 'Ha' }, { value: 'no', label: 'Yo‘q' }, { value: 'unknown', label: 'Aniqlashtiriladi' }];
+const utilitiesTimingOptions = [{ value: 'move_in', label: 'Ko‘chib kirishda' }, { value: 'later', label: 'Keyinroq' }, { value: 'unknown', label: 'Aniqlashtiriladi' }];
+async function parseWithAi() {
+  aiLoading.value = true; aiError.value = ''; reviewFields.value = [];
+  try {
+    const { data } = await axios.post('/account/listings/ai-parse', { text: aiText.value });
+    const allowed = ['deal_type', 'rental_unit', 'property_type', 'students_allowed', 'title', 'description', 'location_text', 'currency', 'price', 'price_basis', 'utilities_mode', 'utilities_amount', 'deposit_mode', 'deposit_amount', 'commission_mode', 'commission_amount', 'capacity', 'free_places', 'rooms', 'area_m2'];
+    allowed.forEach((key) => { if (data[key] !== null && data[key] !== undefined) form[key] = data[key]; });
+    form.amenity_ids = (data.amenities || []).map((code) => props.amenities.find((item) => item.code === code)?.id).filter(Boolean);
+    data.review_fields ||= [];
+    if (data.district_name) { const district = props.districts.find((item) => item.name_uz.toLowerCase().includes(data.district_name.toLowerCase()) || data.district_name.toLowerCase().includes(item.name_uz.toLowerCase())); if (district) form.district_id = district.id; else data.review_fields.push(`Hudud topilmadi: ${data.district_name}`); }
+    reviewFields.value = data.review_fields || [];
+  } catch (error) { aiError.value = error.response?.data?.message || 'AI xizmatiga ulanib bo‘lmadi. Keyinroq urinib ko‘ring.'; }
+  finally { aiLoading.value = false; }
+}
 function save(publish) {
   form.transform((data) => ({ ...data, submit_for_moderation: publish, ...(item ? { _method: 'put' } : {}) }));
   form.post(item ? `/account/listings/${item.id}` : '/account/listings', { preserveScroll: true, forceFormData: true });

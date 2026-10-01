@@ -1,0 +1,13 @@
+[program:uytop-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/uytop/artisan queue:work database --sleep=3 --tries=3 --timeout=120 --max-time=3600
+directory=/var/www/uytop
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+user=www-data
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/uytop/storage/logs/worker.log
+stopwaitsecs=130

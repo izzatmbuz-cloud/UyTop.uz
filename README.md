@@ -1,66 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="public/logo.png" width="120" alt="UyTop logo"></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# UyTop
 
-## About Laravel
+UyTop — платформа поиска и размещения жилья в Андижане. Она помогает найти не только целую квартиру, но и отдельную комнату или место для одного человека, заранее увидеть условия проживания и провести обращение через платформу.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Что решает проект
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Предложения о жилье часто разбросаны по Telegram-каналам и доскам объявлений. Цена, коммунальные платежи, депозит, отношение к студентам и число свободных мест указываются неполно. UyTop приводит объявления к единой структуре, помогает сравнить варианты и контролирует их актуальность.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Возможности MVP
 
-## Learning Laravel
+- каталог аренды и продажи с фильтрами по району, городской зоне, цене, типу жилья и условиям;
+- варианты целого жилья, отдельной комнаты и места для одного человека;
+- сравнение до трёх вариантов с расчётом известных расходов;
+- создание черновика из текста Telegram с помощью AI и ручная проверка результата;
+- кабинет владельца, черновики, изображения и отправка на модерацию;
+- обращения между клиентом и владельцем с историей статусов;
+- автоматическое снятие объявления после завершённой сделки;
+- подтверждение актуальности объявления каждые 7 дней;
+- жалобы, модерация и учёт комиссии платформы;
+- светлая и тёмная темы, узбекский и русский интерфейс;
+- адаптивный интерфейс для компьютеров, планшетов и телефонов.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Роли
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Пользователь** ищет жильё, сравнивает варианты и отправляет обращения.
+- **Владелец** создаёт объявления, отвечает на обращения и фиксирует завершение сделки.
+- **Администратор** модерирует объявления и жалобы, управляет комиссиями и сроком актуальности.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Admin panel доступна пользователю с ролью `admin` по адресу `/admin`. Демонстрационные аккаунты создаются только командой `db:seed`; перед публичным запуском их пароли необходимо заменить.
 
-## Laravel Sponsors
+## Технологии
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Laravel 12, PHP 8.3;
+- Vue 3, Inertia.js, Tailwind CSS;
+- PostgreSQL 16 — основная база данных;
+- Redis 7 — cache, session и queue;
+- OpenAI Responses API со Structured Outputs;
+- Nginx, PHP-FPM, Supervisor;
+- Docker и Docker Compose.
 
-### Premium Partners
+## Быстрый запуск через Docker
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Требуется Docker Engine с плагином Compose.
 
-## Contributing
+```bash
+git clone https://github.com/izzatmbuz-cloud/UyTop.uz.git
+cd UyTop.uz
+cp .env.docker.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Задайте в `.env` надёжные `DB_PASSWORD`, `REDIS_PASSWORD`, правильный `APP_URL`, почтовые настройки и `OPENAI_API_KEY`.
 
-## Code of Conduct
+Получите ключ приложения:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+docker compose run --rm --no-deps -e APP_KEY=temporary app php artisan key:generate --show
+```
 
-## Security Vulnerabilities
+Скопируйте результат в `APP_KEY`, затем запустите стек:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+docker compose up -d --build
+```
 
-## License
+Для демонстрационных данных:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+docker compose exec app php artisan db:seed --force
+```
+
+Приложение будет доступно по адресу `http://localhost:8080`, проверка состояния — `/up`.
+
+## Docker-сервисы
+
+- `app` — Nginx, PHP-FPM и Laravel;
+- `postgres` — PostgreSQL с постоянным volume;
+- `redis` — cache, session и очередь с постоянным volume;
+- `worker` — обработчик очереди Laravel;
+- `scheduler` — планировщик Laravel.
+
+PostgreSQL и Redis не публикуются во внешнюю сеть. Их адреса, пароли, порты и имена баз полностью задаются через `.env`.
+
+## Полезные команды
+
+```bash
+docker compose ps
+docker compose logs -f app worker
+docker compose exec app php artisan migrate:status
+docker compose exec app php artisan test
+docker compose exec app php artisan about
+```
+
+Локальная проверка:
+
+```bash
+composer install
+npm ci
+php artisan test
+npm run build
+```
+
+## AI-заполнение объявления
+
+Владелец вставляет исходный текст объявления. Сервер отправляет его в OpenAI и получает данные по строгой JSON-схеме. Поля, которых нет в тексте, не придумываются и отмечаются для проверки. Ключ OpenAI хранится только на сервере в `OPENAI_API_KEY`.
+
+## Сделки и монетизация
+
+После принятого обращения владелец фиксирует завершение договорённости. Объявление получает статус «сдано» или «продано», а система создаёт комиссию. По умолчанию используются 20% для аренды и 5% для продажи, но администратор может изменить ставки. В MVP оплата отмечается администратором вручную; интеграция с платёжным провайдером является следующим этапом.
+
+## Безопасность и production
+
+- `.env`, API-ключи и пароли не должны попадать в Git;
+- регистрация требует подтверждения email;
+- права владельца и администратора проверяются на сервере;
+- изображения проверяются и преобразуются в WebP;
+- AI не публикует объявление автоматически;
+- перед production необходимо настроить HTTPS, SMTP и заменить demo-пароли.
+
+Полная инструкция: [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## Проверка качества
+
+Feature- и unit-тесты проверяют авторизацию, объявления, AI-разбор, сравнение, обращения, модерацию, жалобы, проекты и комиссии.
+
+```bash
+php artisan test
+npm run build
+```
+
+## Статус
+
+Проект находится на стадии демонстрационного MVP. Основной пользовательский цикл реализован; следующие этапы — подключение онлайн-оплаты, расширение географии и аналитика рекомендаций.

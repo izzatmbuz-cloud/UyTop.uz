@@ -42,8 +42,8 @@
               <CompareRow label="Hudud" :items="items" :render="item => item.district?.name_uz || 'Noma’lum'" />
               <CompareRow label="Ijara turi" :items="items" :render="item => unitLabel(item.rental_unit)" />
               <CompareRow label="Talabalar" :items="items" :render="item => studentLabel(item.students_allowed)" />
-              <CompareRow label="Bo‘sh o‘rinlar" :items="items" :render="item => item.free_places ?? 'Noma’lum'" />
-              <CompareRow label="Mavjud sana" :items="items" :render="item => formatDate(item.available_from)" />
+              <CompareRow label="Yana necha kishi joylashishi mumkin?" :items="items" :render="item => item.free_places ?? 'Ko‘rsatilmagan'" />
+              <CompareRow label="Qachondan ko‘chib kirish mumkin?" :items="items" :render="item => formatDate(item.available_from)" />
             </tbody>
           </table>
         </div>
@@ -69,7 +69,7 @@ CompareRow.props = ['label', 'items', 'render', 'emphasis'];
 
 function removeItem(id) { remove(id); router.visit(comparisonUrl(), { preserveScroll: true }); }
 function formatMoney(value, currency) { return value == null ? 'Noma’lum' : new Intl.NumberFormat('uz-UZ').format(value) + ` ${currency}`; }
-function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Noma’lum'; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Alohida xona', bed: 'Bir kishilik joy' }[value] || 'Ko‘rsatilmagan'; }
 function studentLabel(value) { return { yes: 'Ha', no: 'Yo‘q', unknown: 'Ko‘rsatilmagan' }[value] || 'Ko‘rsatilmagan'; }
 function formatDate(value) { return value ? new Intl.DateTimeFormat('uz-UZ').format(new Date(value)) : 'Noma’lum'; }
 function unknownCosts(item) { const unknown = [...(item.costs?.unknown_monthly_items || []), ...(item.costs?.unknown_movein_items || [])]; return [...new Set(unknown)].join(', ') || 'Yo‘q'; }

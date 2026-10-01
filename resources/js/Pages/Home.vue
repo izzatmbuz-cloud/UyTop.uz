@@ -23,7 +23,7 @@
             <h2 class="text-2xl font-black tracking-[-0.04em] text-slate-950 dark:text-white">{{ t('suitable') }}</h2>
             <form class="mt-6 space-y-4" @submit.prevent="search">
               <label class="block"><span class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Qidiruv</span><input v-model="form.search" class="w-full rounded-2xl border-black/10 bg-white/70 px-4 py-3 text-sm font-semibold shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white" placeholder="Mahalla, universitet yoki manzil" /></label>
-              <div class="grid grid-cols-2 gap-3"><button v-for="unit in units" :key="unit.value" type="button" class="rounded-2xl border p-4 text-left transition" :class="form.rental_unit === unit.value ? 'border-[#e85d3f] bg-[#e85d3f]/10 text-[#c7452c]' : 'border-black/10 bg-black/[0.02] text-slate-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300'" @click="selectUnit(unit.value)"><span class="block text-lg">{{ unit.icon }}</span><span class="mt-2 block text-sm font-bold">{{ unit.label }}</span></button></div>
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2"><button v-for="unit in units" :key="unit.value" type="button" class="min-h-24 rounded-2xl border p-4 text-left transition hover:-translate-y-0.5" :class="form.rental_unit === unit.value ? 'border-[#e85d3f] bg-[#e85d3f]/10 text-[#c7452c]' : 'border-black/10 bg-black/[0.02] text-slate-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300'" @click="selectUnit(unit.value)"><span class="flex items-start gap-3"><span class="text-lg" aria-hidden="true">{{ unit.icon }}</span><span><span class="block text-sm font-black">{{ unit.label }}</span><span class="mt-1 block text-xs leading-4 opacity-75">{{ unit.description }}</span></span></span></button></div>
               <div :key="filterAnimation" class="space-y-4 animate-filter-refresh">
               <UiSelect v-model="form.district_id" :label="t('district')" :options="districtOptions" />
               <UiSelect v-model="form.locality" label="Andijon shahri ichida" :options="localityOptions" />
@@ -70,11 +70,11 @@ const districtOptions = computed(() => [
 ]);
 const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }];
 const localityOptions = computed(() => [{ value: '', label: 'Barcha joylar' }, ...props.localities.map((value) => ({ value, label: value }))]);
-const units = computed(() => [{ value: 'whole', label: t('whole'), icon: '⌂' }, { value: 'room', label: t('room'), icon: '▣' }, { value: 'bed', label: t('bed'), icon: '⌁' }, { value: '', label: t('all'), icon: '✦' }]);
+const units = computed(() => [{ value: 'whole', label: t('whole'), description: t('wholeHint'), icon: '⌂' }, { value: 'room', label: t('room'), description: t('roomHint'), icon: '▣' }, { value: 'bed', label: t('bed'), description: t('bedHint'), icon: '◉' }, { value: '', label: t('all'), description: t('allHint'), icon: '✦' }]);
 function search() { router.get('/catalog', { deal_type: 'rent', search: form.search || undefined, rental_unit: form.rental_unit || undefined, district_id: form.district_id || undefined, locality: form.locality || undefined, price_max: form.price_max || undefined, currency: form.currency, students_allowed: form.students_allowed ? 'yes' : undefined }); }
 function selectUnit(value) { if (form.rental_unit === value) return; form.rental_unit = value; filterAnimation.value += 1; }
 function money(value, currency) { return value == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(value) + ` ${currency}`; }
-function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Sotuv'; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Alohida xona', bed: 'Bir kishilik joy' }[value] || 'Sotuv'; }
 </script>
 
 <style scoped>

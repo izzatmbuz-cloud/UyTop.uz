@@ -30,7 +30,7 @@
             <UiSelect v-model="filters.author_type" label="E’lon beruvchi" :options="authorOptions" />
             <div><UiSelect v-model="filters.currency" label="Narx va valyuta" :options="currencyOptions" /><div class="mt-2 grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
             <p v-if="$page.props.errors?.price_max" class="text-xs font-semibold text-red-600">{{ $page.props.errors.price_max }}</p>
-            <div class="grid grid-cols-2 gap-2"><label><span class="field-label">Xonalar</span><input v-model="filters.rooms_min" type="number" min="1" class="field" placeholder="Kamida" /></label><label v-if="filters.deal_type === 'rent' && ['room', 'bed'].includes(filters.rental_unit)"><span class="field-label">Bo‘sh joy</span><input v-model="filters.free_places_min" type="number" min="1" class="field" placeholder="Kamida" /></label></div>
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1"><label><span class="field-label">Xonalar soni</span><input v-model="filters.rooms_min" type="number" min="1" class="field" placeholder="Kamida nechta?" /></label><label v-if="filters.deal_type === 'rent' && ['room', 'bed'].includes(filters.rental_unit)"><span class="field-label">Necha kishilik joy kerak?</span><input v-model="filters.free_places_min" type="number" min="1" class="field" placeholder="Kamida" /></label></div>
             <label class="block"><span class="field-label">Ko‘chib kirish sanasi</span><input v-model="filters.available_from" type="date" class="field" /></label>
             <div v-if="amenityOptions.length"><span class="field-label">Qulayliklar</span><div class="space-y-2"><label v-for="option in amenityOptions" :key="option.value" class="flex items-center gap-2 text-sm text-slate-700"><input v-model="filters.amenities" type="checkbox" :value="option.value" class="rounded border-slate-300 text-blue-600" />{{ option.label }}</label></div></div>
             <label v-if="filters.deal_type !== 'sale'" class="flex items-start gap-3 rounded-2xl bg-blue-50 p-3 text-sm text-slate-700"><input v-model="filters.students_allowed" type="checkbox" class="mt-0.5 rounded border-slate-300 text-blue-600" /><span><strong class="block text-slate-900">Talabalar qabul qilinadi</strong>Faqat aniq “ha” deb belgilanganlar</span></label>
@@ -73,8 +73,8 @@ import UiSelect from '../Components/UiSelect.vue';
 
 const props = defineProps({ listings: Object, districts: Object, amenities: Object, localities: Array, filters: Object, priceSortAvailable: Boolean });
 const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', locality: props.filters?.locality || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '', property_type: props.filters?.property_type || '', author_type: props.filters?.author_type || '', rooms_min: props.filters?.rooms_min || '', free_places_min: props.filters?.free_places_min || '', available_from: props.filters?.available_from || '', amenities: props.filters?.amenities || [] });
-const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }, { value: '', label: 'Barchasi' }];
-const rentalOptions = [{ value: '', label: 'Hammasi' }, { value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Xona' }, { value: 'bed', label: 'O‘rin' }];
+const dealOptions = [{ value: 'rent', label: 'Ijaraga olish' }, { value: 'sale', label: 'Sotib olish' }, { value: '', label: 'Farqi yo‘q' }];
+const rentalOptions = [{ value: '', label: 'Farqi yo‘q' }, { value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Alohida xona' }, { value: 'bed', label: 'Bir kishilik joy' }];
 const districtOptions = computed(() => [
   { value: '', label: 'Barcha hududlar' },
   ...Object.entries(props.districts || {}).map(([value, label]) => ({ value, label })),
@@ -98,7 +98,7 @@ const activeFilters = computed(() => {
   add('property_type', `Uy turi: ${propertyOptions.find(o => o.value === filters.property_type)?.label || ''}`);
   add('author_type', `Muallif: ${authorOptions.find(o => o.value === filters.author_type)?.label || ''}`);
   add('price_min', `Narx ≥ ${filters.price_min}`); add('price_max', `Narx ≤ ${filters.price_max}`);
-  add('rooms_min', `Xonalar ≥ ${filters.rooms_min}`); add('free_places_min', `Bo‘sh joy ≥ ${filters.free_places_min}`);
+  add('rooms_min', `Kamida ${filters.rooms_min} xona`); add('free_places_min', `Kamida ${filters.free_places_min} kishilik joy`);
   add('available_from', `Sana: ${filters.available_from}`); add('students_allowed', 'Talabalar uchun');
   filters.amenities.forEach(id => items.push({ key: 'amenities', value: id, label: amenityOptions.value.find(o => o.value === id)?.label || 'Qulaylik' }));
   return items;
@@ -110,7 +110,7 @@ function clearFilter(item) { if (item.key === 'amenities') filters.amenities = f
 function toggleCompare(id) { const result = toggle(id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif solishtirishdan olib tashlandi.'); }
 function formatPrice(price, currency) { return price == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(price) + ` ${currency}`; }
 function priceBasis(value) { return { monthly_unit: '/ oy', total: 'umumiy', from_total: 'dan boshlab', per_m2: '/ m²' }[value] || ''; }
-function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Sotuv'; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Alohida xona', bed: 'Bir kishilik joy' }[value] || 'Sotuv'; }
 </script>
 
 <style scoped>

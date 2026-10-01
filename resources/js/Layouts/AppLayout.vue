@@ -3,7 +3,7 @@
     <header class="sticky top-0 z-50 border-b border-black/10 bg-[#f4f1ea]/90 backdrop-blur-xl dark:border-white/10 dark:bg-[#0d1117]/90">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" class="flex items-center gap-3">
-          <span class="flex h-10 w-10 rotate-3 items-center justify-center rounded-[14px] bg-[#e85d3f] font-black text-white shadow-lg shadow-orange-900/15">U</span>
+          <span class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] bg-white/80 p-1 shadow-lg shadow-black/10 dark:bg-white/10"><img src="/logo.png" alt="UyTop logotipi" class="h-full w-full object-contain" /></span>
           <span><span class="block text-lg font-black tracking-[-0.05em] text-slate-950 dark:text-white">UyTop</span><span class="block text-[9px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Andijon</span></span>
         </Link>
 

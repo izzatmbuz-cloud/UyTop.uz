@@ -19,7 +19,7 @@
 
           <div v-if="costs" class="mt-6 grid grid-cols-2 gap-3"><div class="rounded-2xl bg-slate-950 p-4 text-white"><p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Oyiga</p><p class="mt-2 text-lg font-bold">{{ money(costs.monthly_payment) }}</p><p v-if="!costs.monthly_complete" class="mt-1 text-xs text-amber-300">Qisman ma’lum</p></div><div class="rounded-2xl bg-blue-600 p-4 text-white"><p class="text-[10px] font-bold uppercase tracking-wider text-blue-200">Joylashishda</p><p class="mt-2 text-lg font-bold">{{ money(costs.movein_cost) }}</p><p v-if="!costs.movein_complete" class="mt-1 text-xs text-blue-100">Qisman ma’lum</p></div></div>
 
-          <dl class="mt-6 divide-y divide-slate-100 text-sm"><InfoRow label="Talabalar" :value="studentLabel(listing.students_allowed)" /><InfoRow label="Bo‘sh o‘rin" :value="listing.free_places ?? 'Noma’lum'" /><InfoRow label="Xonalar" :value="listing.rooms ?? 'Noma’lum'" /><InfoRow label="Mavjud sana" :value="formatDate(listing.available_from)" /><InfoRow label="Kommunal" :value="costMode(listing.utilities_mode, listing.utilities_amount)" /><InfoRow label="Depozit" :value="costMode(listing.deposit_mode, listing.deposit_amount)" /><InfoRow label="Komissiya" :value="costMode(listing.commission_mode, listing.commission_amount)" /></dl>
+          <dl class="mt-6 divide-y divide-slate-100 text-sm"><InfoRow label="Talabalarni qabul qiladimi?" :value="studentLabel(listing.students_allowed)" /><InfoRow label="Yana necha kishi joylashishi mumkin?" :value="listing.free_places ?? 'Ko‘rsatilmagan'" /><InfoRow label="Xonalar soni" :value="listing.rooms ?? 'Ko‘rsatilmagan'" /><InfoRow label="Qachondan ko‘chib kirish mumkin?" :value="formatDate(listing.available_from)" /><InfoRow label="Kommunal to‘lov" :value="costMode(listing.utilities_mode, listing.utilities_amount)" /><InfoRow label="Oldindan to‘lov (depozit)" :value="costMode(listing.deposit_mode, listing.deposit_amount)" /><InfoRow label="Vositachi haqi (komissiya)" :value="costMode(listing.commission_mode, listing.commission_amount)" /></dl>
 
           <Link :href="`/listings/${listing.id}/request`" class="mt-6 flex w-full items-center justify-center rounded-2xl bg-slate-950 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-900/15">Ko‘rish uchun murojaat</Link>
           <button v-if="$page.props.auth?.user?.id !== listing.owner_user_id" type="button" class="mt-3 w-full rounded-2xl border border-black/10 px-5 py-3 text-sm font-bold text-slate-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-white/10 dark:hover:bg-red-950" @click="reportOpen = true">Shikoyat qilish</button>
@@ -49,11 +49,11 @@ InfoRow.props = ['label', 'value'];
 function toggleItem() { const result = toggle(props.listing.id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif olib tashlandi.'); }
 function submitReport() { reportForm.post(`/listings/${props.listing.id}/reports`, { preserveScroll: true, onSuccess: () => { reportOpen.value = false; notice.value = 'Shikoyat yuborildi.'; reportForm.reset(); } }); }
 function money(value) { return value == null ? 'Noma’lum' : new Intl.NumberFormat('uz-UZ').format(value) + ` ${props.listing.currency}`; }
-function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Noma’lum'; }
+function unitLabel(value) { return { whole: 'Butun uy', room: 'Alohida xona', bed: 'Bir kishilik joy' }[value] || 'Ko‘rsatilmagan'; }
 function basisLabel(value) { return { monthly_unit: '/ oy', total: 'umumiy', from_total: 'dan boshlab', per_m2: '/ m²' }[value] || ''; }
 function studentLabel(value) { return { yes: 'Qabul qilinadi', no: 'Qabul qilinmaydi', unknown: 'Ko‘rsatilmagan' }[value] || 'Ko‘rsatilmagan'; }
 function formatDate(value) { return value ? new Intl.DateTimeFormat('uz-UZ').format(new Date(value)) : 'Noma’lum'; }
-function costMode(mode, amount) { if (mode === 'none') return 'Yo‘q'; if (mode === 'included') return 'Narxga kiritilgan'; if (mode === 'fixed') return money(amount); return 'Aniqlashtiriladi'; }
+function costMode(mode, amount) { if (mode === 'none') return 'Talab qilinmaydi'; if (mode === 'included') return 'Narxga kiritilgan'; if (mode === 'fixed') return money(amount); return 'E’lon egasidan so‘rang'; }
 </script>
 
 <style scoped>.tag { @apply rounded-full px-3 py-1 text-xs font-bold; }</style>

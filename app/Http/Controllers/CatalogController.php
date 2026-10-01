@@ -6,6 +6,7 @@ use App\Http\Requests\CatalogFilterRequest;
 use App\Models\Amenity;
 use App\Models\District;
 use App\Models\Listing;
+use App\Models\PlatformSetting;
 use App\Services\CostCalculationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -17,9 +18,10 @@ class CatalogController extends Controller
     public function index(CatalogFilterRequest $request): Response
     {
         $filters = $request->validated();
+        $confirmationDays = (int) PlatformSetting::number('listing_confirmation_days', 7);
         $query = Listing::query()
             ->where('moderation_status', 'approved')->where('availability_status', 'available')->whereNull('archived_at')
-            ->where(fn ($q) => $q->whereNull('confirmed_at')->orWhereDate('confirmed_at', '>=', now()->subDays(14)));
+            ->where(fn ($q) => $q->whereNull('confirmed_at')->orWhereDate('confirmed_at', '>=', now()->subDays($confirmationDays)));
 
         $simpleFilters = ['deal_type', 'rental_unit', 'district_id', 'currency', 'property_type', 'author_type'];
         foreach ($simpleFilters as $field) {

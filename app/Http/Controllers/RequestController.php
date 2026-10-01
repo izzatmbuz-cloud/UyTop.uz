@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RequestStatus;
+use App\Models\Commission;
 use App\Models\Listing;
+use App\Models\PlatformSetting;
 use App\Models\Request as RequestModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -141,6 +144,26 @@ class RequestController extends Controller
                 'proposed_at' => $validated['proposed_at'] ?? null,
                 'comment' => $validated['comment'] ?? null,
             ]);
+
+            if ($newStatus === RequestStatus::COMPLETED && $lockedRequest->listing_id) {
+                $listing = Listing::query()->lockForUpdate()->findOrFail($lockedRequest->listing_id);
+                $rate = PlatformSetting::number($listing->deal_type->value === 'sale' ? 'sale_commission_percent' : 'rent_commission_percent', $listing->deal_type->value === 'sale' ? 5 : 20);
+                $amount = $listing->price === null ? null : round((float) $listing->price * $rate / 100, 2);
+
+                Commission::updateOrCreate(['request_id' => $lockedRequest->id], [
+                    'listing_id' => $listing->id,
+                    'payer_user_id' => $listing->owner_user_id,
+                    'deal_type' => $listing->deal_type->value,
+                    'rate_percent' => $rate,
+                    'deal_amount' => $listing->price,
+                    'commission_amount' => $amount,
+                    'currency' => $listing->currency,
+                    'status' => 'pending',
+                ]);
+
+                $listing->update(['availability_status' => $listing->deal_type->value === 'sale' ? 'sold' : 'rented']);
+                Cache::forget('home.featured-listings');
+            }
         });
 
         return back()->with('success', 'Status o‘zgartirildi.');

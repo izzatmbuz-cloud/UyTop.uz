@@ -57,4 +57,9 @@ class Request extends Model
     {
         return $this->hasMany(RequestEvent::class);
     }
+
+    public function commission()
+    {
+        return $this->hasOne(Commission::class);
+    }
 }

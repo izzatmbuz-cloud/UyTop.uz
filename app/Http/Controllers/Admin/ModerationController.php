@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Models\Commission;
 use App\Models\Listing;
 use App\Models\ModerationEvent;
+use App\Models\PlatformSetting;
 use App\Models\Report;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,6 +32,13 @@ class ModerationController extends Controller
                 ->where('status', 'new')
                 ->oldest()
                 ->get(),
+            'commissions' => Commission::with(['listing:id,title', 'payer:id,name,email', 'request:id,requester_id'])
+                ->latest()->limit(100)->get(),
+            'settings' => [
+                'rent_commission_percent' => PlatformSetting::number('rent_commission_percent', 20),
+                'sale_commission_percent' => PlatformSetting::number('sale_commission_percent', 5),
+                'listing_confirmation_days' => PlatformSetting::number('listing_confirmation_days', 7),
+            ],
         ]);
     }
 

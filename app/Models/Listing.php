@@ -118,6 +118,6 @@ class Listing extends Model
         return $this->moderation_status === ModerationStatus::APPROVED
             && $this->availability_status === AvailabilityStatus::AVAILABLE
             && $this->archived_at === null
-            && ($this->confirmed_at === null || $this->confirmed_at->gte(now()->subDays(14)));
+            && ($this->confirmed_at === null || $this->confirmed_at->gte(now()->subDays((int) PlatformSetting::number('listing_confirmation_days', 7))));
     }
 }

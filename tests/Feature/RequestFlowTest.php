@@ -85,6 +85,24 @@ class RequestFlowTest extends TestCase
         $this->assertSame('new', $request->fresh()->status->value);
     }
 
+    public function test_completed_rental_creates_commission_and_marks_listing_rented(): void
+    {
+        [$owner, $listing] = $this->listing();
+        $requester = User::factory()->create();
+        $request = $this->createRequest($requester, $owner, $listing);
+
+        $this->actingAs($owner)->patch(route('requests.status', $request), ['status' => 'accepted'])->assertRedirect();
+        $this->actingAs($owner)->patch(route('requests.status', $request), ['status' => 'completed'])->assertRedirect();
+
+        $this->assertSame('rented', $listing->fresh()->availability_status->value);
+        $this->assertDatabaseHas('commissions', [
+            'request_id' => $request->id,
+            'rate_percent' => 20,
+            'commission_amount' => 140000,
+            'status' => 'pending',
+        ]);
+    }
+
     public function test_alternative_requires_a_future_date(): void
     {
         [$owner, $listing] = $this->listing();

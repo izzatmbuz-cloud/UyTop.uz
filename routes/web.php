@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ModerationController;
+use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\ReportModerationController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ComparisonController;
@@ -73,6 +74,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/admin/moderation/{listing}', [ModerationController::class, 'update'])->name('admin.moderation.update');
     Route::post('/listings/{listing}/reports', [ReportController::class, 'store'])->middleware('throttle:5,60')->name('reports.store');
     Route::patch('/admin/reports/{report}', [ReportModerationController::class, 'update'])->name('admin.reports.update');
+    Route::patch('/admin/platform-settings', [PlatformController::class, 'updateSettings'])->name('admin.settings.update');
+    Route::patch('/admin/commissions/{commission}', [PlatformController::class, 'updateCommission'])->name('admin.commissions.update');
 });
 
 Route::get('/dashboard', function () {

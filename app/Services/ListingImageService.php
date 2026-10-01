@@ -11,6 +11,11 @@ class ListingImageService
 {
     public function store(UploadedFile $file): array
     {
+        $dimensions = getimagesize($file->getRealPath());
+        if ($dimensions === false || $dimensions[0] > 8000 || $dimensions[1] > 8000 || ($dimensions[0] * $dimensions[1]) > 40000000) {
+            throw new RuntimeException('Rasm o‘lchami juda katta.');
+        }
+
         $source = match ($file->getMimeType()) {
             'image/jpeg' => imagecreatefromjpeg($file->getRealPath()),
             'image/png' => imagecreatefrompng($file->getRealPath()),

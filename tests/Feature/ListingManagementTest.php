@@ -5,9 +5,11 @@ namespace Tests\Feature;
 use App\Models\District;
 use App\Models\Listing;
 use App\Models\User;
+use App\Services\ListingImageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 use Tests\TestCase;
 
 class ListingManagementTest extends TestCase
@@ -82,6 +84,28 @@ class ListingManagementTest extends TestCase
             'images' => [UploadedFile::fake()->create('virus.php', 20, 'application/x-php')],
             'submit_for_moderation' => true,
         ])->assertSessionHasErrors('images.0');
+    }
+
+    public function test_draft_is_not_lost_when_image_processing_fails(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create(['role' => 'owner', 'email_verified_at' => now()]);
+        $district = District::create(['name_uz' => 'Andijon shahri', 'active' => true]);
+        $this->mock(ListingImageService::class)->shouldReceive('store')->once()->andThrow(new RuntimeException('broken image'));
+
+        $response = $this->actingAs($user)->post(route('account.listings.store'), [
+            'deal_type' => 'rent', 'rental_unit' => 'bed', 'property_type' => 'apartment',
+            'students_allowed' => 'yes', 'district_id' => $district->id,
+            'title' => 'Rasm xatosida saqlanadigan qoralama',
+            'description' => 'Rasmda xato bo‘lsa ham qoralama yo‘qolib ketmasligi kerak.',
+            'currency' => 'UZS', 'price' => 700000, 'price_basis' => 'monthly_unit',
+            'amenity_ids' => [], 'images' => [UploadedFile::fake()->image('home.jpg')],
+            'submit_for_moderation' => false,
+        ]);
+
+        $listing = Listing::where('title', 'Rasm xatosida saqlanadigan qoralama')->firstOrFail();
+        $response->assertRedirect(route('account.listings.edit', $listing))->assertSessionHas('error');
+        $this->assertSame('draft', $listing->moderation_status->value);
     }
 
     public function test_user_cannot_edit_someone_elses_listing(): void

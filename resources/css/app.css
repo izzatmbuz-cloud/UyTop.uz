@@ -22,5 +22,7 @@
 .dark .text-slate-950, .dark .text-slate-900, .dark .text-gray-900 { color: #f8fafc !important; }
 .dark .text-slate-800, .dark .text-slate-700, .dark .text-gray-700 { color: #d7dee7 !important; }
 .dark .text-slate-600, .dark .text-gray-600 { color: #aab4c2 !important; }
+.dark .text-slate-500, .dark .text-gray-500, .dark .text-slate-400 { color: #94a3b8 !important; }
 .dark .border-slate-100, .dark .border-slate-200, .dark .border-gray-200 { border-color: rgba(255,255,255,.10) !important; }
 .dark input, .dark select, .dark textarea { background-color: #111820; border-color: rgba(255,255,255,.12); color: #f8fafc; }
+.dark input::placeholder, .dark textarea::placeholder { color: #7f8b9b; }

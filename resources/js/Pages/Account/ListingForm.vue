@@ -3,6 +3,7 @@
     <Head :title="listing ? 'E’lonni tahrirlash' : 'Yangi e’lon'" />
     <section class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Link href="/account/listings" class="text-sm font-bold text-[#e85d3f]">← E’lonlarim</Link>
+      <div v-if="$page.props.flash?.error" class="mt-5 rounded-2xl bg-red-100 px-4 py-3 text-sm font-semibold text-red-900 dark:bg-red-950 dark:text-red-200">{{ $page.props.flash.error }}</div>
       <div class="mt-5"><p class="eyebrow">E’lon ustasi</p><h1 class="page-title">{{ listing ? 'E’lonni tahrirlash' : 'Yangi e’lon yarating' }}</h1><p class="mt-3 text-slate-600 dark:text-slate-300">Avval qoralama saqlang yoki tayyor bo‘lsa moderatsiyaga yuboring.</p></div>
       <section class="mt-8 overflow-hidden rounded-[28px] border border-[#e85d3f]/20 bg-gradient-to-br from-[#fff5ef] to-white p-5 dark:from-[#2a1814] dark:to-slate-900 sm:p-7">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"><div><p class="eyebrow">AI yordamchi</p><h2 class="section-title mt-1">Telegram matnidan to‘ldirish</h2><p class="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-300">E’lon matnini kiriting. AI faqat matnda bor ma’lumotlarni taklif qiladi, yakuniy tekshiruv sizda qoladi.</p></div><span class="w-fit rounded-full bg-[#bedc79] px-3 py-1 text-xs font-black text-[#24310d]">Beta</span></div>
@@ -19,7 +20,7 @@
           <UiSelect v-model="form.district_id" label="Hudud" :options="districtOptions" :error="form.errors.district_id" />
           <label class="sm:col-span-2"><span class="field-label">Sarlavha</span><input v-model="form.title" class="field" /><span class="error">{{ form.errors.title }}</span></label>
           <label class="sm:col-span-2"><span class="field-label">Tavsif</span><textarea v-model="form.description" rows="5" class="field resize-y" /><span class="error">{{ form.errors.description }}</span></label>
-          <label class="sm:col-span-2"><span class="field-label">Manzil mo‘ljali</span><input v-model="form.location_text" class="field" placeholder="Universitet yonida" /></label>
+          <label class="sm:col-span-2"><span class="field-label">Mahalla, kichik daha yoki mo‘ljal</span><input v-model="form.location_text" list="andijan-areas" class="field" placeholder="Masalan: Eski shahar, universitet yonida" /><datalist id="andijan-areas"><option v-for="area in localities" :key="area" :value="area" /></datalist></label>
         </div></section>
 
         <section class="surface rounded-[28px] p-5 sm:p-7"><h2 class="section-title">2. Narx va to‘lovlar</h2><div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -49,7 +50,8 @@
           <div v-else class="mt-5 rounded-2xl border-2 border-dashed border-black/10 p-8 text-center text-sm text-slate-500 dark:border-white/10">Hozircha rasm tanlanmagan. Qoralamani rasmsiz saqlash mumkin.</div><span class="error">{{ form.errors.images }}</span>
         </section>
 
-        <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"><button type="button" class="rounded-full border border-black/10 px-6 py-3 text-sm font-black dark:border-white/10" :disabled="form.processing" @click="save(false)">Qoralama saqlash</button><button type="button" class="rounded-full bg-[#e85d3f] px-6 py-3 text-sm font-black text-white" :disabled="form.processing" @click="save(true)">Moderatsiyaga yuborish</button></div>
+        <div v-if="form.processing" class="rounded-2xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-800 dark:bg-blue-950 dark:text-blue-200">Rasmlar qayta ishlanmoqda… {{ form.progress ? `${form.progress.percentage}%` : '' }} Sahifani yopmang.</div>
+        <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"><button type="button" class="rounded-full border border-black/10 px-6 py-3 text-sm font-black dark:border-white/10" :disabled="form.processing" @click="save(false)">{{ form.processing ? 'Saqlanmoqda…' : 'Qoralama saqlash' }}</button><button type="button" class="rounded-full bg-[#e85d3f] px-6 py-3 text-sm font-black text-white disabled:opacity-60" :disabled="form.processing" @click="save(true)">{{ form.processing ? 'Yuborilmoqda…' : 'Moderatsiyaga yuborish' }}</button></div>
       </form>
     </section>
   </AppLayout>
@@ -61,7 +63,7 @@ import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import axios from 'axios';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import UiSelect from '../../Components/UiSelect.vue';
-const props = defineProps({ listing: { type: Object, default: null }, districts: { type: Array, default: () => [] }, amenities: { type: Array, default: () => [] } });
+const props = defineProps({ listing: { type: Object, default: null }, districts: { type: Array, default: () => [] }, amenities: { type: Array, default: () => [] }, localities: { type: Array, default: () => [] } });
 const item = props.listing;
 const form = useForm({ deal_type: item?.deal_type || 'rent', rental_unit: item?.rental_unit || 'whole', property_type: item?.property_type || 'apartment', students_allowed: item?.students_allowed || 'unknown', district_id: item?.district_id || '', title: item?.title || '', description: item?.description || '', currency: item?.currency || 'UZS', price: item?.price || '', price_basis: item?.price_basis || 'monthly_unit', utilities_mode: item?.utilities_mode || 'unknown', utilities_amount: item?.utilities_amount || '', utilities_payment_timing: item?.utilities_payment_timing || 'unknown', deposit_mode: item?.deposit_mode || 'unknown', deposit_amount: item?.deposit_amount || '', commission_mode: item?.commission_mode || 'unknown', commission_amount: item?.commission_amount || '', capacity: item?.capacity || '', free_places: item?.free_places ?? '', available_from: item?.available_from?.slice(0, 10) || '', min_months: item?.min_months || '', area_m2: item?.area_m2 || '', rooms: item?.rooms || '', floor: item?.floor ?? '', location_text: item?.location_text || '', amenity_ids: item?.amenities?.map((a) => a.id) || [], images: [], submit_for_moderation: false });
 const existingImages = ref([...(item?.media || [])]); const previews = ref([]); const fileInputKey = ref(0); const totalImages = computed(() => existingImages.value.length + form.images.length);

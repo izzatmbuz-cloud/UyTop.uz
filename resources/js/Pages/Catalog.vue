@@ -25,6 +25,7 @@
             <label class="block"><span class="field-label">Qidiruv</span><input v-model="filters.search" class="field" placeholder="Hudud yoki tavsif" @keyup.enter="applyFilters" /></label>
             <UiSelect v-if="filters.deal_type === 'rent'" v-model="filters.rental_unit" label="Ijara turi" :options="rentalOptions" />
             <UiSelect v-model="filters.district_id" label="Hudud" :options="districtOptions" />
+            <UiSelect v-model="filters.locality" label="Andijon shahri ichida" :options="localityOptions" />
             <UiSelect v-model="filters.property_type" label="Uy turi" :options="propertyOptions" />
             <UiSelect v-model="filters.author_type" label="E’lon beruvchi" :options="authorOptions" />
             <div><UiSelect v-model="filters.currency" label="Narx va valyuta" :options="currencyOptions" /><div class="mt-2 grid grid-cols-2 gap-2"><input v-model="filters.price_min" type="number" class="field" placeholder="Min" /><input v-model="filters.price_max" type="number" class="field" placeholder="Max" /></div></div>
@@ -70,8 +71,8 @@ import AppLayout from '../Layouts/AppLayout.vue';
 import { useComparison } from '../composables/useComparison';
 import UiSelect from '../Components/UiSelect.vue';
 
-const props = defineProps({ listings: Object, districts: Object, amenities: Object, filters: Object, priceSortAvailable: Boolean });
-const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '', property_type: props.filters?.property_type || '', author_type: props.filters?.author_type || '', rooms_min: props.filters?.rooms_min || '', free_places_min: props.filters?.free_places_min || '', available_from: props.filters?.available_from || '', amenities: props.filters?.amenities || [] });
+const props = defineProps({ listings: Object, districts: Object, amenities: Object, localities: Array, filters: Object, priceSortAvailable: Boolean });
+const filters = reactive({ deal_type: props.filters?.deal_type || 'rent', rental_unit: props.filters?.rental_unit || '', students_allowed: props.filters?.students_allowed === 'yes', district_id: props.filters?.district_id || '', locality: props.filters?.locality || '', price_min: props.filters?.price_min || '', price_max: props.filters?.price_max || '', currency: props.filters?.currency || 'UZS', sort: props.filters?.sort || 'confirmed_at', search: props.filters?.search || '', property_type: props.filters?.property_type || '', author_type: props.filters?.author_type || '', rooms_min: props.filters?.rooms_min || '', free_places_min: props.filters?.free_places_min || '', available_from: props.filters?.available_from || '', amenities: props.filters?.amenities || [] });
 const dealOptions = [{ value: 'rent', label: 'Ijara' }, { value: 'sale', label: 'Sotuv' }, { value: '', label: 'Barchasi' }];
 const rentalOptions = [{ value: '', label: 'Hammasi' }, { value: 'whole', label: 'Butun uy' }, { value: 'room', label: 'Xona' }, { value: 'bed', label: 'O‘rin' }];
 const districtOptions = computed(() => [
@@ -79,6 +80,7 @@ const districtOptions = computed(() => [
   ...Object.entries(props.districts || {}).map(([value, label]) => ({ value, label })),
 ]);
 const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }];
+const localityOptions = computed(() => [{ value: '', label: 'Barcha joylar' }, ...(props.localities || []).map(value => ({ value, label: value }))]);
 const propertyOptions = [{ value: '', label: 'Barcha turlar' }, { value: 'apartment', label: 'Kvartira' }, { value: 'house', label: 'Hovli' }, { value: 'dormitory', label: 'Yotoqxona' }];
 const authorOptions = [{ value: '', label: 'Barchasi' }, { value: 'owner', label: 'Uy egasi' }, { value: 'agent', label: 'Agent' }, { value: 'developer', label: 'Quruvchi' }];
 const amenityOptions = computed(() => Object.entries(props.amenities || {}).map(([value, label]) => ({ value, label })));
@@ -92,6 +94,7 @@ const activeFilters = computed(() => {
   const items = [];
   const add = (key, label, active = filters[key]) => { if (active) items.push({ key, label }); };
   add('search', `Qidiruv: ${filters.search}`); add('district_id', `Hudud: ${props.districts?.[filters.district_id] || ''}`);
+  add('locality', `Joy: ${filters.locality}`);
   add('property_type', `Uy turi: ${propertyOptions.find(o => o.value === filters.property_type)?.label || ''}`);
   add('author_type', `Muallif: ${authorOptions.find(o => o.value === filters.author_type)?.label || ''}`);
   add('price_min', `Narx ≥ ${filters.price_min}`); add('price_max', `Narx ≤ ${filters.price_max}`);
@@ -102,7 +105,7 @@ const activeFilters = computed(() => {
 });
 
 function applyFilters() { if (!canSortByPrice.value && filters.sort.startsWith('price_')) filters.sort = 'confirmed_at'; filterOpen.value = false; router.get('/catalog', { ...filters, students_allowed: filters.students_allowed ? 'yes' : undefined }, { preserveState: true, replace: true }); }
-function clearFilters() { Object.assign(filters, { deal_type: 'rent', rental_unit: '', students_allowed: false, district_id: '', price_min: '', price_max: '', currency: 'UZS', sort: 'confirmed_at', search: '', property_type: '', author_type: '', rooms_min: '', free_places_min: '', available_from: '', amenities: [] }); applyFilters(); }
+function clearFilters() { Object.assign(filters, { deal_type: 'rent', rental_unit: '', students_allowed: false, district_id: '', locality: '', price_min: '', price_max: '', currency: 'UZS', sort: 'confirmed_at', search: '', property_type: '', author_type: '', rooms_min: '', free_places_min: '', available_from: '', amenities: [] }); applyFilters(); }
 function clearFilter(item) { if (item.key === 'amenities') filters.amenities = filters.amenities.filter(id => id !== item.value); else filters[item.key] = item.key === 'students_allowed' ? false : ''; applyFilters(); }
 function toggleCompare(id) { const result = toggle(id); notice.value = result.error || (result.added ? 'Taklif solishtirishga qo‘shildi.' : 'Taklif solishtirishdan olib tashlandi.'); }
 function formatPrice(price, currency) { return price == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(price) + ` ${currency}`; }

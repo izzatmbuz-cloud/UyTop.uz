@@ -22,9 +22,11 @@
             <span class="absolute -right-3 -top-3 rotate-6 rounded-full bg-[#bedc79] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#24310d] shadow-lg">{{ t('quickSearch') }}</span>
             <h2 class="text-2xl font-black tracking-[-0.04em] text-slate-950 dark:text-white">{{ t('suitable') }}</h2>
             <form class="mt-6 space-y-4" @submit.prevent="search">
+              <label class="block"><span class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Qidiruv</span><input v-model="form.search" class="w-full rounded-2xl border-black/10 bg-white/70 px-4 py-3 text-sm font-semibold shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white" placeholder="Mahalla, universitet yoki manzil" /></label>
               <div class="grid grid-cols-2 gap-3"><button v-for="unit in units" :key="unit.value" type="button" class="rounded-2xl border p-4 text-left transition" :class="form.rental_unit === unit.value ? 'border-[#e85d3f] bg-[#e85d3f]/10 text-[#c7452c]' : 'border-black/10 bg-black/[0.02] text-slate-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300'" @click="selectUnit(unit.value)"><span class="block text-lg">{{ unit.icon }}</span><span class="mt-2 block text-sm font-bold">{{ unit.label }}</span></button></div>
               <div :key="filterAnimation" class="space-y-4 animate-filter-refresh">
               <UiSelect v-model="form.district_id" :label="t('district')" :options="districtOptions" />
+              <UiSelect v-model="form.locality" label="Andijon shahri ichida" :options="localityOptions" />
               <div class="grid grid-cols-[1fr_120px] gap-3"><label class="block"><span class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-500">{{ t('maxPrice') }}</span><input v-model="form.price_max" type="number" class="w-full rounded-2xl border-black/10 bg-white/70 px-4 py-3 text-sm font-semibold shadow-sm dark:border-white/10 dark:bg-white/5" placeholder="800 000" /></label><UiSelect v-model="form.currency" :label="t('currency')" :options="currencyOptions" /></div>
               <label class="flex items-center gap-3 rounded-2xl bg-[#bedc79]/25 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100"><input v-model="form.students_allowed" type="checkbox" class="rounded border-black/20 text-[#e85d3f] focus:ring-[#e85d3f]" /> {{ t('students') }}</label>
               <button class="w-full rounded-2xl bg-[#e85d3f] px-5 py-3.5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#d94e32]">{{ t('find') }}</button>
@@ -58,8 +60,8 @@ import AppLayout from '../Layouts/AppLayout.vue';
 import UiSelect from '../Components/UiSelect.vue';
 import { useLocale } from '../composables/useLocale';
 
-const props = defineProps({ featuredListings: { type: Array, default: () => [] }, districts: { type: Array, default: () => [] } });
-const form = reactive({ rental_unit: 'bed', district_id: '', price_max: '', currency: 'UZS', students_allowed: true });
+const props = defineProps({ featuredListings: { type: Array, default: () => [] }, districts: { type: Array, default: () => [] }, localities: { type: Array, default: () => [] } });
+const form = reactive({ search: '', rental_unit: 'bed', district_id: '', locality: '', price_max: '', currency: 'UZS', students_allowed: true });
 const filterAnimation = ref(0);
 const { t } = useLocale();
 const districtOptions = computed(() => [
@@ -67,8 +69,9 @@ const districtOptions = computed(() => [
   ...props.districts.map((district) => ({ value: district.id, label: district.name_uz })),
 ]);
 const currencyOptions = [{ value: 'UZS', label: 'UZS' }, { value: 'USD', label: 'USD' }];
+const localityOptions = computed(() => [{ value: '', label: 'Barcha joylar' }, ...props.localities.map((value) => ({ value, label: value }))]);
 const units = computed(() => [{ value: 'whole', label: t('whole'), icon: '⌂' }, { value: 'room', label: t('room'), icon: '▣' }, { value: 'bed', label: t('bed'), icon: '⌁' }, { value: '', label: t('all'), icon: '✦' }]);
-function search() { router.get('/catalog', { deal_type: 'rent', rental_unit: form.rental_unit || undefined, district_id: form.district_id || undefined, price_max: form.price_max || undefined, currency: form.currency, students_allowed: form.students_allowed ? 'yes' : undefined }); }
+function search() { router.get('/catalog', { deal_type: 'rent', search: form.search || undefined, rental_unit: form.rental_unit || undefined, district_id: form.district_id || undefined, locality: form.locality || undefined, price_max: form.price_max || undefined, currency: form.currency, students_allowed: form.students_allowed ? 'yes' : undefined }); }
 function selectUnit(value) { if (form.rental_unit === value) return; form.rental_unit = value; filterAnimation.value += 1; }
 function money(value, currency) { return value == null ? 'So‘rov bo‘yicha' : new Intl.NumberFormat('uz-UZ').format(value) + ` ${currency}`; }
 function unitLabel(value) { return { whole: 'Butun uy', room: 'Xona', bed: 'O‘rin' }[value] || 'Sotuv'; }

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Throwable;
 
 class ListingController extends Controller
 {
@@ -43,22 +44,31 @@ class ListingController extends Controller
     {
         Gate::authorize('create', Listing::class);
 
-        $listing = DB::transaction(function () use ($request, $images) {
+        $listing = DB::transaction(function () use ($request) {
             $data = $this->listingData($request);
             $data['owner_user_id'] = $request->user()->id;
-            $data['moderation_status'] = $request->boolean('submit_for_moderation') ? 'pending' : 'draft';
+            $data['moderation_status'] = 'draft';
             $data['availability_status'] = 'available';
             $data['author_type'] = 'owner';
             $data['source_type'] = 'direct';
 
             $listing = Listing::create($data);
             $listing->amenities()->sync($request->input('amenity_ids', []));
-            foreach ($request->file('images', []) as $index => $image) {
-                $listing->media()->create([...$images->store($image), 'sort_order' => $index]);
-            }
 
             return $listing;
         });
+
+        try {
+            $this->storeImages($request, $listing, $images);
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return redirect()->route('account.listings.edit', $listing)->with('error', 'Qoralama saqlandi, lekin rasmlardan birini qayta ishlash imkoni bo‘lmadi. Rasmni almashtirib qayta urinib ko‘ring.');
+        }
+
+        if ($request->boolean('submit_for_moderation')) {
+            $listing->update(['moderation_status' => 'pending']);
+        }
 
         $this->forgetPublicCache();
 
@@ -82,17 +92,25 @@ class ListingController extends Controller
     {
         Gate::authorize('update', $listing);
 
-        DB::transaction(function () use ($request, $listing, $images) {
+        DB::transaction(function () use ($request, $listing) {
             $data = $this->listingData($request);
-            $data['moderation_status'] = $request->boolean('submit_for_moderation') ? 'pending' : 'draft';
+            $data['moderation_status'] = 'draft';
             $data['published_at'] = null;
             $listing->update($data);
             $listing->amenities()->sync($request->input('amenity_ids', []));
-            $nextOrder = (int) $listing->media()->max('sort_order') + 1;
-            foreach ($request->file('images', []) as $index => $image) {
-                $listing->media()->create([...$images->store($image), 'sort_order' => $nextOrder + $index]);
-            }
         });
+
+        try {
+            $this->storeImages($request, $listing, $images);
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return back()->with('error', 'O‘zgarishlar qoralama sifatida saqlandi, lekin rasmni qayta ishlash imkoni bo‘lmadi.');
+        }
+
+        if ($request->boolean('submit_for_moderation')) {
+            $listing->update(['moderation_status' => 'pending']);
+        }
 
         $this->forgetPublicCache();
 
@@ -159,6 +177,7 @@ class ListingController extends Controller
         return [
             'districts' => Cache::remember('reference.districts', now()->addHour(), fn () => District::where('active', true)->orderBy('name_uz')->get(['id', 'name_uz'])),
             'amenities' => Cache::remember('reference.amenities', now()->addHour(), fn () => Amenity::orderBy('name_uz')->get(['id', 'code', 'name_uz'])),
+            'localities' => config('locations.andijan_city_areas'),
         ];
     }
 
@@ -176,5 +195,13 @@ class ListingController extends Controller
     private function forgetPublicCache(): void
     {
         Cache::forget('home.featured-listings');
+    }
+
+    private function storeImages(SaveListingRequest $request, Listing $listing, ListingImageService $images): void
+    {
+        $nextOrder = (int) $listing->media()->max('sort_order') + 1;
+        foreach ($request->file('images', []) as $index => $image) {
+            $listing->media()->create([...$images->store($image), 'sort_order' => $nextOrder + $index]);
+        }
     }
 }

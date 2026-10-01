@@ -30,6 +30,7 @@ class CatalogFilterRequest extends FormRequest
             'amenities.*' => ['string', Rule::in(['wifi', 'furniture'])],
             'author_type' => ['nullable', Rule::in(['owner', 'agent', 'developer'])],
             'search' => ['nullable', 'string', 'max:100'],
+            'locality' => ['nullable', Rule::in(config('locations.andijan_city_areas'))],
             'sort' => ['nullable', Rule::in(['confirmed_at', 'price_asc', 'price_desc', 'date'])],
             'page' => ['nullable', 'integer', 'min:1'],
         ];

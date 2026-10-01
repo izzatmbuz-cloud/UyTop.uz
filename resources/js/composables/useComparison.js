@@ -20,6 +20,11 @@ function persist() {
     window.localStorage.setItem('compare_ids', JSON.stringify(selectedIds.value));
 }
 
+function clear() {
+    selectedIds.value = [];
+    if (typeof window !== 'undefined') window.localStorage.removeItem('compare_ids');
+}
+
 export function useComparison() {
     initialize();
     const count = computed(() => selectedIds.value.length);
@@ -51,5 +56,5 @@ export function useComparison() {
         return `/compare${query.size ? `?${query.toString()}` : ''}`;
     }
 
-    return { selectedIds, count, contains, toggle, remove, comparisonUrl };
+    return { selectedIds, count, contains, toggle, remove, clear, comparisonUrl };
 }

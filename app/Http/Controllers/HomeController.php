@@ -23,6 +23,7 @@ class HomeController extends Controller
                 ->limit(6)
                 ->get()),
             'districts' => Cache::remember('reference.districts', now()->addHour(), fn () => District::query()->where('active', true)->orderBy('name_uz')->get(['id', 'name_uz'])),
+            'localities' => config('locations.andijan_city_areas'),
         ]);
     }
 }

@@ -52,6 +52,9 @@ class CatalogController extends Controller
             $search = $filters['search'];
             $query->where(fn ($q) => $q->where('title', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%")->orWhere('location_text', 'like', "%{$search}%"));
         }
+        if (! empty($filters['locality'])) {
+            $query->where('location_text', 'like', '%'.$filters['locality'].'%');
+        }
 
         $sort = $filters['sort'] ?? 'confirmed_at';
         $canSortByPrice = ! empty($filters['currency']) && (($filters['deal_type'] ?? null) === 'sale' || ! empty($filters['rental_unit']));
@@ -71,6 +74,7 @@ class CatalogController extends Controller
             'amenities' => Cache::remember('reference.catalog-amenities', now()->addHour(), fn () => Amenity::whereIn('code', ['wifi', 'furniture'])->pluck('name_uz', 'code')),
             'filters' => $filters,
             'priceSortAvailable' => $canSortByPrice,
+            'localities' => config('locations.andijan_city_areas'),
         ]);
     }
 

@@ -1,117 +1,117 @@
-# Слайд 1. UyTop — жильё с понятными условиями
+# 1-slayd. UyTop — shartlari tushunarli uy-joy platformasi
 
-Здравствуйте! Меня зовут …  
-Я представляю UyTop — платформу для поиска и размещения жилья в Андижане.
+Assalomu alaykum! Mening ismim …
+Men sizlarga Andijonda uy-joy topish va e’lon joylashtirish uchun yaratilgan UyTop platformasini taqdim etaman.
 
-**Что сказать:** «Мы хотим сделать поиск жилья понятным, безопасным и быстрым для обеих сторон».
-
----
-
-# Слайд 2. Проблема
-
-- Объявления разбросаны по Telegram-каналам и разным сайтам.
-- В описании часто нет полной цены, депозита и коммунальных платежей.
-- Студентам трудно понять, готовы ли их принять.
-- Уже сданные объявления продолжают отнимать время.
-
-**Что сказать:** «Человеку приходится писать и звонить многим владельцам только для уточнения базовых условий».
+**Og‘zaki izoh:** “Biz uy-joy izlash jarayonini har ikki tomon uchun tushunarli, xavfsiz va tez qilishni maqsad qilganmiz.”
 
 ---
 
-# Слайд 3. Решение UyTop
+# 2-slayd. Muammo
 
-- Все предложения имеют одинаковую понятную структуру.
-- Можно искать целое жильё, отдельную комнату или место для одного человека.
-- Неизвестные условия честно отмечаются как неизвестные.
-- Обращение и результат договорённости фиксируются внутри платформы.
+- E’lonlar Telegram kanallari va turli saytlarda tarqoq joylashgan.
+- Narx, kommunal to‘lov, depozit va komissiya ko‘pincha to‘liq ko‘rsatilmaydi.
+- Talabalar ularni qabul qilish yoki qilmasligini oldindan bilmaydi.
+- Ijaraga berilgan uylarning e’lonlari ham faol qolib ketadi.
 
-**Что сказать:** «UyTop не просто показывает телефон — платформа сопровождает пользователя до результата».
-
----
-
-# Слайд 4. Как работает сервис
-
-1. Владелец создаёт объявление и отправляет его на модерацию.
-2. Пользователь применяет фильтры и сравнивает варианты.
-3. Пользователь отправляет обращение владельцу.
-4. После договорённости жильё отмечается как сданное или проданное.
-5. Каждые 7 дней владелец подтверждает актуальность объявления.
-
-**Что сказать:** «Благодаря этому каталог содержит более актуальные предложения».
+**Og‘zaki izoh:** “Foydalanuvchi oddiy shartlarni aniqlash uchun ham ko‘plab e’lon egalariga yozishi yoki qo‘ng‘iroq qilishi kerak.”
 
 ---
 
-# Слайд 5. Основные возможности
+# 3-slayd. UyTop yechimi
 
-- Умные фильтры по цене, району, условиям и свободным местам.
-- Сравнение до трёх вариантов и расчёт известных расходов.
-- Личный кабинет владельца и история обращений.
-- Модерация, жалобы и контроль актуальности.
-- Тёмная тема, два языка и адаптивный интерфейс.
+- Barcha e’lonlar yagona va tushunarli shaklda ko‘rsatiladi.
+- Butun uy, alohida xona yoki bir kishilik joyni izlash mumkin.
+- Noma’lum shartlar yashirilmaydi, ular alohida belgilanadi.
+- Murojaat va kelishuv natijasi platforma ichida qayd etiladi.
 
-**Что сказать:** «Пользователь видит важную информацию до звонка и принимает решение быстрее».
-
----
-
-# Слайд 6. Искусственный интеллект
-
-- Владелец вставляет обычный текст из Telegram.
-- AI распознаёт цену, адрес, комнаты, свободные места и условия.
-- Форма объявления заполняется автоматически.
-- Отсутствующие сведения AI не придумывает, а просит проверить.
-- Публикацию всегда подтверждает человек.
-
-**Что сказать:** «AI сокращает ручное заполнение, но не принимает ответственные решения вместо пользователя».
+**Og‘zaki izoh:** “UyTop faqat telefon raqamini ko‘rsatmaydi — platforma foydalanuvchini natijagacha kuzatib boradi.”
 
 ---
 
-# Слайд 7. UyTop, Joymee и OLX
+# 4-slayd. Platforma qanday ishlaydi?
 
-| Платформа | Основной фокус | Отличие UyTop |
+1. Uy egasi e’lon yaratib, moderatsiyaga yuboradi.
+2. Foydalanuvchi filtrlar orqali mos variantlarni topadi va solishtiradi.
+3. Tanlangan uy bo‘yicha egasiga murojaat yuboradi.
+4. Kelishuv yakunlangach, uy “ijaraga berildi” yoki “sotildi” deb belgilanadi.
+5. Uy egasi har 7 kunda e’lon dolzarbligini tasdiqlaydi.
+
+**Og‘zaki izoh:** “Shu tartib yordamida katalogdagi takliflar doimo dolzarb bo‘lib qoladi.”
+
+---
+
+# 5-slayd. Asosiy imkoniyatlar
+
+- Narx, hudud, uy turi, talabalar va bo‘sh joylar bo‘yicha filtrlar.
+- Uchtagacha variantni solishtirish va ma’lum xarajatlarni hisoblash.
+- Uy egasining shaxsiy kabineti va murojaatlar tarixi.
+- Moderatsiya, shikoyatlar va e’lon dolzarbligini nazorat qilish.
+- Tungi rejim, ikki til va telefonlarga moslashgan interfeys.
+
+**Og‘zaki izoh:** “Foydalanuvchi qo‘ng‘iroq qilishdan oldin muhim ma’lumotlarni ko‘rib, tezroq qaror qabul qiladi.”
+
+---
+
+# 6-slayd. Sun’iy intellekt
+
+- Uy egasi Telegram’dagi oddiy e’lon matnini joylashtiradi.
+- AI narx, manzil, xonalar, bo‘sh joylar va shartlarni aniqlaydi.
+- E’lon formasi avtomatik ravishda to‘ldiriladi.
+- Matnda yo‘q ma’lumotlar o‘ylab topilmaydi, tekshirish uchun belgilanadi.
+- E’lonni nashr qilishdan oldin inson tasdiqlaydi.
+
+**Og‘zaki izoh:** “AI qo‘lda ma’lumot kiritishni tezlashtiradi, lekin foydalanuvchi o‘rniga mas’uliyatli qaror qabul qilmaydi.”
+
+---
+
+# 7-slayd. UyTop, Joymee va OLX taqqoslanishi
+
+| Platforma | Asosiy yo‘nalish | UyTop’ning farqi |
 |---|---|---|
-| OLX | Большая универсальная доска объявлений | UyTop специализируется на жилье и сопровождает обращение до сделки |
-| Joymee | Поиск недвижимости, карта и стандартные фильтры | UyTop отдельно учитывает студентов, место для одного человека и полную структуру расходов |
-| UyTop | Жильё в Андижане с понятными условиями | AI-заполнение, сравнение расходов, актуальность 7 дней, обращения и комиссии внутри системы |
+| OLX | Ko‘plab yo‘nalishlarga ega umumiy e’lonlar platformasi | UyTop faqat uy-joyga ixtisoslashadi va murojaatni kelishuvgacha olib boradi |
+| Joymee | Ko‘chmas mulk qidiruvi, xarita va standart filtrlar | UyTop talabalar, bir kishilik joy va barcha xarajatlarni alohida hisobga oladi |
+| UyTop | Andijondagi shartlari tushunarli uy-joylar | AI orqali to‘ldirish, xarajatlarni solishtirish, 7 kunlik dolzarblik nazorati va ichki murojaatlar |
 
-**Что сказать:** «Наше преимущество не в количестве категорий, а в глубине решения конкретной проблемы».
-
----
-
-# Слайд 8. Монетизация
-
-- Платформа получает комиссию после зафиксированной договорённости.
-- Базовая ставка аренды — 20%.
-- Базовая ставка продажи — 5%.
-- Ставки изменяются через admin panel.
-- В MVP оплату подтверждает администратор; следующий этап — онлайн-платёж.
-
-**Что сказать:** «Доход платформы связан с реальным результатом, поэтому нам выгодно помогать пользователю найти жильё».
+**Og‘zaki izoh:** “Bizning ustunligimiz kategoriyalar sonida emas, aniq bir muammoni chuqurroq yechishimizda.”
 
 ---
 
-# Слайд 9. Технологии и готовность
+# 8-slayd. Monetizatsiya
 
-- Laravel 12, Vue 3 и Inertia.js.
-- PostgreSQL для основных данных.
-- Redis для cache, session и queue.
-- OpenAI API для разбора объявлений.
-- Docker Compose для одинакового запуска на сервере.
-- Автотесты покрывают ключевые пользовательские сценарии.
+- Platforma yakunlangan kelishuvdan keyin komissiya oladi.
+- Ijara uchun boshlang‘ich komissiya — 20%.
+- Sotuv uchun boshlang‘ich komissiya — 5%.
+- Foizlar admin panel orqali o‘zgartiriladi.
+- MVP’da to‘lovni administrator tasdiqlaydi, keyingi bosqichda onlayn to‘lov ulanadi.
 
-**Что сказать:** «Это уже работающий MVP с каталогом, AI, кабинетами, модерацией и учётом комиссий».
+**Og‘zaki izoh:** “Platforma daromadi real natijaga bog‘langan, shuning uchun foydalanuvchiga mos uy topib berish biz uchun ham manfaatli.”
 
 ---
 
-# Слайд 10. Заключение
+# 9-slayd. Texnologiyalar va tayyorlik holati
 
-UyTop делает поиск жилья:
+- Backend — Laravel 12, frontend — Vue 3 va Inertia.js.
+- Asosiy ma’lumotlar bazasi — PostgreSQL.
+- Cache, session va queue uchun — Redis.
+- E’lon matnini tahlil qilish uchun — OpenAI API.
+- Bir xil muhitda ishga tushirish uchun — Docker Compose.
+- Asosiy foydalanuvchi jarayonlari avtomatik testlar bilan tekshirilgan.
 
-- понятнее для арендатора;
-- удобнее для владельца;
-- прозрачнее для платформы.
+**Og‘zaki izoh:** “Hozirning o‘zida katalog, AI, shaxsiy kabinetlar, moderatsiya va komissiya hisobiga ega ishlaydigan MVP tayyor.”
 
-Следующий шаг — публичный запуск, подключение оплаты и расширение географии.
+---
 
-Спасибо за внимание! Готова ответить на ваши вопросы.
+# 10-slayd. Xulosa
 
-**Что сказать:** «UyTop превращает разрозненные объявления в управляемый и полезный сервис».
+UyTop uy-joy izlash jarayonini:
+
+- ijarachi uchun tushunarli;
+- uy egasi uchun qulay;
+- platforma uchun shaffof qiladi.
+
+Keyingi qadam — ommaviy ishga tushirish, onlayn to‘lovni ulash va xizmat hududini kengaytirish.
+
+E’tiboringiz uchun rahmat! Savollaringizga javob berishga tayyorman.
+
+**Og‘zaki izoh:** “UyTop tarqoq e’lonlarni boshqariladigan va foydali xizmatga aylantiradi.”
